@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Chess_club_manager.Models;
+using Chess_club_manager.Repository;
 
 namespace Chess_club_manager
 {
