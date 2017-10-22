@@ -180,8 +180,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArbitratorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageArbitratorsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DTO\Arbitrators\CreateArbitratorDto.cs" />
+    <Compile Include="DTO\Arbitrators\EditArbitratorDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -263,6 +267,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Arbitrators\Index.cshtml" />
+    <Content Include="Views\ManageArbitrators\Delete.cshtml" />
+    <Content Include="Views\ManageArbitrators\Details.cshtml" />
+    <Content Include="Views\ManageArbitrators\Index.cshtml" />
+    <Content Include="Views\ManageArbitrators\Create.cshtml" />
+    <Content Include="Views\ManageArbitrators\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

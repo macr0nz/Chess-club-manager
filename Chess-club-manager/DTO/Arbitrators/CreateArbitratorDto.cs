@@ -1,6 +1,6 @@
-﻿namespace Chess_club_manager.DataModel.Entity
+﻿namespace Chess_club_manager.DTO.Arbitrators
 {
-    public class Arbitrator : Entity
+    public class CreateArbitratorDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

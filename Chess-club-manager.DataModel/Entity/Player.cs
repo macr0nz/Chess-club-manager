@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Chess_club_manager.DataModel.Entity
 {
@@ -11,6 +12,7 @@ namespace Chess_club_manager.DataModel.Entity
         public int CurrentRating { get; set; }
         public string Info { get; set; }
 
+        public ICollection<Tournament> Tournaments { get; set; }
 
     }
 }

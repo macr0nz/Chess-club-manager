@@ -15,10 +15,11 @@ namespace Chess_club_manager.DataModel.Entity
         public bool TimeControll { get; set; }
         public string Info { get; set; }
 
-        public TournamentState TournamentState { get; set; }
+        public TournamentState State { get; set; }
 
         public Player FirstPlayer { get; set; }
         public Player SecondPlayer { get; set; }
-        
+
+        public TournamentResult Result { get; set; }
     }
 }

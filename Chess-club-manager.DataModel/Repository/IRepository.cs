@@ -17,5 +17,7 @@ namespace Chess_club_manager.DataModel.Repository
 
         void Delete(TEntity entity);
 
+        void Dispose();
+
     }
 }
