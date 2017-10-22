@@ -55,7 +55,7 @@ namespace Chess_club_manager
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = true,
                 RequireUppercase = false,
@@ -87,6 +87,8 @@ namespace Chess_club_manager
             }
             return manager;
         }
+
+        
     }
 
     // Configure the application sign-in manager which is used in this application.

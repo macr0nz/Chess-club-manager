@@ -8,6 +8,8 @@ namespace Chess_club_manager.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public UserRole Role  { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);

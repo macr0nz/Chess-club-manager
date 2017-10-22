@@ -5,18 +5,30 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Выход</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-wrench"></i> Управление</a>
+                <ul class="dropdown-menu">
+                    <li><a href="@Url.Action("Index", "ManageArbitrators")"><i class="fa fa-star"></i> Управление Турнираим</a></li>
+                    <li><a href="@Url.Action("Index", "ManageArbitrators")"><i class="fa fa-user"></i> Управление Игроками</a></li>
+                    <li><a href="@Url.Action("Index", "ManageArbitrators")"><i class="fa fa-balance-scale"></i> Управление Арбитрами</a></li>
+                    </ul>
+            </li>
+            
+            <li><a href="@Url.Action("Index", "Manage")"><i class="fa fa-user-circle"></i> @User.Identity.GetUserName()</a></li>
+
+            <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Выход</a></li>
+        </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li><a href="@Url.Action("Register", "Account")"><i class="fa fa-arrow-up"></i> Регистрация</a></li>
+        <li><a href="@Url.Action("Login", "Account")"><i class="fa fa-sign-in"></i> Вход</a></li>
+        
+        @*<li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>
+        <li>@Html.ActionLink("Вход", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>*@
     </ul>
 }

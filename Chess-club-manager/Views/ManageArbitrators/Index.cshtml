@@ -4,21 +4,21 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Управление Арбитраторами</h2>
+<h2>Управление Арбитрами</h2>
 
 <p>
-    @Html.ActionLink("Добавить", "Create")
+    <a href="@Url.Action("Create")" class="btn btn-success"><i class="fa fa-plus"></i> Добавить</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            Имя
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            Фамилия
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Титул
         </th>
         <th></th>
     </tr>
@@ -35,9 +35,9 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> Редактировать</a>
+            <a href="@Url.Action("Details", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> Детали</a>
+            <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-trash"></i> Удалить</a>
         </td>
     </tr>
 }

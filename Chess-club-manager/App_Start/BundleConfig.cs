@@ -26,6 +26,8 @@ namespace Chess_club_manager
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            
+            bundles.Add(new StyleBundle("~/Content/font-awesome").Include("~/Content/font-awesome.css"));
         }
     }
 }

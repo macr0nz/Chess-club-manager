@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - ANS Chess Club Manager</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="~/Resources/Images/ans.ico" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -24,11 +26,11 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Начальная страница", "Index", "Home")</li>
-                <li>@Html.ActionLink("О приложении", "About", "Home")</li>
-                <li>@Html.ActionLink("Арбитры", "Index", "Arbitrators")</li>
-                <li>@Html.ActionLink("Управление Арбитрами", "Index", "ManageArbitrators")</li>
+                <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> Домой</a></li>
+                <li><a href="@Url.Action("About", "Home")"><i class="fa fa-info"></i> Помощь</a></li>
+                <li><a href="@Url.Action("Index", "Arbitrators")"><i class="fa fa-balance-scale"></i> Арбитры</a></li>
                 
+
             </ul>
 
             @Html.Partial("_LoginPartial")
@@ -47,8 +49,10 @@
     </footer>
 </div>
 
+
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/font-awesome")
 @RenderSection("scripts", required: false)
 
 </body>
