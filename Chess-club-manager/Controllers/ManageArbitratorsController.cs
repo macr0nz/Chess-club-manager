@@ -19,13 +19,13 @@ namespace Chess_club_manager.Controllers
 
         public ManageArbitratorsController()
         {
-            arbitratorsRepository = new ChessClubManagerRepository<Arbitrator>();
+            this.arbitratorsRepository = new ChessClubManagerRepository<Arbitrator>();
         }
 
         
         public ActionResult Index()
         {
-            var allArbitrators = arbitratorsRepository.All().ToList();
+            var allArbitrators = this.arbitratorsRepository.All().ToList();
 
             return View(allArbitrators);
         }
@@ -38,7 +38,7 @@ namespace Chess_club_manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var arbitrator = arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
+            var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
 
             if (arbitrator == null)
             {
@@ -62,7 +62,7 @@ namespace Chess_club_manager.Controllers
         {
             if (ModelState.IsValid)
             {
-                arbitratorsRepository.Add(new Arbitrator
+                this.arbitratorsRepository.Add(new Arbitrator
                 {
                     FirstName = createArbitratorDto.FirstName,
                     LastName = createArbitratorDto.LastName,
@@ -83,7 +83,7 @@ namespace Chess_club_manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var editArbitrator = arbitratorsRepository.All().Where(p => p.Id == id).Select(x => new EditArbitratorDto
+            var editArbitrator = this.arbitratorsRepository.All().Where(p => p.Id == id).Select(x => new EditArbitratorDto
             {
                 FirstName = x.FirstName,
                 LastName = x.LastName,
@@ -106,7 +106,7 @@ namespace Chess_club_manager.Controllers
         {
             if (ModelState.IsValid)
             {
-                var arbitrator = arbitratorsRepository.All().SingleOrDefault(p => p.Id == editArbitratorDto.Id);
+                var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == editArbitratorDto.Id);
 
                 if (arbitrator == null) return View(editArbitratorDto);
 
@@ -129,7 +129,7 @@ namespace Chess_club_manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var arbitrator = arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
+            var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
 
             if (arbitrator == null)
             {
@@ -143,7 +143,7 @@ namespace Chess_club_manager.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var arbitrator = arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
+            var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
             
             this.arbitratorsRepository.Delete(arbitrator);
 

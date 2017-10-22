@@ -10,21 +10,17 @@ namespace Chess_club_manager.Controllers
     {
         public ActionResult Index()
         {
+            //top 5 players orderby rating
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "ANS Chess Club Manager description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }
