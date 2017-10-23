@@ -16,7 +16,7 @@ namespace Chess_club_manager.Controllers
     [Authorize]
     public class ManageArbitratorsController : Controller
     {
-        private IRepository<Arbitrator> arbitratorsRepository;
+        private readonly IRepository<Arbitrator> arbitratorsRepository;
 
         public ManageArbitratorsController()
         {

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Chess_club_manager.DTO.Players.ViewPlayerDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Игроки</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Имя
+        </th>
+        <th>
+            Фамилия
+        </th>
+        <th>
+            Дата рождения
+        </th>
+        <th>
+            Титул
+        </th>
+        <th>
+            Текущий рейтинг
+        </th>
+        <th>
+            Информация
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentRating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Info)
+        </td>
+        <td>
+            <a href="@Url.Action("Details", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> Детали</a>
+        </td>
+    </tr>
+}
+
+</table>

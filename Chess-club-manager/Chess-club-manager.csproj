@@ -184,8 +184,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageArbitratorsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManagePlayersController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="DTO\Arbitrators\CreateArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\EditArbitratorDto.cs" />
+    <Compile Include="DTO\Players\CreatePlayerDto.cs" />
+    <Compile Include="DTO\Players\EditPlayerDto.cs" />
+    <Compile Include="DTO\Players\PlayerDetailsDto.cs" />
+    <Compile Include="DTO\Players\ViewPlayerDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -285,6 +291,13 @@
     <Content Include="Views\ManageArbitrators\Index.cshtml" />
     <Content Include="Views\ManageArbitrators\Create.cshtml" />
     <Content Include="Views\ManageArbitrators\Edit.cshtml" />
+    <Content Include="Views\Players\Index.cshtml" />
+    <Content Include="Views\Players\Details.cshtml" />
+    <Content Include="Views\ManagePlayers\Delete.cshtml" />
+    <Content Include="Views\ManagePlayers\Details.cshtml" />
+    <Content Include="Views\ManagePlayers\Index.cshtml" />
+    <Content Include="Views\ManagePlayers\Create.cshtml" />
+    <Content Include="Views\ManagePlayers\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
