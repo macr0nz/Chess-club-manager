@@ -36,7 +36,7 @@
         </td>
         <td>
             <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> Редактировать</a>
-            <a href="@Url.Action("Details", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> Детали</a>
+            <a href="@Url.Action("Details", "Arbitrators", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> Детали</a>
             <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-trash"></i> Удалить</a>
         </td>
     </tr>

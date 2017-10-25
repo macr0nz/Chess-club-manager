@@ -4,7 +4,7 @@ using Chess_club_manager.DataModel.Entity;
 
 namespace Chess_club_manager.DTO.Players
 {
-    public class PlayerDetailsDto
+    public class HomePagePlayerView
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -14,6 +14,8 @@ namespace Chess_club_manager.DTO.Players
         public int CurrentRating { get; set; }
         public string Info { get; set; }
 
-        public ICollection<Tournament> Tournaments { get; set; }
+        //public ICollection<Tournament> Tournaments { get; set; }
+
+
     }
 }

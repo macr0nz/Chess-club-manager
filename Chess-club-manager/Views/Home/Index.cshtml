@@ -1,12 +1,49 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Главная страница";
 }
 
 <div class="jumbotron">
-    <h1>ANS Chess Club Manager</h1>
+    <div style="text-align: center;">
+        <h2>ANS Chess Club Manager</h2>
+    </div>
     <p class="lead">Национальная Шахматная Академия Молдовы</p>
-    <p><a href="#" class="btn btn-primary btn-lg">Подробнее &raquo;</a></p>
+    <p><a href="#" class="btn btn-primary btn-lg">Подробнее &raquo;</a>
+    </p>
 </div>
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        @Html.Action("TopPlayers", "Home")
+    </div>
+
+    <div class="col-md-4">
+        <div class="well">
+            <b>1st info</b>
+            <p>new text</p>
+            <hr/>
+            <button class="btn btn-default btn-sm"><i class="fa fa-window-restore"></i> Подробнее</button>
+        </div>
+        <div class="well">
+            <b>1st info</b>
+            <p>new text</p>
+            <hr/>
+            <button class="btn btn-default btn-sm"><i class="fa fa-window-restore"></i> Подробнее</button>
+        </div>
+        <div class="well">
+            <b>1st info</b>
+            <p>new text</p>
+            <hr/>
+            <button class="btn btn-default btn-sm"><i class="fa fa-window-restore"></i> Подробнее</button>
+        </div>
+        
+        <div class="well">7 info</div>
+        <div class="well">8 info</div>
+    </div>
+</div>
+    
+<hr/>
 
 <div class="row">
     <div class="col-md-4">
