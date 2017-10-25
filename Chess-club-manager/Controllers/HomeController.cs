@@ -26,16 +26,19 @@ namespace Chess_club_manager.Controllers
 
         public ActionResult TopPlayers()
         {
-            //var allPlayersIdList = this.playersRepository.All().Select(x => x.Id).ToList();
+            var playersNumberToReturn = 6;
 
-            var players = this.playersRepository.All().Take(6).Select(x => new HomePagePlayerView
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                Info = x.Info,
-                CurrentRating = x.CurrentRating,
-            }).ToList();
+            var players = this.playersRepository.All()
+                .OrderByDescending(p => p.CurrentRating)
+                .Take(playersNumberToReturn)
+                .Select(x => new HomePagePlayerView
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Info = x.Info,
+                    CurrentRating = x.CurrentRating,
+                }).ToList();
             
             return PartialView(players);
         }
