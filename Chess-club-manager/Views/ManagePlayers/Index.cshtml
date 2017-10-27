@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Chess_club_manager.DataModel.Entity.Player>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Управление Игроками";
 }
 
 <h2>Управление Игроками</h2>
@@ -44,7 +44,14 @@
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BirthDay)
+            @if (item.BirthDay.HasValue)
+            {
+                <h5>@item.BirthDay.Value.ToShortDateString()</h5>
+            }
+            else
+            {
+                <h5> - </h5>
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
