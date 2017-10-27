@@ -25,7 +25,7 @@ namespace Chess_club_manager.Controllers
         
         public ActionResult Index()
         {
-            var allNews = this.newsRepository.All().ToList();
+            var allNews = this.newsRepository.All().OrderByDescending(p => p.CreatedDate).ToList();
 
             return View(allNews);
         }
