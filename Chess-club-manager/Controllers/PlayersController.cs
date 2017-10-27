@@ -46,6 +46,7 @@ namespace Chess_club_manager.Controllers
 
             var player = this.playersRepository.All().Where(p => p.Id == id).Select(x => new PlayerDetailsDto
             {
+                Id = x.Id,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 BirthDay = x.BirthDay,

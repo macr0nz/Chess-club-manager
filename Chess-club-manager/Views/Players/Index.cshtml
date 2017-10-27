@@ -7,7 +7,7 @@
 <h2>Игроки</h2>
 
 
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             Имя
@@ -45,7 +45,7 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CurrentRating)
+            <i class="fa fa-star" style="color: gold;"></i> @Html.DisplayFor(modelItem => item.CurrentRating)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Info)

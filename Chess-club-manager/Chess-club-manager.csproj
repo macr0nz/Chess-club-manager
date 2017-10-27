@@ -189,8 +189,10 @@
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="DTO\Arbitrators\CreateArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\EditArbitratorDto.cs" />
+    <Compile Include="DTO\Arbitrators\ViewArbitratorDto.cs" />
     <Compile Include="DTO\Players\CreatePlayerDto.cs" />
     <Compile Include="DTO\Players\EditPlayerDto.cs" />
+    <Compile Include="DTO\Players\HomePagePlayerView.cs" />
     <Compile Include="DTO\Players\PlayerDetailsDto.cs" />
     <Compile Include="DTO\Players\ViewPlayerDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -298,6 +300,8 @@
     <Content Include="Views\ManagePlayers\Index.cshtml" />
     <Content Include="Views\ManagePlayers\Create.cshtml" />
     <Content Include="Views\ManagePlayers\Edit.cshtml" />
+    <Content Include="Views\Home\TopPlayers.cshtml" />
+    <Content Include="Views\Arbitrators\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

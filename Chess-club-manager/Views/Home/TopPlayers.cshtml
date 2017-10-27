@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Chess_club_manager.DTO.Players.HomePagePlayerView>
+
+    
+@foreach (var player in Model)
+{
+    <div class="col-md-4">
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <b><i class="fa fa-user"></i> @player.FirstName @player.LastName</b>
+                
+            </div>
+            <div class="panel-body">
+                <i class="fa fa-star" style="color: gold;"></i><b> Рейтинг:</b>
+                <p>@player.CurrentRating</p>
+                
+                <b>Информация:</b>
+                <p>@player.Info</p>
+            </div>
+            <div class="panel-footer">
+                <a href="@Url.Action("Details", "Players", new {id = player.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i></a>
+            </div>
+        </div>
+
+    </div>
+}

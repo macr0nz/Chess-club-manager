@@ -77,4 +77,9 @@
 
 <p>
     <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Назад</a>
+
+    @if (Request.IsAuthenticated)
+    {
+        <a href="@Url.Action("Edit", "ManageArbitrators", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
+    }
 </p>

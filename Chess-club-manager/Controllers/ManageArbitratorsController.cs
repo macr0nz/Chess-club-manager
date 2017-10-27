@@ -31,22 +31,7 @@ namespace Chess_club_manager.Controllers
             return View(allArbitrators);
         }
 
-        // GET: ManageArbitrators/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
-
-            if (arbitrator == null)
-            {
-                return HttpNotFound();
-            }
-            return View(arbitrator);
-        }
+        
 
         // GET: ManageArbitrators/Create
         public ActionResult Create()
