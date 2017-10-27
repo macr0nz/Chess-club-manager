@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - ANS Chess Club Manager</title>
+    <title>@ViewBag.Title - Chess Club Manager</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="~/Resources/Images/ans.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Resources/Images/ico_png.ico" />
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            @Html.ActionLink("ANS Chess Club Manager", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+            @Html.ActionLink("Chess Club Manager", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
 
         </div>
         <div class="navbar-collapse collapse">
@@ -51,7 +51,7 @@
     <hr/>
     <div class="col-md-12">
         <footer>
-            <p>&copy; @DateTime.Now.Year - ANS Chess Club Manager</p>
+            <p>&copy; @DateTime.Now.Year - Chess Club Manager</p>
             <p>Assembly verson: @ViewContext.Controller.GetType().Assembly.GetName().Version</p>
             <p>Assembly Date: @File.GetCreationTime(ViewContext.Controller.GetType().Assembly.Location)</p>
         </footer>

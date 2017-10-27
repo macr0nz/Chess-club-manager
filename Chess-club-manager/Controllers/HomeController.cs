@@ -13,10 +13,12 @@ namespace Chess_club_manager.Controllers
     public class HomeController : Controller
     {
         private readonly IRepository<Player> playersRepository;
+        private readonly IRepository<News> newsRepository;
 
         public HomeController()
         {
             this.playersRepository = new ChessClubManagerRepository<Player>();
+            this.newsRepository = new ChessClubManagerRepository<News>();
         }
 
         public ActionResult Index()
@@ -43,9 +45,19 @@ namespace Chess_club_manager.Controllers
             return PartialView(players);
         }
 
+        public ActionResult TopNews()
+        {
+            var news = this.newsRepository.All()
+                .OrderByDescending(p => p.CreatedDate)
+                .Take(4)
+                .ToList();
+
+            return PartialView(news);
+        }
+
         public ActionResult About()
         {
-            ViewBag.Message = "ANS Chess Club Manager description page.";
+            ViewBag.Message = "Chess Club Manager description page.";
 
             return View();
         }

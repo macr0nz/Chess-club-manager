@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Chess_club_manager.DataModel.Entity.News>
+
+@{
+    ViewBag.Title = "Новости";
+}
+
+<h2>Все новости</h2>
+
+<div class="row">
+    
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="well">
+                <b>@item.Title</b>
+                <p>@item.Content</p>
+                <hr/>
+                <a href="@Url.Action("Details", "News", new {id = item.Id})" class="btn btn-default btn-sm"><i class="fa fa-window-restore"></i> Подробнее</a>
+            </div>
+        </div>
+    }
+
+</div>
+

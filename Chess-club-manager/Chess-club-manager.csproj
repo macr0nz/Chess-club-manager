@@ -185,11 +185,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageArbitratorsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManageNewsController.cs" />
     <Compile Include="Controllers\ManagePlayersController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="DTO\Arbitrators\CreateArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\EditArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\ViewArbitratorDto.cs" />
+    <Compile Include="DTO\News\EditNewsDto.cs" />
+    <Compile Include="DTO\News\CreateNewsDto.cs" />
+    <Compile Include="DTO\News\ViewNewsDto.cs" />
     <Compile Include="DTO\Players\CreatePlayerDto.cs" />
     <Compile Include="DTO\Players\EditPlayerDto.cs" />
     <Compile Include="DTO\Players\HomePagePlayerView.cs" />
@@ -234,6 +239,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Resources\Images\ans.ico" />
     <Content Include="Resources\Images\fullLogo.png" />
+    <Content Include="Resources\Images\ico_png.ico" />
+    <Content Include="Resources\Images\ico_png.png" />
     <Content Include="Resources\Images\Logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -309,6 +316,13 @@
     <Content Include="Views\ManagePlayers\Edit.cshtml" />
     <Content Include="Views\Home\TopPlayers.cshtml" />
     <Content Include="Views\Arbitrators\Details.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\ManageNews\Delete.cshtml" />
+    <Content Include="Views\ManageNews\Index.cshtml" />
+    <Content Include="Views\ManageNews\Create.cshtml" />
+    <Content Include="Views\ManageNews\Edit.cshtml" />
+    <Content Include="Views\Home\TopNews.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

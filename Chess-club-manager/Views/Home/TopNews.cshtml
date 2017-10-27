@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Chess_club_manager.DataModel.Entity.News>
+
+<div class="row">
+    
+    @foreach (var item in Model)
+    {
+        <div class="well">
+            <b>@item.Title</b>
+            <p>@item.Content</p>
+            <hr />
+            <a href="@Url.Action("Details", "News", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-window-restore"></i> Подробнее</a>
+        </div>
+    }
+
+</div>

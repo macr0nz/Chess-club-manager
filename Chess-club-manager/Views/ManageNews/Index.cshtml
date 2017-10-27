@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Chess_club_manager.DataModel.Entity.News>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Новости</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success"><i class="fa fa-plus"></i> Добавить новость</a>
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <b>@Html.DisplayFor(modelItem => item.Title)</b>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> Редактировать</a>
+            <a href="@Url.Action("Details", "News", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> Детали</a>
+            <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-trash"></i> Удалить</a>
+        </td>
+    </tr>
+}
+
+</table>

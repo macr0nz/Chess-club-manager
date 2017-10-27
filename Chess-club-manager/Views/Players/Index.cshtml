@@ -52,7 +52,27 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            <i class="fa fa-star" style="color: gold;"></i> @Html.DisplayFor(modelItem => item.CurrentRating)
+            @if (item.CurrentRating > 1000)
+            {
+                <i class="fa fa-star" style="color: gold;"></i>
+            }
+            @if (item.CurrentRating > 1500)
+            {
+                <i class="fa fa-star" style="color: gold;"></i>
+            }
+            @if (item.CurrentRating > 2000)
+            {
+                <i class="fa fa-star" style="color: gold;"></i>
+            }
+            @if (item.CurrentRating > 2500)
+            {
+                <i class="fa fa-star" style="color: gold;"></i>
+            }
+            @if (item.CurrentRating > 2700)
+            {
+                <i class="fa fa-star" style="color: gold;"></i>
+            }
+             @Html.DisplayFor(modelItem => item.CurrentRating)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Info)

@@ -17,6 +17,7 @@ namespace Chess_club_manager.Repository
         public DbSet<Player> Players { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<Arbitrator> Arbitrators { get; set; }
+        public DbSet<News> News { get; set; }
             
 
         public static ApplicationDbContext Create()

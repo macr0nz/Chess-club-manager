@@ -4,42 +4,27 @@
 
 <div class="jumbotron">
     <div style="text-align: center;">
-        <h2>ANS Chess Club Manager</h2>
+        <h2>Chess Club Manager</h2>
     </div>
-    <p class="lead">Национальная Шахматная Академия Молдовы</p>
-    <p><a href="#" class="btn btn-primary btn-lg">Подробнее &raquo;</a>
-    </p>
+    <p class="lead">Chess Club Manager это современное Веб приложение для автоматизации процессов шахматного клуба</p>
+    @*<p class="lead">Национальная Шахматная Академия Молдовы</p>*@
+    <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg"><i class="fa fa-search-plus"></i> Подробнее</a></p>
+    
 </div>
 
 
 
 <div class="row">
     <div class="col-md-8">
+        <h3 style="text-align: center">Рейтинг игроков</h3>
+        <hr/>
         @Html.Action("TopPlayers", "Home")
     </div>
 
     <div class="col-md-4">
-        <div class="well">
-            <b>1st info</b>
-            <p>new text</p>
-            <hr/>
-            <button class="btn btn-default btn-sm"><i class="fa fa-window-restore"></i> Подробнее</button>
-        </div>
-        <div class="well">
-            <b>1st info</b>
-            <p>new text</p>
-            <hr/>
-            <button class="btn btn-default btn-sm"><i class="fa fa-window-restore"></i> Подробнее</button>
-        </div>
-        <div class="well">
-            <b>1st info</b>
-            <p>new text</p>
-            <hr/>
-            <button class="btn btn-default btn-sm"><i class="fa fa-window-restore"></i> Подробнее</button>
-        </div>
-        
-        <div class="well">7 info</div>
-        <div class="well">8 info</div>
+        <h3 style="text-align: center">Новости</h3>
+        <hr />
+        @Html.Action("TopNews", "Home")
     </div>
 </div>
     

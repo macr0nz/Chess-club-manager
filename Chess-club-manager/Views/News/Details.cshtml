@@ -1,0 +1,45 @@
+﻿@model Chess_club_manager.DTO.News.ViewNewsDto
+
+@{
+    ViewBag.Title = "Новость";
+}
+
+<h2>Подробнее</h2>
+
+<div>
+    <h4>Новость</h4>
+    <hr />
+    <h3>@Html.DisplayFor(model => model.Title)</h3>
+    <h5>@Html.DisplayFor(model => model.CreatedDate)</h5>
+    <hr/>
+    <div class="well">
+        <h4>@Html.DisplayFor(model => model.Content)</h4>
+    </div>
+    
+</div>
+<p>
+    <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Назад</a>
+
+    @if (Request.IsAuthenticated)
+    {
+        <a href="@Url.Action("Edit", "ManageNews", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
+    }
+</p>
+
+<br/>
+<h4>Другие новости</h4>
+<hr />
+
+<div>
+    @foreach (var item in Model.OtherNews)
+    {
+        <div class="col-md-4">
+            <div class="well">
+                <b>@item.Title</b>
+                <p>@item.Content</p>
+                <hr />
+                <a href="@Url.Action("Details", "News", new {id = item.Id})" class="btn btn-default btn-sm"><i class="fa fa-window-restore"></i> Подробнее</a>
+            </div>
+        </div>
+    }
+</div>
