@@ -52,6 +52,8 @@
     <div class="col-md-12">
         <footer>
             <p>&copy; @DateTime.Now.Year - ANS Chess Club Manager</p>
+            <p>Assembly verson: @ViewContext.Controller.GetType().Assembly.GetName().Version</p>
+            <p>Assembly Date: @File.GetCreationTime(ViewContext.Controller.GetType().Assembly.Location)</p>
         </footer>
     </div>
     
