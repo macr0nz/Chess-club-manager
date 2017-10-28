@@ -13,6 +13,7 @@ using Chess_club_manager.Repository;
 
 namespace Chess_club_manager.Controllers
 {
+    [Authorize]
     public class ManageNewsController : Controller
     {
         private IRepository<News> newsRepository;
