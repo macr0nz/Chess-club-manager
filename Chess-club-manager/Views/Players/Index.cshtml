@@ -41,11 +41,11 @@
         <td>
             @if (item.BirthDay.HasValue)
             {
-                <h5>@item.BirthDay.Value.ToShortDateString()</h5>
+                @item.BirthDay.Value.ToShortDateString()
             }
             else
             {
-                <h5> - </h5>
+                <label class="label label-warning">Отсутствует</label>
             }
         </td>
         <td>

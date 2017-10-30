@@ -68,7 +68,7 @@
 
         @if (Request.IsAuthenticated && User.IsInRole("admin"))
         {
-            <a href="@Url.Action("Edit", "ManageArbitrators", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
+            <a href="@Url.Action("Edit", "ManagePlayers", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
         }
     </p>
 
