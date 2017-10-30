@@ -7,11 +7,13 @@ using System.Web.Mvc;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Players;
+using Chess_club_manager.Filters;
 using Chess_club_manager.Models;
 using Chess_club_manager.Repository;
 
 namespace Chess_club_manager.Controllers
 {
+    [Culture]
     public class PlayersController : Controller
     {
         private IRepository<ApplicationUser> playersRepository;

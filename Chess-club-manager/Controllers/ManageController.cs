@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Chess_club_manager.Filters;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -10,6 +11,7 @@ using Chess_club_manager.Models;
 
 namespace Chess_club_manager.Controllers
 {
+    [Culture]
     [Authorize]
     public class ManageController : Controller
     {

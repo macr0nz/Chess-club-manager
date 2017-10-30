@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Chess_club_manager.Filters;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -13,6 +14,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Chess_club_manager.Controllers
 {
+    [Culture]
     [Authorize]
     public class AccountController : Controller
     {

@@ -6,11 +6,13 @@ using System.Web.Mvc;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Players;
+using Chess_club_manager.Filters;
 using Chess_club_manager.Models;
 using Chess_club_manager.Repository;
 
 namespace Chess_club_manager.Controllers
 {
+    [Culture]
     public class HomeController : Controller
     {
         private readonly IRepository<ApplicationUser> playersRepository;
@@ -26,6 +28,43 @@ namespace Chess_club_manager.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult ChangeCulture(string lang)
+        {
+            if (Request.UrlReferrer != null)
+            {
+                var returnUrl = Request.UrlReferrer.AbsolutePath;
+                 
+                var cultures = new List<string>() { "ru", "en", "md" };
+
+                if (!cultures.Contains(lang))
+                {
+                    lang = "ru";
+                }
+                
+
+                var cookie = Request.Cookies["lang"];
+
+                if (cookie != null)
+                {
+                    cookie.Value = lang;
+                }  
+                else
+                {
+                    cookie = new HttpCookie("lang")
+                    {
+                        HttpOnly = false,
+                        Value = lang,
+                        Expires = DateTime.Now.AddYears(1)
+                    };
+                }
+
+                Response.Cookies.Add(cookie);
+
+                return Redirect(returnUrl);
+            }
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult TopPlayers()

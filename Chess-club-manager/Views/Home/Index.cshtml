@@ -1,29 +1,28 @@
 ﻿@{
-    ViewBag.Title = "Главная страница";
+    ViewBag.Title = @Resources.Resource.HomePage;
 }
 
 <div class="jumbotron">
     <div style="text-align: center;">
         <h2>Chess Club Manager</h2>
     </div>
-    <p class="lead">Chess Club Manager это современное Веб приложение для автоматизации процессов шахматного клуба</p>
+    <p class="lead">@Resources.Resource.HomeJumbotronInfo</p>
     @*<p class="lead">Национальная Шахматная Академия Молдовы</p>*@
-    <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg"><i class="fa fa-search-plus"></i> Подробнее</a></p>
+    <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a></p>
     
 </div>
 
 
-
 <div class="row">
     <div class="col-md-8">
-        <h3 style="text-align: center">Рейтинг игроков</h3>
+        <h3 style="text-align: center">@Resources.Resource.TopPlayersRating</h3>
         <hr/>
         @Html.Action("TopPlayers", "Home")
         
     </div>
 
     <div class="col-md-4">
-        <h3 style="text-align: center">Новости</h3>
+        <h3 style="text-align: center">@Resources.Resource.News</h3>
         <hr />
         @Html.Action("TopNews", "Home")
     </div>

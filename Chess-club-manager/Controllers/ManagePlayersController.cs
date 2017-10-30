@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Players;
+using Chess_club_manager.Filters;
 using Chess_club_manager.Models;
 using Chess_club_manager.Repository;
 using Microsoft.AspNet.Identity;
@@ -17,6 +18,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Chess_club_manager.Controllers
 {
+    [Culture]
     [Authorize(Roles = "admin")]
     public class ManagePlayersController : Controller
     {
@@ -40,26 +42,14 @@ namespace Chess_club_manager.Controllers
 
         public ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
+            get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            private set => _signInManager = value;
         }
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            private set => _userManager = value;
         }
 
         // GET: ManagePlayers

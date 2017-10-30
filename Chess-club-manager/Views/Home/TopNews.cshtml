@@ -8,7 +8,7 @@
             <b>@item.Title</b>
             <p>@item.Content</p>
             <hr />
-            <a href="@Url.Action("Details", "News", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-window-restore"></i> Подробнее</a>
+            <a href="@Url.Action("Details", "News", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-window-restore"></i> @Resources.Resource.Details</a>
         </div>
     }
 
