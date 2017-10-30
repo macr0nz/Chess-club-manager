@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Chess_club_manager.Models
@@ -49,9 +50,8 @@ namespace Chess_club_manager.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Email/Login")]
+        public string EmailOrLogin { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -65,6 +65,21 @@ namespace Chess_club_manager.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "BirthDay")]
+        public DateTime? BirthDay { get; set; }
+
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

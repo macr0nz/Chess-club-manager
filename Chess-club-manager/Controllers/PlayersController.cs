@@ -7,22 +7,24 @@ using System.Web.Mvc;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Players;
+using Chess_club_manager.Models;
 using Chess_club_manager.Repository;
 
 namespace Chess_club_manager.Controllers
 {
     public class PlayersController : Controller
     {
-        private IRepository<Player> playersRepository;
+        private IRepository<ApplicationUser> playersRepository;
 
         public PlayersController()
         {
-            playersRepository = new ChessClubManagerRepository<Player>();
+            playersRepository = new ChessClubManagerRepository<ApplicationUser>();
         }
 
         // GET: Players
         public ActionResult Index()
         {
+            //except admin
             var allPlayers = this.playersRepository.All().Select(x => new ViewPlayerDto
             {
                 Id = x.Id,
@@ -37,7 +39,7 @@ namespace Chess_club_manager.Controllers
             return View(allPlayers);
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {

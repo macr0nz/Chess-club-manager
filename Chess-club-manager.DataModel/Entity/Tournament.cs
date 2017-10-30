@@ -17,8 +17,8 @@ namespace Chess_club_manager.DataModel.Entity
 
         public TournamentState State { get; set; }
 
-        public Player FirstPlayer { get; set; }
-        public Player SecondPlayer { get; set; }
+        //public ApplicationUser FirstPlayer { get; set; }
+        //public Player SecondPlayer { get; set; }
 
         public TournamentResult Result { get; set; }
     }

@@ -13,7 +13,7 @@ using Chess_club_manager.Repository;
 
 namespace Chess_club_manager.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class ManageArbitratorsController : Controller
     {
         private readonly IRepository<Arbitrator> arbitratorsRepository;

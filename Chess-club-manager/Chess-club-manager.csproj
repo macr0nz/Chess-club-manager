@@ -199,6 +199,7 @@
     <Compile Include="DTO\Players\EditPlayerDto.cs" />
     <Compile Include="DTO\Players\HomePagePlayerView.cs" />
     <Compile Include="DTO\Players\PlayerDetailsDto.cs" />
+    <Compile Include="DTO\Players\ViewManagePlayerDto.cs" />
     <Compile Include="DTO\Players\ViewPlayerDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -310,11 +311,6 @@
     <Content Include="Views\ManageArbitrators\Edit.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\Players\Details.cshtml" />
-    <Content Include="Views\ManagePlayers\Delete.cshtml" />
-    <Content Include="Views\ManagePlayers\Details.cshtml" />
-    <Content Include="Views\ManagePlayers\Index.cshtml" />
-    <Content Include="Views\ManagePlayers\Create.cshtml" />
-    <Content Include="Views\ManagePlayers\Edit.cshtml" />
     <Content Include="Views\Home\TopPlayers.cshtml" />
     <Content Include="Views\Arbitrators\Details.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
@@ -324,6 +320,10 @@
     <Content Include="Views\ManageNews\Edit.cshtml" />
     <Content Include="Views\Home\TopNews.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\ManagePlayers\Index.cshtml" />
+    <Content Include="Views\ManagePlayers\Create.cshtml" />
+    <Content Include="Views\ManagePlayers\Edit.cshtml" />
+    <Content Include="Views\ManagePlayers\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

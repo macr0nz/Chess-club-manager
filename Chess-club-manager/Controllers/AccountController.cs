@@ -76,7 +76,9 @@ namespace Chess_club_manager.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
+            var result = await SignInManager.PasswordSignInAsync(model.EmailOrLogin, model.Password, model.RememberMe, shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -135,47 +137,54 @@ namespace Chess_club_manager.Controllers
             }
         }
 
-        ////
-        //// GET: /Account/Register
+        //
+        // GET: /Account/Register
         //[AllowAnonymous]
         //public ActionResult Register()
         //{
         //    return View();
         //}
 
-        //
+
         // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    Role = UserRole.User,
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Register(RegisterViewModel model)
+        //{
+        //     //custom register
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = new ApplicationUser
+        //        {
+        //            FirstName = model.FirstName,
+        //            LastName = model.LastName,
+        //            UserName = model.UserName,
+        //            Email = model.Email,
+        //            BirthDay = model.BirthDay
+        //        };
+
+        //        //if login
+        //        //if email
+
+        //        var result = await UserManager.CreateAsync(user, model.Password);
+
+        //        if (result.Succeeded)
+        //        {
+        //            var roleresult = UserManager.AddToRole(user.Id, "user");
+
+        //            await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
-                };
-
-                var result = await UserManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
-                    
-                    return RedirectToAction("Index", "Home");
-                }
+        //            return RedirectToAction("Index", "Home");
+        //        }
 
-                AddErrors(result);
-            }
+        //        AddErrors(result);
+        //    }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
+        //    // If we got this far, something failed, redisplay form
+        //    return View(model);
+        //}
 
         //
         // GET: /Account/ConfirmEmail

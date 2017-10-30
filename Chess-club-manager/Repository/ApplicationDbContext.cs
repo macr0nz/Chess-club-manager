@@ -6,7 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Chess_club_manager.Repository
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public sealed class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -14,7 +14,7 @@ namespace Chess_club_manager.Repository
         }
 
 
-        public DbSet<Player> Players { get; set; }
+        //public DbSet<Player> Players { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<Arbitrator> Arbitrators { get; set; }
         public DbSet<News> News { get; set; }
@@ -24,5 +24,7 @@ namespace Chess_club_manager.Repository
         {
             return new ApplicationDbContext();
         }
+
+
     }
 }

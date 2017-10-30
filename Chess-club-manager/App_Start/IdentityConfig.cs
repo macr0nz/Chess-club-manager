@@ -48,7 +48,7 @@ namespace Chess_club_manager
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
+                RequireUniqueEmail = false
             };
 
             // Configure validation logic for passwords
@@ -63,8 +63,10 @@ namespace Chess_club_manager
 
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
+
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(3);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 7;
+
+            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
 
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug it in here.
@@ -77,14 +79,18 @@ namespace Chess_club_manager
                 Subject = "Security Code",
                 BodyFormat = "Your security code is {0}"
             });
+
             manager.EmailService = new EmailService();
+
             manager.SmsService = new SmsService();
+
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider = 
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
+
             return manager;
         }
 

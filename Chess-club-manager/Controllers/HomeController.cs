@@ -6,18 +6,20 @@ using System.Web.Mvc;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Players;
+using Chess_club_manager.Models;
 using Chess_club_manager.Repository;
 
 namespace Chess_club_manager.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository<Player> playersRepository;
+        private readonly IRepository<ApplicationUser> playersRepository;
         private readonly IRepository<News> newsRepository;
 
+        
         public HomeController()
         {
-            this.playersRepository = new ChessClubManagerRepository<Player>();
+            this.playersRepository = new ChessClubManagerRepository<ApplicationUser>();
             this.newsRepository = new ChessClubManagerRepository<News>();
         }
 

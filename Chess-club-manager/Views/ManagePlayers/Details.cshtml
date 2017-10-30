@@ -1,13 +1,13 @@
-﻿@model Chess_club_manager.DataModel.Entity.Player
+﻿@model Chess_club_manager.DTO.Players.PlayerDetailsDto
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Детали</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>Игрок</h4>
+    <h4>PlayerDetailsDto</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -58,16 +58,13 @@
             @Html.DisplayFor(model => model.Info)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
     </dl>
 </div>
 <p>
     <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Назад к списку</a>
+    @if (Request.IsAuthenticated && User.IsInRole("admin"))
+    {
+        <a href="@Url.Action("Edit", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
+    }
+    
 </p>

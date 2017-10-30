@@ -4,48 +4,108 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Players;
+using Chess_club_manager.Models;
 using Chess_club_manager.Repository;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Chess_club_manager.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class ManagePlayersController : Controller
     {
-        private readonly IRepository<Player> playersRepository;
+        private readonly IRepository<ApplicationUser> playersRepository;
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
 
         public ManagePlayersController()
         {
-            this.playersRepository = new ChessClubManagerRepository<Player>();
+            this.playersRepository = new ChessClubManagerRepository<ApplicationUser>();
+            
+        }
+
+        public ManagePlayersController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            this.playersRepository = new ChessClubManagerRepository<ApplicationUser>();
+
+            this.UserManager = userManager;
+            this.SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
         // GET: ManagePlayers
         public ActionResult Index()
         {
-            var allPlayers = this.playersRepository.All().ToList();
+            var allPlayers = this.playersRepository.All().Select(x => new ViewManagePlayerDto
+            {
+                Id = x.Id,
+                UserName = x.UserName,
+                Email = x.Email,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Title = x.Title,
+                CurrentRating = x.CurrentRating,
+                BirthDay = x.BirthDay,
+                Info = x.Info,
+                Roles = x.Roles
+            }).ToList();
 
             return View(allPlayers);
         }
 
         // GET: ManagePlayers/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var player = this.playersRepository.All().SingleOrDefault(x => x.Id == id);
+            var player = this.playersRepository.All().Where(p => p.Id == id).Select(x => new PlayerDetailsDto
+            {
+                Id = x.Id,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                BirthDay = x.BirthDay,
+                Info = x.Info,
+                CurrentRating = x.CurrentRating,
+                Title = x.Title,
+                Tournaments = x.Tournaments,
+            }).SingleOrDefault();
 
             if (player == null)
             {
                 return HttpNotFound();
             }
-
             return View(player);
         }
 
@@ -59,26 +119,53 @@ namespace Chess_club_manager.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreatePlayerDto createPlayerDto)
+        public async Task<ActionResult> Create(CreatePlayerDto model)
         {
             if (ModelState.IsValid)
             {
-                this.playersRepository.Add(new Player
+                var user = new ApplicationUser
                 {
-                    FirstName = createPlayerDto.FirstName,
-                    LastName = createPlayerDto.LastName,
-                    BirthDay = createPlayerDto.BirthDay,
-                    Info = createPlayerDto.Info,
-                });
-                return RedirectToAction("Index");
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    BirthDay = model.BirthDay
+                };
+
+                var password = "qwe123";
+
+                var result = await this.UserManager.CreateAsync(user, password);
+
+                if (result.Succeeded)
+                {
+                    var roleresult = this.UserManager.AddToRole(user.Id, "user");
+
+                    //email
+
+                    //await this.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    return RedirectToAction("Index", "ManagePlayers");
+                }
+                else
+                {
+                    this.AddModelErrors(result);
+                }
             }
 
-            return View(createPlayerDto);
+            return View(model);
         }
 
+        private void AddModelErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
         // GET: ManagePlayers/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -88,9 +175,12 @@ namespace Chess_club_manager.Controllers
             var player = this.playersRepository.All().Where(x => x.Id == id).Select(x => new EditPlayerDto
             {
                 Id = x.Id,
+                UserName = x.UserName,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 Info = x.Info,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
                 BirthDay = x.BirthDay,
             }).SingleOrDefault();
 
@@ -121,6 +211,9 @@ namespace Chess_club_manager.Controllers
                 player.LastName = editPlayerDto.LastName;
                 player.BirthDay = editPlayerDto.BirthDay;
                 player.Info = editPlayerDto.Info;
+                player.UserName = editPlayerDto.UserName;
+                player.Email = editPlayerDto.Email;
+                player.PhoneNumber = editPlayerDto.PhoneNumber;
 
                 this.playersRepository.Update(player);
 
@@ -129,47 +222,47 @@ namespace Chess_club_manager.Controllers
             return View(editPlayerDto);
         }
 
-        // GET: ManagePlayers/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        //// GET: ManagePlayers/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
 
-            var player = this.playersRepository.All().SingleOrDefault(x => x.Id == id);
+        //    var player = this.playersRepository.All().SingleOrDefault(x => x.Id == id);
 
-            if (player == null)
-            {
-                return HttpNotFound();
-            }
-            return View(player);
-        }
+        //    if (player == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(player);
+        //}
 
-        // POST: ManagePlayers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            var player = this.playersRepository.All().SingleOrDefault(x => x.Id == id);
+        //// POST: ManagePlayers/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    var player = this.playersRepository.All().SingleOrDefault(x => x.Id == id);
 
-            if (player == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        //    if (player == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
 
-            this.playersRepository.Delete(player);
+        //    this.playersRepository.Delete(player);
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this.playersRepository.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        this.playersRepository.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

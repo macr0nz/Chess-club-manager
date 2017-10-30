@@ -6,7 +6,7 @@ namespace Chess_club_manager.DTO.Players
 {
     public class HomePagePlayerView
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? BirthDay { get; set; }
