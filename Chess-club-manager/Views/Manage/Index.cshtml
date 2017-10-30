@@ -1,107 +1,81 @@
 ﻿@model Chess_club_manager.Models.IndexViewModel
 @{
-    ViewBag.Title = "Управление профилем";
+    ViewBag.Title = Resources.Resource.Profile;
 }
 
-<div class="col-md-10">
-    <h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-10 well">
+        <h3 style="text-align: center">@ViewBag.Title</h3>
+        <hr/>
 
-    <p class="text-success">@ViewBag.StatusMessage</p>
-    <div>
-        <h4>Настройки Вашего профиля</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>Password:</dt>
-            <dd>
-                @if (Model.HasPassword)
-                {
-                    <a href="@Url.Action("ChangePassword", "Manage")" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Изменить пароль</b></a>
-                }
-                else
-                {
-                    @Html.ActionLink("Create", "SetPassword")
-                }
-            </dd>
+        <p class="text-success">@ViewBag.StatusMessage</p>
 
-            @*<dt>External Logins:</dt>
-            <dd>
-                @Model.Logins.Count [
-                @Html.ActionLink("Manage", "ManageLogins") ]
-            </dd>*@
-            
+        <div class="media">
+            <div class="media-left">
+                <img src="~/Resources/Images/user.png" class="media-object" style="width:150px" alt="User Avatar">
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading"><b>@Model.FirstName @Model.LastName</b></h3>
+                <dl class="dl-horizontal">
+                    <dt>User Name (login):</dt>
+                    <dd>@Model.UserName</dd>
+                    
+                    <dt>Email:</dt>
+                    <dd>@Model.Email</dd>
+                    
+                    <dt>Phone Number:</dt>
+                    <dd>@Model.PhoneNumber</dd>
+                    
+                    <dt>Birth Day:</dt>
+                    <dd>@Model.BirthDay</dd>
+                   
+                    <dt>Title:</dt>
+                    <dd>@Model.Title</dd>
+                    
+                    <dt>Current Rating:</dt>
+                    <dd>@Model.CurrentRating</dd>
+                    
+                    <dt>Info:</dt>
+                    <dd>@Model.Info</dd>
+                </dl>
+                
+            </div>
+        </div>
 
-
-            @*
-            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
-             See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
-             Uncomment the following block after you have set up two-factor authentication
-        *@
-            @*  
-            <dt>Phone Number:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
-                {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                    }
-                }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
-            </dd>
-        *@
         
-            @*<dt>Two-Factor Authentication:</dt>
-        <dd>
-            <p>
-                There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication.
-            </p>
-            @if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Enabled
-                        <input type="submit" value="Disable" class="btn btn-link" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Disabled
-                        <input type="submit" value="Enable" class="btn btn-link" />
-                        </text>
-                    }
-                }
-        </dd>*@
-        </dl>
-    </div>
+    </div> 
+    
+    
+    <div class="col-md-10 well">
+        <h3 style="text-align: center">Настройки</h3>
+        <hr />
+        <div class="list-group">
+            @if (Model.HasPassword)
+            {
+                <a href="@Url.Action("ChangePassword", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Изменить пароль</b></a>
+            }
+            else
+            {
+                <a href="@Url.Action("SetPassword", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Установить пароль</b></a>
+            }
+            
+            <a href="@Url.Action("Index", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Редактировать профиль</b></a>
+            
+            <a href="@Url.Action("Index", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Изображение Пользователя</b></a>
 
+        </div>
+    </div>
 </div>
+
 
 
 <div class="row">
     <div id="playerChart" class="col-md-10 well">
 
         <h3 style="text-align: center;">Player rating chart</h3>
+        <hr />
 
-        <p><b>some chart here ...</b></p>
-        <p><b>some chart here ...</b></p>
-        <p><b>some chart here ...</b></p>
-        <p><b>some chart here ...</b></p>
+        <img src="~/Resources/Images/chart.png" class="img-rounded img-responsive" alt="Cinque Terre">
     </div>
 
 
@@ -109,6 +83,7 @@
     <div id="playerTournaments" class="col-md-10 well">
 
         <h3 style="text-align: center;">Player game history</h3>
+        <hr />
 
         @*@if (Model.Tournaments != null)
         {

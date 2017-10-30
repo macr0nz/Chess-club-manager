@@ -250,10 +250,12 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Resources\Images\ans.ico" />
+    <Content Include="Resources\Images\chart.png" />
     <Content Include="Resources\Images\fullLogo.png" />
     <Content Include="Resources\Images\ico_png.ico" />
     <Content Include="Resources\Images\ico_png.png" />
     <Content Include="Resources\Images\Logo.png" />
+    <Content Include="Resources\Images\user.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\FontAwesome.otf" />

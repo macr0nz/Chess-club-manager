@@ -3,11 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.Filters;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Chess_club_manager.Models;
+using Chess_club_manager.Repository;
 
 namespace Chess_club_manager.Controllers
 {
@@ -15,17 +17,20 @@ namespace Chess_club_manager.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        private readonly IRepository<ApplicationUser> playersRepository;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public ManageController()
         {
+            this.playersRepository = new ChessClubManagerRepository<ApplicationUser>();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this.playersRepository = new ChessClubManagerRepository<ApplicationUser>();
         }
 
         public ApplicationSignInManager SignInManager
@@ -66,7 +71,7 @@ namespace Chess_club_manager.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-
+            
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -75,6 +80,25 @@ namespace Chess_club_manager.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
             };
+
+            var user = this.playersRepository.All().SingleOrDefault(x => x.Id == userId);
+
+            if (user == null)
+            {
+                return View(model);
+            }
+
+            model.UserName = user.UserName;
+            model.FirstName = user.FirstName;
+            model.LastName = user.LastName;
+            model.Email = user.Email;
+            model.Title = user.Title;
+            model.CurrentRating = user.CurrentRating;
+            model.BirthDay = user.BirthDay;
+            model.Info = user.Info;
+
+            model.Tournaments = user.Tournaments;
+
             return View(model);
         }
 

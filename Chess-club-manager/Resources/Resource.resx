@@ -165,6 +165,9 @@
   <data name="Players" xml:space="preserve">
     <value>Игроки</value>
   </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+  </data>
   <data name="TopPlayersRating" xml:space="preserve">
     <value>Рейтинг игроков</value>
   </data>
