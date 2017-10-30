@@ -4,82 +4,133 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Детали</h2>
+<div class="col-md-10">
+    <h2>Детали</h2>
 
-<div>
-    <h4>Игрок</h4>
+    <div>
+        <h4>Игрок</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BirthDay)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BirthDay)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CurrentRating)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CurrentRating)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Info)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Info)
+            </dd>
+
+        </dl>
+    </div>
+
+    
+    <p>
+        <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Назад</a>
+
+        @if (Request.IsAuthenticated && User.IsInRole("admin"))
+        {
+            <a href="@Url.Action("Edit", "ManageArbitrators", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
+        }
+    </p>
+
+
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDay)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BirthDay)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CurrentRating)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CurrentRating)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Info)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Info)
-        </dd>
-
-    </dl>
 </div>
 
-    @if (Model.Tournaments != null)
-    {
-        <div>
-            @foreach (var tournament in Model.Tournaments)
-            {
-                <div class="panel">
-                    <p>
-                        @tournament.Name
-                    </p>
-                </div>
-            }
+
+<div class="row">
+    <div id="playerChart" class="col-md-10 well">
+        
+        <h3 style="text-align: center;">Player rating chart</h3>
+
+        <p><b>some chart here ...</b></p>
+        <p><b>some chart here ...</b></p>
+        <p><b>some chart here ...</b></p>
+        <p><b>some chart here ...</b></p>
+    </div>
+
+
+
+    <div id="playerTournaments" class="col-md-10 well">
+        
+        <h3 style="text-align: center;">Player game history</h3>
+
+        @if (Model.Tournaments != null)
+        {
+            <div>
+                @foreach (var tournament in Model.Tournaments)
+                {
+                    <div class="panel">
+                        <p>
+                            @tournament.Name
+                        </p>
+                    </div>
+                }
+            </div>
+        }
+
+        <div class="panel panel-success">
+            <div class="panel-heading">Tournament name [win]</div>
+            <div class="panel-body">Panel Content</div>
         </div>
-    }
 
-<p>
-    <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Назад</a>
-
-    @if (Request.IsAuthenticated)
-    {
-        <a href="@Url.Action("Edit", "ManageArbitrators", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
-    }
-</p>
+        <div class="panel panel-danger">
+            <div class="panel-heading">Tournament name [lost]</div>
+            <div class="panel-body">Panel Content</div>
+        </div>
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">Tournament name [win]</div>
+            <div class="panel-body">Panel Content</div>
+        </div>
+        
+        <div class="panel panel-danger">
+            <div class="panel-heading">Tournament name [lost]</div>
+            <div class="panel-body">Panel Content</div>
+        </div>
+        
+        <div class="panel panel-warning">
+            <div class="panel-heading">Tournament name [any]</div>
+            <div class="panel-body">Panel Content</div>
+        </div>
+    </div>
+</div>

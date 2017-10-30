@@ -90,16 +90,20 @@ namespace Chess_club_manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var player = this.playersRepository.All().Where(p => p.Id == id).Select(x => new PlayerDetailsDto
+            var player = this.playersRepository.All().Where(p => p.Id == id).Select(x => new ViewManagePlayerDto
             {
                 Id = x.Id,
+                UserName = x.UserName,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 BirthDay = x.BirthDay,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
                 Info = x.Info,
                 CurrentRating = x.CurrentRating,
                 Title = x.Title,
-                Tournaments = x.Tournaments,
+                Roles = x.Roles
+                //Tournaments = x.Tournaments,
             }).SingleOrDefault();
 
             if (player == null)
@@ -131,7 +135,9 @@ namespace Chess_club_manager.Controllers
                     LastName = model.LastName,
                     UserName = model.UserName,
                     Email = model.Email,
-                    BirthDay = model.BirthDay
+                    BirthDay = model.BirthDay,
+                    Info = model.Info,
+                    PhoneNumber = model.PhoneNumber
                 };
 
                 var password = "qwe123";

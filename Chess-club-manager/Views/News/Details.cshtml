@@ -20,7 +20,7 @@
 <p>
     <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Назад</a>
 
-    @if (Request.IsAuthenticated)
+    @if (Request.IsAuthenticated && User.IsInRole("admin"))
     {
         <a href="@Url.Action("Edit", "ManageNews", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
     }

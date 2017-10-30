@@ -25,6 +25,10 @@ namespace Chess_club_manager.DTO.Players
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "PhoneNumber")]
+        public string PhoneNumber { get; set; }
+
 
         [Display(Name = "Info")]
         [DataType(DataType.MultilineText)]
