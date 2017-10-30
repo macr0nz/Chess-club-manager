@@ -39,7 +39,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-info"></i> @Resources.Resource.HelpLanguage <span class="caret"></span></a>
                     <ul class="dropdown-menu" style="">
                         <li class="dropdown-header"><b>@Resources.Resource.ChooseLang</b></li>
-                        <li class="divider"></li>
+                        @*<li class="divider"></li>*@
                         <li><a href="@Url.Action("ChangeCulture", "Home", new {lang = "ru"})"><i class="fa fa-flag"></i> Русский</a></li>
                         <li class="divider"></li>
                         <li><a href="@Url.Action("ChangeCulture", "Home", new {lang = "en"})"><i class="fa fa-flag-checkered "></i> English</a></li>
