@@ -66,5 +66,20 @@ namespace Chess_club_manager.Controllers
             }
             return View(player);
         }
+
+        public ActionResult PlayersChart(string id)
+        {
+            //List<DataPoint> dataPoints = new List<DataPoint>{
+            //    new DataPoint(10, 22),
+            //    new DataPoint(20, 36),
+            //    new DataPoint(30, 42),
+            //    new DataPoint(40, 51),
+            //    new DataPoint(50, 46),
+            //};
+
+            //ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+
+            return PartialView();
+        }
     }
 }

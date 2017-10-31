@@ -88,6 +88,7 @@ namespace Chess_club_manager.Controllers
                 return View(model);
             }
 
+            model.Id = user.Id;
             model.UserName = user.UserName;
             model.FirstName = user.FirstName;
             model.LastName = user.LastName;

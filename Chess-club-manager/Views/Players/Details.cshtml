@@ -4,87 +4,66 @@
     ViewBag.Title = "Details";
 }
 
-<div class="col-md-10">
-    <h2>Детали</h2>
+<div class="row">
+    <div class="col-md-10 well">
+        <h2>Детали</h2>
 
-    <div>
-        <h4>Игрок</h4>
+        <div>
+            <h4>Игрок</h4>
+            <hr />
+            <div class="media">
+                <div class="media-left">
+                    <img src="~/Resources/Images/user.png" class="media-object" style="width:150px" alt="User Avatar">
+                </div>
+                <div class="media-body">
+                    <h3 class="media-heading"><b>@Model.FirstName @Model.LastName</b></h3>
+                    <dl class="dl-horizontal">
+                        @*<dt>User Name (login):</dt>
+                        <dd>@Model.UserName</dd>
+                    
+                        <dt>Email:</dt>
+                        <dd>@Model.Email</dd>
+                    
+                        <dt>Phone Number:</dt>
+                        <dd>@Model.PhoneNumber</dd>*@
+                    
+                        <dt>Birth Day:</dt>
+                        <dd>@Model.BirthDay</dd>
+                   
+                        <dt>Title:</dt>
+                        <dd>@Model.Title</dd>
+                    
+                        <dt>Current Rating:</dt>
+                        <dd>@Model.CurrentRating</dd>
+                    
+                        <dt>Info:</dt>
+                        <dd>@Model.Info</dd>
+                    </dl>
+                
+                </div>
+            </div>
+        </div>
+
+
+        <p>
+            <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Назад</a>
+
+            @*@if (Request.IsAuthenticated && User.IsInRole("admin"))
+                {
+                    <a href="@Url.Action("Edit", "ManagePlayers", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
+                }*@
+        </p>
+
+
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.BirthDay)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.BirthDay)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Title)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Title)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.CurrentRating)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CurrentRating)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Info)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Info)
-            </dd>
-
-        </dl>
     </div>
-
-    
-    <p>
-        <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Назад</a>
-
-        @if (Request.IsAuthenticated && User.IsInRole("admin"))
-        {
-            <a href="@Url.Action("Edit", "ManagePlayers", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
-        }
-    </p>
-
-
-    <hr />
 </div>
 
 
+
 <div class="row">
-    <div id="playerChart" class="col-md-10 well">
-
-        <h3 style="text-align: center;">Player rating chart</h3>
-        <hr />
-
-        <img src="~/Resources/Images/chart.png" class="img-rounded img-responsive" alt="Cinque Terre">
-    </div>
+    
+    @Html.Action("PlayersChart", "Players", new { id = Model.Id })
 
 
 
@@ -108,12 +87,16 @@
 
         <div class="panel panel-success">
             <div class="panel-heading">Tournament name [win]</div>
-            <div class="panel-body">Panel Content</div>
+            <div class="panel-body">
+                Panel Content
+                <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a></p>
+            </div>
         </div>
 
         <div class="panel panel-danger">
             <div class="panel-heading">Tournament name [lost]</div>
-            <div class="panel-body">Panel Content</div>
+            <div class="panel-body">Panel Content
+                <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a></p></div>
         </div>
         
         <div class="panel panel-success">
