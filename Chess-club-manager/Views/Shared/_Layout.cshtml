@@ -64,29 +64,33 @@
 <div class="container body-content">
 
     @RenderBody()
-
-    <hr/>
+    
+    
+</div>
+    
+    
+<div id="applicationFooter">
+    <hr />
     <div class="col-md-12">
         <div class="col-md-4">
             <p>&copy; @DateTime.Now.Year - Chess Club Manager</p>
-            
+
+        </div>
+        <div class="col-md-4" style="text-align: center">
+            <p>Assembly Verson: @ViewContext.Controller.GetType().Assembly.GetName().Version</p>
+            <p>Assembly Date: @File.GetCreationTime(ViewContext.Controller.GetType().Assembly.Location)</p>
         </div>
         <div class="col-md-4">
-            <p>Assembly Verson: @ViewContext.Controller.GetType().Assembly.GetName().Version</p> 
-            <p>Assembly Date: @File.GetCreationTime(ViewContext.Controller.GetType().Assembly.Location)</p> 
-        </div>
-        <div class="col-md-4">
-            <div class="btn-group">
+            <h5 style="text-align: right">USM High Graduate Work Project</h5>
+            <div class="btn-group pull-right">
                 <a href="https://vk.com/macr0nz" class="btn btn-info"><i class="fa fa-cogs"></i> Programmer</a>
                 <a href="https://vk.com/id307180684" class="btn btn-info"><i class="fa fa-bar-chart"></i> Designer</a>
                 <a href="https://vk.com/0x0000011" class="btn btn-info"><i class="fa fa-commenting"></i> Tester</a>
-                
+
             </div>
         </div>
     </div>
-    
 </div>
-
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
