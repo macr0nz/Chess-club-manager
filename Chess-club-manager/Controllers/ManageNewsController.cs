@@ -18,38 +18,22 @@ namespace Chess_club_manager.Controllers
     [Authorize(Roles = "admin")]
     public class ManageNewsController : Controller
     {
-        private IRepository<News> newsRepository;
+        private readonly IRepository<News> _newsRepository;
 
         public ManageNewsController()
         {
-            newsRepository = new ChessClubManagerRepository<News>();
+            _newsRepository = new ChessClubManagerRepository<News>();
         }
 
         // GET: ManageNews
         public ActionResult Index()
         {
-            var allNews = this.newsRepository.All().ToList();
+            var allNews = this._newsRepository.All().ToList();
 
             return View(allNews);
         }
 
-        // GET: ManageNews/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var news = this.newsRepository.All().SingleOrDefault(p => p.Id == id);
-
-            if (news == null)
-            {
-                return HttpNotFound();
-            }
-            return View(news);
-        }
-
+        
         // GET: ManageNews/Create
         public ActionResult Create()
         {
@@ -65,7 +49,7 @@ namespace Chess_club_manager.Controllers
         {
             if (ModelState.IsValid)
             {
-                this.newsRepository.Add(new News
+                this._newsRepository.Add(new News
                 {
                     Content = newsDto.Content,
                     Title = newsDto.Title,
@@ -85,7 +69,7 @@ namespace Chess_club_manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var news = this.newsRepository.All().Where(p => p.Id == id).Select(x => new EditNewsDto
+            var news = this._newsRepository.All().Where(p => p.Id == id).Select(x => new EditNewsDto
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -108,14 +92,14 @@ namespace Chess_club_manager.Controllers
         {
             if (ModelState.IsValid)
             {
-                var news = this.newsRepository.All().SingleOrDefault(p => p.Id == editNewsDto.Id);
+                var news = this._newsRepository.All().SingleOrDefault(p => p.Id == editNewsDto.Id);
 
                 if (news != null)
                 {
                     news.Content = editNewsDto.Content;
                     news.Title = editNewsDto.Title;
 
-                    this.newsRepository.Update(news);
+                    this._newsRepository.Update(news);
 
                     return RedirectToAction("Index");
                 }
@@ -131,7 +115,7 @@ namespace Chess_club_manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var news = this.newsRepository.All().SingleOrDefault(p => p.Id == id);
+            var news = this._newsRepository.All().SingleOrDefault(p => p.Id == id);
 
             if (news == null)
             {
@@ -145,11 +129,11 @@ namespace Chess_club_manager.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var news = this.newsRepository.All().SingleOrDefault(p => p.Id == id);
+            var news = this._newsRepository.All().SingleOrDefault(p => p.Id == id);
 
             if (news != null)
             {
-                this.newsRepository.Delete(news);
+                this._newsRepository.Delete(news);
             }
             
             return RedirectToAction("Index");
@@ -159,7 +143,7 @@ namespace Chess_club_manager.Controllers
         {
             if (disposing)
             {
-                this.newsRepository.Dispose();
+                this._newsRepository.Dispose();
             }
             base.Dispose(disposing);
         }

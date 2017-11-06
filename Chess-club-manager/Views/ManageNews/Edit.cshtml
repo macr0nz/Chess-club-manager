@@ -28,10 +28,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Content, 10, 40, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Content, 10, 40, new { @class = "form-control", @id = "editor" })
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#editor'))
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

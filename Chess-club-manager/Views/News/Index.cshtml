@@ -14,7 +14,7 @@
             <div class="well">
                 <label class="label label-info">@item.CreatedDate.ToShortDateString()</label>
                 <p><span class="fa fa-newspaper-o"></span><b> @item.Title</b></p>
-                <p>@item.Content</p>
+                <p>@Html.Raw(item.Content)</p>
                 <hr/>
                 <a href="@Url.Action("Details", "News", new {id = item.Id})" class="btn btn-default btn-sm"><i class="fa fa-window-restore"></i> Подробнее</a>
             </div>
