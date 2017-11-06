@@ -9,7 +9,7 @@
 <p>
     <a href="@Url.Action("Create")" class="btn btn-success"><i class="fa fa-plus"></i> Добавить</a>
 </p>
-<table class="table">
+<table class="table table-hover table-responsive">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -92,7 +92,18 @@
             {
                 foreach (var role in item.Roles)
                 {
-                    <label class="label label-info">@role.RoleId</label>
+                    if (role.RoleId == "userRole")
+                    {
+                        <label class="label label-info">User</label>
+                    }
+                    else if (role.RoleId == "adminRole")
+                    {
+                        <label class="label label-danger">Admin</label>
+                    }
+                    else if (role.RoleId == "moderatorRole")
+                    {
+                        <label class="label label-danger">Moderator</label>
+                    }
                 }
             }
         </td>

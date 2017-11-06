@@ -27,7 +27,14 @@
                     <dd>@Model.PhoneNumber</dd>
                     
                     <dt>Birth Day:</dt>
-                    <dd>@Model.BirthDay</dd>
+                    <dd>@if (Model.BirthDay.HasValue)
+                        {
+                            @Model.BirthDay.Value.ToShortDateString()
+                        }
+                        else
+                        {
+                            <label class="label label-warning">Не установлено</label>
+                        }</dd>
                    
                     <dt>Title:</dt>
                     <dd>@Model.Title</dd>
@@ -59,7 +66,7 @@
                 <a href="@Url.Action("SetPassword", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Установить пароль</b></a>
             }
             
-            <a href="@Url.Action("Index", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Редактировать профиль</b></a>
+            <a href="@Url.Action("Edit", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Редактировать профиль</b></a>
             
             <a href="@Url.Action("Index", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Изображение Пользователя</b></a>
 
@@ -76,33 +83,43 @@
     
 
 
-    <div id="playerTournaments" class="col-md-10 well">
+    <button class="btn btn-info col-md-10" data-toggle="collapse" data-target="#tournamentHistory">Show Player's Tournaments History</button>
 
-        <h3 style="text-align: center;">Player game history</h3>
-        <hr/>
+
+    <div id="tournamentHistory" class="collapse col-md-10 well">
+
+        <h3 style="text-align: center;">Player's game history</h3>
 
         @*@if (Model.Tournaments != null)
-        {
-            <div>
-                @foreach (var tournament in Model.Tournaments)
-                {
-                    <div class="panel">
-                        <p>
-                            @tournament.Name
-                        </p>
-                    </div>
-                }
-            </div>
-        }*@
+            {
+                <div>
+                    @foreach (var tournament in Model.Tournaments)
+                    {
+                        <div class="panel">
+                            <p>
+                                @tournament.Name
+                            </p>
+                        </div>
+                    }
+                </div>
+            }*@
+
+
 
         <div class="panel panel-success">
             <div class="panel-heading">Tournament name [win]</div>
-            <div class="panel-body">Panel Content</div>
+            <div class="panel-body">
+                Panel Content
+                <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a></p>
+            </div>
         </div>
 
         <div class="panel panel-danger">
             <div class="panel-heading">Tournament name [lost]</div>
-            <div class="panel-body">Panel Content</div>
+            <div class="panel-body">
+                Panel Content
+                <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a></p>
+            </div>
         </div>
 
         <div class="panel panel-success">
@@ -119,7 +136,7 @@
             <div class="panel-heading">Tournament name [any]</div>
             <div class="panel-body">Panel Content</div>
         </div>
-        
+
         <ul class="pagination">
             <li class="active"><a href="#">1</a></li>
             <li><a href="#">2</a></li>
@@ -127,5 +144,7 @@
             <li><a href="#">4</a></li>
             <li><a href="#">5</a></li>
         </ul>
+
+
     </div>
 </div>

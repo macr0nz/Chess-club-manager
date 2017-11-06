@@ -205,7 +205,10 @@ namespace Chess_club_manager.Controllers
 
                 player.FirstName = editPlayerDto.FirstName;
                 player.LastName = editPlayerDto.LastName;
-                player.BirthDay = editPlayerDto.BirthDay;
+                if (editPlayerDto.BirthDay != null)
+                {
+                    player.BirthDay = editPlayerDto.BirthDay;
+                }
                 player.Info = editPlayerDto.Info;
                 player.UserName = editPlayerDto.UserName;
                 player.Email = editPlayerDto.Email;

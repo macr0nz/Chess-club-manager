@@ -192,6 +192,7 @@
     <Compile Include="DTO\Arbitrators\CreateArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\EditArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\ViewArbitratorDto.cs" />
+    <Compile Include="DTO\Manage\EditUserSelfDto.cs" />
     <Compile Include="DTO\News\EditNewsDto.cs" />
     <Compile Include="DTO\News\CreateNewsDto.cs" />
     <Compile Include="DTO\News\ViewNewsDto.cs" />
@@ -338,6 +339,7 @@
     <Content Include="Views\ManagePlayers\Edit.cshtml" />
     <Content Include="Views\ManagePlayers\Details.cshtml" />
     <Content Include="Views\Players\PlayersChart.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

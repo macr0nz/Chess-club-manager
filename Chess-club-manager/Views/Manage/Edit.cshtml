@@ -1,11 +1,10 @@
-﻿@model Chess_club_manager.DTO.Players.EditPlayerDto
+﻿@model Chess_club_manager.DTO.Manage.EditUserSelfDto
 
 @{
-    ViewBag.Title = "Редактировать пользователя";
+    ViewBag.Title = "Редактировать профиль";
 }
 
-<h2>Редактировать пользователя</h2>
-
+<h2>Редактировать профиль</h2>
 
 @using (Html.BeginForm())
 {
@@ -16,14 +15,6 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -46,14 +37,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.BirthDay, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BirthDay, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Info, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Info, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Info, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -82,9 +65,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Отмена</a>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
