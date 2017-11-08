@@ -10,7 +10,7 @@ namespace Chess_club_manager.DataModel.Entity
         public DateTime Finish { get; set; }
         public TournamentType Type { get; set; }
 
-        public Arbitrator Arbitrator { get; set; }
+        //public Arbitrator Arbitrator { get; set; }
 
         public bool TimeControll { get; set; }
         public string Info { get; set; }
