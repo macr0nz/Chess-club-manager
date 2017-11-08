@@ -89,6 +89,8 @@ namespace Chess_club_manager.Controllers
             model.BirthDay = user.BirthDay;
             model.Info = user.Info;
 
+            model.Roles = user.Roles;
+
             model.Tournaments = user.Tournaments;
 
             return View(model);

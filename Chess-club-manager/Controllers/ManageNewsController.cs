@@ -15,7 +15,7 @@ using Chess_club_manager.Repository;
 namespace Chess_club_manager.Controllers
 {
     [Culture]
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, moderator")]
     public class ManageNewsController : Controller
     {
         private readonly IRepository<News> _newsRepository;

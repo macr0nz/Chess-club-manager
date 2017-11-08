@@ -21,5 +21,7 @@ namespace Chess_club_manager.DTO.Players
 
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
+
+        public bool IsModerator { get; set; }
     }
 }

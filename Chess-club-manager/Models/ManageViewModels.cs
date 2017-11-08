@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Chess_club_manager.DataModel.Entity;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 
 namespace Chess_club_manager.Models
@@ -24,6 +25,7 @@ namespace Chess_club_manager.Models
         public string Title { get; set; }
         public int CurrentRating { get; set; }
         public string Info { get; set; }
+        public ICollection<IdentityUserRole> Roles { get; set; }
 
         public ICollection<Tournament> Tournaments { get; set; }
     }

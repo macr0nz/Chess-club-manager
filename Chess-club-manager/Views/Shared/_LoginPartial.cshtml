@@ -8,7 +8,7 @@
     @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            @if (User.IsInRole("admin"))
+            @if (User.IsInRole("admin") || User.IsInRole("moderator"))
             {
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-wrench"></i> @Resources.Resource.ManageDropdown <span class="caret"></span></a>

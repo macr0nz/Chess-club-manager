@@ -1,4 +1,5 @@
-﻿@model Chess_club_manager.DTO.Players.EditPlayerDto
+﻿@using Microsoft.Ajax.Utilities
+@model Chess_club_manager.DTO.Players.EditPlayerDto
 
 @{
     ViewBag.Title = "Редактировать пользователя";
@@ -72,6 +73,13 @@
                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
             </div>
         </div>
+        <hr/>
+        <div class="form-group">
+            <b class="control-label col-md-2"><label class="label label-warning">Moderator</label></b>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsModerator, new { @class = "form-control" } )
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -82,7 +90,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Отмена</a>
 </div>
 
 @section Scripts {
