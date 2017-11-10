@@ -151,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Настройки Email .
+        /// </summary>
+        public static string MailSettings {
+            get {
+                return ResourceManager.GetString("MailSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Управление.
         /// </summary>
         public static string ManageDropdown {

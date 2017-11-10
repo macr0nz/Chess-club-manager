@@ -147,6 +147,9 @@
   <data name="LogOut" xml:space="preserve">
     <value>Выход</value>
   </data>
+  <data name="MailSettings" xml:space="preserve">
+    <value>Настройки Email </value>
+  </data>
   <data name="ManageDropdown" xml:space="preserve">
     <value>Управление</value>
   </data>

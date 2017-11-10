@@ -181,9 +181,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ArbitratorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageArbitratorsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageNewsController.cs" />
     <Compile Include="Controllers\ManagePlayersController.cs" />
@@ -317,16 +315,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Arbitrators\Index.cshtml" />
-    <Content Include="Views\ManageArbitrators\Delete.cshtml" />
-    <Content Include="Views\ManageArbitrators\Details.cshtml" />
-    <Content Include="Views\ManageArbitrators\Index.cshtml" />
-    <Content Include="Views\ManageArbitrators\Create.cshtml" />
-    <Content Include="Views\ManageArbitrators\Edit.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\Players\Details.cshtml" />
     <Content Include="Views\Home\TopPlayers.cshtml" />
-    <Content Include="Views\Arbitrators\Details.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\ManageNews\Delete.cshtml" />
     <Content Include="Views\ManageNews\Index.cshtml" />
