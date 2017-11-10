@@ -8,7 +8,7 @@
     @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            @if (User.IsInRole("admin"))
+            @if (User.IsInRole("admin") || User.IsInRole("moderator"))
             {
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-wrench"></i> @Resources.Resource.ManageDropdown <span class="caret"></span></a>
@@ -17,8 +17,8 @@
                         <li><a href="@Url.Action("Index", "ManageArbitrators")"><i class="fa fa-star"></i> @Resources.Resource.Tournaments</a></li>
                         <li class="divider"></li>
                         <li><a href="@Url.Action("Index", "ManagePlayers")"><i class="fa fa-address-card-o "></i> @Resources.Resource.Users</a></li>
-                        <li class="divider"></li>
-                        <li><a href="@Url.Action("Index", "ManageArbitrators")"><i class="fa fa-balance-scale"></i> @Resources.Resource.Arbitrators</a></li>
+                        @*<li class="divider"></li>
+                        <li><a href="@Url.Action("Index", "ManageArbitrators")"><i class="fa fa-balance-scale"></i> @Resources.Resource.Arbitrators</a></li>*@
                         @*<li class="divider"></li>*@
                         @*<li><a href="@Url.Action("Index", "ManagePlayers")"><i class="fa fa-user"></i> Игроки</a></li>*@
                     

@@ -18,133 +18,133 @@ namespace Chess_club_manager.Controllers
     [Authorize(Roles = "admin")]
     public class ManageArbitratorsController : Controller
     {
-        private readonly IRepository<Arbitrator> arbitratorsRepository;
+        //private readonly IRepository<Arbitrator> arbitratorsRepository;
 
-        public ManageArbitratorsController()
-        {
-            this.arbitratorsRepository = new ChessClubManagerRepository<Arbitrator>();
-        }
-
-        
-        public ActionResult Index()
-        {
-            var allArbitrators = this.arbitratorsRepository.All().ToList();
-
-            return View(allArbitrators);
-        }
+        //public ManageArbitratorsController()
+        //{
+        //    this.arbitratorsRepository = new ChessClubManagerRepository<Arbitrator>();
+        //}
 
         
+        //public ActionResult Index()
+        //{
+        //    var allArbitrators = this.arbitratorsRepository.All().ToList();
 
-        // GET: ManageArbitrators/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //    return View(allArbitrators);
+        //}
 
-        // POST: ManageArbitrators/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateArbitratorDto createArbitratorDto)
-        {
-            if (ModelState.IsValid)
-            {
-                this.arbitratorsRepository.Add(new Arbitrator
-                {
-                    FirstName = createArbitratorDto.FirstName,
-                    LastName = createArbitratorDto.LastName,
-                    Title = createArbitratorDto.Title
-                });
+        
+
+        //// GET: ManageArbitrators/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        //// POST: ManageArbitrators/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(CreateArbitratorDto createArbitratorDto)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        this.arbitratorsRepository.Add(new Arbitrator
+        //        {
+        //            FirstName = createArbitratorDto.FirstName,
+        //            LastName = createArbitratorDto.LastName,
+        //            Title = createArbitratorDto.Title
+        //        });
                 
-                return RedirectToAction("Index");
-            }
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(createArbitratorDto);
-        }
+        //    return View(createArbitratorDto);
+        //}
 
-        // GET: ManageArbitrators/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        //// GET: ManageArbitrators/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
 
-            var editArbitrator = this.arbitratorsRepository.All().Where(p => p.Id == id).Select(x => new EditArbitratorDto
-            {
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                Title = x.Title,
-                Id = x.Id
-            }).SingleOrDefault();
+        //    var editArbitrator = this.arbitratorsRepository.All().Where(p => p.Id == id).Select(x => new EditArbitratorDto
+        //    {
+        //        FirstName = x.FirstName,
+        //        LastName = x.LastName,
+        //        Title = x.Title,
+        //        Id = x.Id
+        //    }).SingleOrDefault();
 
-            if (editArbitrator == null)
-            {
-                return HttpNotFound();
-            }
-            return View(editArbitrator);
-        }
+        //    if (editArbitrator == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(editArbitrator);
+        //}
 
-        // POST: ManageArbitrators/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(EditArbitratorDto editArbitratorDto)
-        {
-            if (ModelState.IsValid)
-            {
-                var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == editArbitratorDto.Id);
+        //// POST: ManageArbitrators/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(EditArbitratorDto editArbitratorDto)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == editArbitratorDto.Id);
 
-                if (arbitrator == null) return View(editArbitratorDto);
+        //        if (arbitrator == null) return View(editArbitratorDto);
 
-                arbitrator.FirstName = editArbitratorDto.FirstName;
-                arbitrator.LastName = editArbitratorDto.LastName;
-                arbitrator.Title = editArbitratorDto.Title;
+        //        arbitrator.FirstName = editArbitratorDto.FirstName;
+        //        arbitrator.LastName = editArbitratorDto.LastName;
+        //        arbitrator.Title = editArbitratorDto.Title;
 
-                this.arbitratorsRepository.Update(arbitrator);
+        //        this.arbitratorsRepository.Update(arbitrator);
 
-                return RedirectToAction("Index");
-            }
-            return View(editArbitratorDto);
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(editArbitratorDto);
+        //}
 
-        // GET: ManageArbitrators/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        //// GET: ManageArbitrators/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
 
-            var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
+        //    var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
 
-            if (arbitrator == null)
-            {
-                return HttpNotFound();
-            }
-            return View(arbitrator);
-        }
+        //    if (arbitrator == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(arbitrator);
+        //}
 
-        // POST: ManageArbitrators/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
+        //// POST: ManageArbitrators/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    var arbitrator = this.arbitratorsRepository.All().SingleOrDefault(p => p.Id == id);
             
-            this.arbitratorsRepository.Delete(arbitrator);
+        //    this.arbitratorsRepository.Delete(arbitrator);
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this.arbitratorsRepository.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        this.arbitratorsRepository.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

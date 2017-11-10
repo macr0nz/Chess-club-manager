@@ -19,7 +19,7 @@ using Microsoft.AspNet.Identity.Owin;
 namespace Chess_club_manager.Controllers
 {
     [Culture]
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, moderator")]
     public class ManagePlayersController : Controller
     {
         private readonly IRepository<ApplicationUser> playersRepository;
@@ -177,13 +177,16 @@ namespace Chess_club_manager.Controllers
                 Info = x.Info,
                 Email = x.Email,
                 PhoneNumber = x.PhoneNumber,
-                BirthDay = x.BirthDay,
+                BirthDay = x.BirthDay
             }).SingleOrDefault();
 
             if (player == null)
             {
                 return HttpNotFound();
             }
+
+            player.IsModerator = UserManager.IsInRole(player.Id, "moderator");
+
             return View(player);
         }
 
@@ -205,11 +208,29 @@ namespace Chess_club_manager.Controllers
 
                 player.FirstName = editPlayerDto.FirstName;
                 player.LastName = editPlayerDto.LastName;
-                player.BirthDay = editPlayerDto.BirthDay;
+                if (editPlayerDto.BirthDay != null)
+                {
+                    player.BirthDay = editPlayerDto.BirthDay;
+                }
                 player.Info = editPlayerDto.Info;
                 player.UserName = editPlayerDto.UserName;
                 player.Email = editPlayerDto.Email;
                 player.PhoneNumber = editPlayerDto.PhoneNumber;
+
+                if (editPlayerDto.IsModerator)
+                {
+                    if (!UserManager.IsInRole(player.Id, "moderator"))
+                    {
+                        UserManager.AddToRole(player.Id, "moderator");
+                    }
+                }
+                else
+                {
+                    if (UserManager.IsInRole(player.Id, "moderator"))
+                    {
+                        UserManager.RemoveFromRole(player.Id, "moderator");
+                    }
+                }
 
                 this.playersRepository.Update(player);
 

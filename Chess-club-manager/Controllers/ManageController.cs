@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Chess_club_manager.DataModel.Repository;
+using Chess_club_manager.DTO.Manage;
+using Chess_club_manager.DTO.Players;
 using Chess_club_manager.Filters;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -35,26 +38,14 @@ namespace Chess_club_manager.Controllers
 
         public ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
-            }
+            get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            private set => _signInManager = value;
         }
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            private set => _userManager = value;
         }
 
         //
@@ -97,6 +88,8 @@ namespace Chess_club_manager.Controllers
             model.CurrentRating = user.CurrentRating;
             model.BirthDay = user.BirthDay;
             model.Info = user.Info;
+
+            model.Roles = user.Roles;
 
             model.Tournaments = user.Tournaments;
 
@@ -348,6 +341,73 @@ namespace Chess_club_manager.Controllers
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+        }
+
+        public ActionResult Edit()
+        {
+            var userId = User.Identity.GetUserId();
+
+            var player = this.playersRepository.All().Where(x => x.Id == userId).Select(x => new EditUserSelfDto()
+            {
+                Id = x.Id,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+                BirthDay = x.BirthDay,
+            }).SingleOrDefault();
+
+            if (player == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(player);
+
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditUserSelfDto model)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var userId = User.Identity.GetUserId();
+
+                var user = this.playersRepository.All().SingleOrDefault(p => p.Id == userId);
+
+                if (user == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+
+                if (model.BirthDay != null)
+                {
+                    user.BirthDay = model.BirthDay;
+                }
+
+                if(!user.Email.Equals(model.Email))
+                {
+                    user.Email = model.Email;
+                    //email changed 
+                    //send mail
+                }
+                
+                user.PhoneNumber = model.PhoneNumber;
+
+
+                this.playersRepository.Update(user);
+
+                return RedirectToAction("Index");
+            }
+            return View(model);
+
+
         }
 
         protected override void Dispose(bool disposing)

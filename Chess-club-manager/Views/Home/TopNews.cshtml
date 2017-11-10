@@ -5,9 +5,10 @@
     @foreach (var item in Model)
     {
         <div class="well">
-            <b>@item.Title</b>
-            <p>@item.Content</p>
-            <hr />
+            <label class="label label-info">@item.CreatedDate.ToShortDateString()</label>
+            <p><span class="fa fa-newspaper-o"></span><b> @item.Title</b></p>
+            <p>@Html.Raw(item.Content)</p>
+            <hr/>
             <a href="@Url.Action("Details", "News", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-window-restore"></i> @Resources.Resource.Details</a>
         </div>
     }

@@ -8,17 +8,21 @@ namespace Chess_club_manager.Repository
 {
     public sealed class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        //Identity fields by base class
+
+        //public DbSet<Player> Players { get; set; }
+        //public DbSet<Arbitrator> Arbitrators { get; set; }
+        
+        public DbSet<Tournament> Tournaments { get; set; }
+        
+        public DbSet<News> News { get; set; }
+
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-
-        //public DbSet<Player> Players { get; set; }
-        public DbSet<Tournament> Tournaments { get; set; }
-        public DbSet<Arbitrator> Arbitrators { get; set; }
-        public DbSet<News> News { get; set; }
-            
 
         public static ApplicationDbContext Create()
         {

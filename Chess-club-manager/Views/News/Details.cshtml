@@ -13,7 +13,8 @@
     <h5>@Html.DisplayFor(model => model.CreatedDate)</h5>
     <hr/>
     <div class="well">
-        <h4>@Html.DisplayFor(model => model.Content)</h4>
+        @*<h4>@Html.DisplayFor(model => model.Content)</h4>*@
+        <h4>@Html.Raw(Model.Content)</h4>
     </div>
     
 </div>
@@ -36,7 +37,7 @@
         <div class="col-md-4">
             <div class="well">
                 <b>@item.Title</b>
-                <p>@item.Content</p>
+                <p>@Html.Raw(item.Content)</p>
                 <hr />
                 <a href="@Url.Action("Details", "News", new {id = item.Id})" class="btn btn-default btn-sm"><i class="fa fa-window-restore"></i> Подробнее</a>
             </div>

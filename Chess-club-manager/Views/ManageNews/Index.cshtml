@@ -14,9 +14,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Content)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CreatedDate)
         </th>
@@ -28,11 +28,12 @@
         <td>
             <b>@Html.DisplayFor(modelItem => item.Title)</b>
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Content)
-        </td>
+        </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
+            <label class="label label-info">@item.CreatedDate.ToShortDateString()</label>
+            @*@Html.DisplayFor(modelItem => item.CreatedDate)*@
         </td>
         <td>
             <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> Редактировать</a>
