@@ -5,12 +5,14 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.Filters;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Chess_club_manager.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
+using Chess_club_manager.Repository;
+
 
 namespace Chess_club_manager.Controllers
 {
@@ -20,15 +22,18 @@ namespace Chess_club_manager.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly IRepository<ApplicationUser> _usersRepository;
 
         public AccountController()
         {
+            this._usersRepository = new ChessClubManagerRepository<ApplicationUser>();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this._usersRepository = new ChessClubManagerRepository<ApplicationUser>();
         }
 
         public ApplicationSignInManager SignInManager
@@ -64,10 +69,27 @@ namespace Chess_club_manager.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var isEmailLogin = model.EmailOrLogin.Contains("@");
+            var result = SignInStatus.Failure;
 
-            var result = await SignInManager.PasswordSignInAsync(model.EmailOrLogin, model.Password, model.RememberMe, shouldLockout: false);
+            if (isEmailLogin)
+            {
+                var user = this._usersRepository.All().SingleOrDefault(x => x.Email == model.EmailOrLogin);
+
+                if (user != null)
+                {
+                    var userName = user.UserName;
+
+                    result = await SignInManager.PasswordSignInAsync(userName, model.Password,
+                        model.RememberMe, shouldLockout: false);
+                }
+            }
+            else
+            {
+                 result = await SignInManager.PasswordSignInAsync(model.EmailOrLogin, model.Password,
+                    model.RememberMe, shouldLockout: false);
+            }
+
 
             switch (result)
             {
