@@ -332,7 +332,6 @@
     <Content Include="Views\ManagePlayers\Index.cshtml" />
     <Content Include="Views\ManagePlayers\Create.cshtml" />
     <Content Include="Views\ManagePlayers\Edit.cshtml" />
-    <Content Include="Views\ManagePlayers\Details.cshtml" />
     <Content Include="Views\Players\PlayersChart.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\MailSettings\Create.cshtml" />

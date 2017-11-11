@@ -1,59 +1,81 @@
 ﻿@model Chess_club_manager.DTO.Players.PlayerDetailsDto
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Resources.Resource.UserDetails;
 }
 
 <div class="row">
+
     <div class="col-md-10 well">
-        <h2>Детали</h2>
+        <h2>@ViewBag.Title</h2>
 
         <div>
-            <h4>Игрок</h4>
+            <h4>@Resources.Resource.User</h4>
             <hr />
             <div class="media">
                 <div class="media-left">
                     <img src="~/Resources/Images/user.png" class="media-object" style="width:150px" alt="User Avatar">
                 </div>
                 <div class="media-body">
-                    <h3 class="media-heading"><b>@Model.FirstName @Model.LastName</b></h3>
+                    <div class="media-heading">
+                        <h3><b>@Model.FirstName @Model.LastName</b></h3>
+
+                        @foreach (var role in Model.Roles)
+                        {
+                            if (role.RoleId == "userRole")
+                            {
+                                <label class="label label-info">User</label>
+                            }
+                            else if (role.RoleId == "adminRole")
+                            {
+                                <label class="label label-danger">Admin</label>
+                            }
+                            else if (role.RoleId == "moderatorRole")
+                            {
+                                <label class="label label-warning">Moderator</label>
+                            }
+                        }
+
+                    </div>
+
                     <dl class="dl-horizontal">
-                        @*<dt>User Name (login):</dt>
-                        <dd>@Model.UserName</dd>
-                    
-                        <dt>Email:</dt>
-                        <dd>@Model.Email</dd>
-                    
-                        <dt>Phone Number:</dt>
-                        <dd>@Model.PhoneNumber</dd>*@
-                    
+                        @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                        {
+                            <dt>User Name (login):</dt>
+                            <dd>@Model.UserName</dd>
+
+                            <dt>Email:</dt>
+                            <dd>@Model.Email</dd>
+
+                            <dt>Phone Number:</dt>
+                            <dd>@Model.PhoneNumber</dd>
+                        }
+
                         <dt>Birth Day:</dt>
                         <dd>@Model.BirthDay</dd>
-                   
+
                         <dt>Title:</dt>
                         <dd>@Model.Title</dd>
-                    
+
                         <dt>Current Rating:</dt>
                         <dd>@Model.CurrentRating</dd>
-                    
+
                         <dt>Info:</dt>
                         <dd>@Model.Info</dd>
                     </dl>
-                
+
                 </div>
             </div>
         </div>
-
-
         <p>
-            <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Назад</a>
+            <a href="@Url.Action("Index", "Players")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> Назад к списку</a>
 
-            @*@if (Request.IsAuthenticated && User.IsInRole("admin"))
-                {
-                    <a href="@Url.Action("Edit", "ManagePlayers", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
-                }*@
+            @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+            {
+                <a href="@Url.Action("Edit", "ManagePlayers", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
+            }
+
         </p>
-
 
         <hr />
     </div>
@@ -61,64 +83,56 @@
 
 
 
+
 <div class="row">
-    
+
     @Html.Action("PlayersChart", "Players", new { id = Model.Id })
 
-   
     <button class="btn btn-info col-md-10" data-toggle="collapse" data-target="#tournamentHistory">Show Player's Tournaments History</button>
-    
 
-    
-    <div id="tournamentHistory" class="collapse col-md-10 well">
-        
+    <div id="tournamentHistory" class="col-md-10 well collapse">
+
         <h3 style="text-align: center;">Player game history</h3>
 
         @*@if (Model.Tournaments != null)
-        {
-            <div>
-                @foreach (var tournament in Model.Tournaments)
-                {
-                    <div class="panel">
-                        <p>
-                            @tournament.Name
-                        </p>
-                    </div>
-                }
-            </div>
-        }*@
-        
-        
-        
+            {
+                <div>
+                    @foreach (var tournament in Model.Tournaments)
+                    {
+                        <div class="panel">
+                            <p>
+                                @tournament.Name
+                            </p>
+                        </div>
+                    }
+                </div>
+            }*@
+
         <div class="panel panel-success">
             <div class="panel-heading">Tournament name [win]</div>
-            <div class="panel-body">
-                Panel Content
-                <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a></p>
-            </div>
+            <div class="panel-body">Panel Content</div>
         </div>
 
         <div class="panel panel-danger">
             <div class="panel-heading">Tournament name [lost]</div>
-            <div class="panel-body">Panel Content
-                <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a></p></div>
+            <div class="panel-body">Panel Content</div>
         </div>
-        
+
         <div class="panel panel-success">
             <div class="panel-heading">Tournament name [win]</div>
             <div class="panel-body">Panel Content</div>
         </div>
-        
+
         <div class="panel panel-danger">
             <div class="panel-heading">Tournament name [lost]</div>
             <div class="panel-body">Panel Content</div>
         </div>
-        
+
         <div class="panel panel-warning">
             <div class="panel-heading">Tournament name [any]</div>
             <div class="panel-body">Panel Content</div>
         </div>
-        
+
         <ul class="pagination">
             <li class="active"><a href="#">1</a></li>
             <li><a href="#">2</a></li>
@@ -126,7 +140,5 @@
             <li><a href="#">4</a></li>
             <li><a href="#">5</a></li>
         </ul>
-        
-
     </div>
 </div>

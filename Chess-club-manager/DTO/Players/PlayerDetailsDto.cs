@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Chess_club_manager.DataModel.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Chess_club_manager.DTO.Players
 {
@@ -13,6 +14,12 @@ namespace Chess_club_manager.DTO.Players
         public string Title { get; set; }
         public int CurrentRating { get; set; }
         public string Info { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        
+
+        public ICollection<IdentityUserRole> Roles { get; set; }
 
         public ICollection<Tournament> Tournaments { get; set; }
     }

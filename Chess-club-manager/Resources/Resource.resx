@@ -195,6 +195,12 @@
   <data name="Tournaments" xml:space="preserve">
     <value>Турниры</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
+  <data name="UserDetails" xml:space="preserve">
+    <value>Детали пользователя</value>
+  </data>
   <data name="Users" xml:space="preserve">
     <value>Пользователи</value>
   </data>

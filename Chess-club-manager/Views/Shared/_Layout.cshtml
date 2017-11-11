@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            @Html.ActionLink(Resources.Resource.ApplicationName, "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+            <a href="@Url.Action("Index", "Home")" class="navbar-brand"><i class="fa fa-code"></i> @Resources.Resource.ApplicationName</a>
 
         </div>
         <div class="navbar-collapse collapse">

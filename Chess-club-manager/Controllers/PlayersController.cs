@@ -16,18 +16,18 @@ namespace Chess_club_manager.Controllers
     [Culture]
     public class PlayersController : Controller
     {
-        private IRepository<ApplicationUser> playersRepository;
+        private readonly IRepository<ApplicationUser> _playersRepository;
 
         public PlayersController()
         {
-            playersRepository = new ChessClubManagerRepository<ApplicationUser>();
+            _playersRepository = new ChessClubManagerRepository<ApplicationUser>();
         }
 
         // GET: Players
         public ActionResult Index()
         {
             //except admin
-            var allPlayers = this.playersRepository.All().Select(x => new ViewPlayerDto
+            var allPlayers = this._playersRepository.All().Select(x => new ViewPlayerDto
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
@@ -48,7 +48,7 @@ namespace Chess_club_manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var player = this.playersRepository.All().Where(p => p.Id == id).Select(x => new PlayerDetailsDto
+            var player = this._playersRepository.All().Where(p => p.Id == id).Select(x => new PlayerDetailsDto
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
@@ -58,6 +58,10 @@ namespace Chess_club_manager.Controllers
                 CurrentRating = x.CurrentRating,
                 Title = x.Title,
                 Tournaments = x.Tournaments,
+                UserName = x.UserName,
+                PhoneNumber = x.PhoneNumber,
+                Email = x.Email,
+                Roles = x.Roles
             }).SingleOrDefault();
 
             if (player == null)
@@ -69,15 +73,9 @@ namespace Chess_club_manager.Controllers
 
         public ActionResult PlayersChart(string id)
         {
-            //List<DataPoint> dataPoints = new List<DataPoint>{
-            //    new DataPoint(10, 22),
-            //    new DataPoint(20, 36),
-            //    new DataPoint(30, 42),
-            //    new DataPoint(40, 51),
-            //    new DataPoint(50, 46),
-            //};
-
-            //ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+            //get logic
+            //form array logic
+            //return array to js
 
             return PartialView();
         }

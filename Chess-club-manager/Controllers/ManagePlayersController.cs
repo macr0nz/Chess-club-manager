@@ -75,32 +75,7 @@ namespace Chess_club_manager.Controllers
         // GET: ManagePlayers/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var player = this.playersRepository.All().Where(p => p.Id == id).Select(x => new ViewManagePlayerDto
-            {
-                Id = x.Id,
-                UserName = x.UserName,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                BirthDay = x.BirthDay,
-                Email = x.Email,
-                PhoneNumber = x.PhoneNumber,
-                Info = x.Info,
-                CurrentRating = x.CurrentRating,
-                Title = x.Title,
-                Roles = x.Roles
-                //Tournaments = x.Tournaments,
-            }).SingleOrDefault();
-
-            if (player == null)
-            {
-                return HttpNotFound();
-            }
-            return View(player);
+            return RedirectToAction("Details", "Players", new {id = id});
         }
 
         // GET: ManagePlayers/Create

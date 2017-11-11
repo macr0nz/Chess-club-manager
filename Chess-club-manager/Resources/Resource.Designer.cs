@@ -295,6 +295,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пользователь.
+        /// </summary>
+        public static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Детали пользователя.
+        /// </summary>
+        public static string UserDetails {
+            get {
+                return ResourceManager.GetString("UserDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пользователи.
         /// </summary>
         public static string Users {
