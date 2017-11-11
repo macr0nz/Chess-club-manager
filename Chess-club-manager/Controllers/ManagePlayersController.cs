@@ -130,7 +130,12 @@ namespace Chess_club_manager.Controllers
                     PhoneNumber = model.PhoneNumber
                 };
 
-                var password = "qwe123";
+                var dateTimeStamp = DateTime.Now.GetHashCode();
+                if (dateTimeStamp < 0)
+                {
+                    dateTimeStamp *= -1;
+                }
+                var password = model.UserName + dateTimeStamp.ToString();
 
                 var result = await this.UserManager.CreateAsync(user, password);
 
@@ -138,10 +143,15 @@ namespace Chess_club_manager.Controllers
                 {
                     var roleresult = this.UserManager.AddToRole(user.Id, "user");
 
-                    //email
+                    if (!string.IsNullOrEmpty(model.Email))
+                    {
+                        using (var emailNotificationService = new EmailNotificationService())
+                        {
+                            emailNotificationService.SendRegistrationMail(model.Email, model.UserName, password);
+                        }
+                    }
 
-                    //await this.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
+                    
                     return RedirectToAction("Index", "ManagePlayers");
                 }
                 else

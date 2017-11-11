@@ -1,0 +1,66 @@
+﻿@model Chess_club_manager.DataModel.Entity.MailSettings
+
+@{
+    ViewBag.Title = Resources.Resource.MailSettings;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>@Resources.Resource.MailSettings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MailFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MailPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MailServer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailServer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MailPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailPort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnableSsl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnableSsl)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <a href="@Url.Action("Edit")" class="btn btn-default"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
+</div>

@@ -9,13 +9,17 @@ namespace Chess_club_manager.Repository
     public sealed class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         //Identity fields by base class
+        //[dbo].[AspNetRoles]
+        //[dbo].[AspNetUserClaims]
+        //[dbo].[AspNetUserLogins]
+        //[dbo].[AspNetUserRoles]
+        //[dbo].[AspNetUsers]
 
-        //public DbSet<Player> Players { get; set; }
-        //public DbSet<Arbitrator> Arbitrators { get; set; }
-        
         public DbSet<Tournament> Tournaments { get; set; }
         
         public DbSet<News> News { get; set; }
+
+        public DbSet<MailSettings> MailSettings { get; set; }
 
 
         public ApplicationDbContext()

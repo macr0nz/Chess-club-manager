@@ -182,14 +182,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MailSettingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageNewsController.cs" />
     <Compile Include="Controllers\ManagePlayersController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Controllers\TournamentsController.cs" />
     <Compile Include="DTO\Arbitrators\CreateArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\EditArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\ViewArbitratorDto.cs" />
+    <Compile Include="DTO\MailSettingsDto.cs" />
     <Compile Include="DTO\Manage\EditUserSelfDto.cs" />
     <Compile Include="DTO\News\EditNewsDto.cs" />
     <Compile Include="DTO\News\CreateNewsDto.cs" />
@@ -212,6 +215,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ApplicationDbContext.cs" />
     <Compile Include="Repository\ChessClubManagerRepository.cs" />
+    <Compile Include="Repository\EmailNotificationService.cs" />
     <Compile Include="Resources\Resource.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -331,6 +335,9 @@
     <Content Include="Views\ManagePlayers\Details.cshtml" />
     <Content Include="Views\Players\PlayersChart.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\MailSettings\Create.cshtml" />
+    <Content Include="Views\MailSettings\Index.cshtml" />
+    <Content Include="Views\MailSettings\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -356,6 +363,9 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Tournaments\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

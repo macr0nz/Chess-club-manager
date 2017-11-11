@@ -27,9 +27,9 @@
         <th>
             Текущий рейтинг
         </th>
-        <th>
+        @*<th>
             Информация
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -58,31 +58,11 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @if (item.CurrentRating > 1000)
-            {
-                <i class="fa fa-star" style="color: gold;"></i>
-            }
-            @if (item.CurrentRating > 1500)
-            {
-                <i class="fa fa-star" style="color: gold;"></i>
-            }
-            @if (item.CurrentRating > 2000)
-            {
-                <i class="fa fa-star" style="color: gold;"></i>
-            }
-            @if (item.CurrentRating > 2500)
-            {
-                <i class="fa fa-star" style="color: gold;"></i>
-            }
-            @if (item.CurrentRating > 2700)
-            {
-                <i class="fa fa-star" style="color: gold;"></i>
-            }
-             @Html.DisplayFor(modelItem => item.CurrentRating)
+            @Html.DisplayFor(modelItem => item.CurrentRating)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Info)
-        </td>
+        </td>*@
         <td>
             <a href="@Url.Action("Details", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> Детали</a>
         </td>
