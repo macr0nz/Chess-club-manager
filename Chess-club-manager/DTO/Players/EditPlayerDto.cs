@@ -23,5 +23,7 @@ namespace Chess_club_manager.DTO.Players
         public string PhoneNumber { get; set; }
 
         public bool IsModerator { get; set; }
+        public bool IsAdmin { get; set; }
+        public bool IsUser { get; set; }
     }
 }

@@ -61,6 +61,10 @@
     </dl>
 </div>
 
-<div>
-    <a href="@Url.Action("Edit")" class="btn btn-default"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
-</div>
+@if (User.IsInRole("admin"))
+{
+    <div>
+        <a href="@Url.Action("Edit")" class="btn btn-default"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
+    </div>
+}
+

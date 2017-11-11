@@ -99,7 +99,7 @@ namespace Chess_club_manager.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Chess Club Manager description page.";
+            ViewBag.Message = $"{Resources.Resource.ApplicationName} description page.";
 
             return View();
         }

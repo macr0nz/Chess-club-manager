@@ -48,15 +48,15 @@ namespace Chess_club_manager.Repository
                 var message = new MailMessage
                 {
                     Body = "<div>" +
-                           "<h3><b>Chess Club Manager Registration:</b></h3>" +
+                           $"<h3><b>{Resources.Resource.ApplicationName} Registration:</b></h3>" +
                            $"<p>Login:</p><p>{login}</p>" +
                            $"<p>Password:</p><p>{password}</p>" +
                            "<p><b>You can change temp.password via user account settings.</b></p>" +
-                           $"<hr/><p>Chess Club Manager {DateTime.Now}</p>" +
+                           $"<hr/><p>{Resources.Resource.ApplicationName} {DateTime.Now}</p>" +
                            "</div>",
                     From = new MailAddress(_mailSettings.MailFrom),
                     To = { new MailAddress(mailTo) },
-                    Subject = "Chess Club Manager Registration",
+                    Subject = $"{Resources.Resource.ApplicationName} Registration",
                     IsBodyHtml = true
                 };
                 

@@ -196,6 +196,8 @@ namespace Chess_club_manager.Controllers
             }
 
             player.IsModerator = UserManager.IsInRole(player.Id, "moderator");
+            player.IsAdmin = UserManager.IsInRole(player.Id, "admin");
+            player.IsUser = true; // always?
 
             return View(player);
         }
@@ -227,6 +229,7 @@ namespace Chess_club_manager.Controllers
                 player.Email = editPlayerDto.Email;
                 player.PhoneNumber = editPlayerDto.PhoneNumber;
 
+                //is moderator true
                 if (editPlayerDto.IsModerator)
                 {
                     if (!UserManager.IsInRole(player.Id, "moderator"))
@@ -241,6 +244,25 @@ namespace Chess_club_manager.Controllers
                         UserManager.RemoveFromRole(player.Id, "moderator");
                     }
                 }
+
+                //is admin true
+                if (editPlayerDto.IsAdmin)
+                {
+                    if (!UserManager.IsInRole(player.Id, "admin"))
+                    {
+                        UserManager.AddToRole(player.Id, "admin");
+                    }
+                }
+                else
+                {
+                    if (UserManager.IsInRole(player.Id, "admin"))
+                    {
+                        UserManager.RemoveFromRole(player.Id, "admin");
+                    }
+                }
+
+                //is user true
+                //always?
 
                 this.playersRepository.Update(player);
 

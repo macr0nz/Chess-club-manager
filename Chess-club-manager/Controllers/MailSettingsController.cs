@@ -15,7 +15,7 @@ using Chess_club_manager.Repository;
 namespace Chess_club_manager.Controllers
 {
     [Culture]
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, moderator")]
     public class MailSettingsController : Controller
     {
         private readonly IRepository<MailSettings> _mailSettingsRepository;
@@ -39,6 +39,7 @@ namespace Chess_club_manager.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Edit()
         {
 
@@ -62,6 +63,7 @@ namespace Chess_club_manager.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(MailSettingsDto mailSettingsDto)
         {
             if (ModelState.IsValid)

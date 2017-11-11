@@ -1,4 +1,5 @@
 ﻿@using Microsoft.Ajax.Utilities
+@using Microsoft.AspNet.Identity
 @model Chess_club_manager.DTO.Players.EditPlayerDto
 
 @{
@@ -73,14 +74,36 @@
                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
             </div>
         </div>
-        <hr/>
+        
         <div class="form-group">
             <b class="control-label col-md-2"><label class="label label-warning">Moderator</label></b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.IsModerator, new { @class = "form-control" } )
             </div>
         </div>
+        <div class="form-group">
+            <b class="control-label col-md-2"><label class="label label-danger">Admin</label></b>
+            <div class="col-md-10">
+                @if (Model.Id == User.Identity.GetUserId())
+                {
+                    @Html.DisplayFor(model => model.IsAdmin, new { @class = "form-control" })
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.IsAdmin, new { @class = "form-control" })
+                }
+            </div>
+        </div>
 
+        <div class="form-group">
+            <b class="control-label col-md-2"><label class="label label-info">User</label></b>
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.IsUser, new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.IsUser, new { @class = "form-control" })*@
+            </div>
+        </div>
+
+        <hr />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @Resources.Resource.Save</button>

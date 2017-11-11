@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Chess Club Manager</title>
+    <title>@ViewBag.Title - @Resources.Resource.ApplicationName</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="~/Resources/Images/ico_png.ico" />
     <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/classic/ckeditor.js"></script>
@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            @Html.ActionLink("Chess Club Manager", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+            @Html.ActionLink(Resources.Resource.ApplicationName, "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
 
         </div>
         <div class="navbar-collapse collapse">
@@ -73,7 +73,8 @@
     <hr />
     <div class="col-md-12">
         <div class="col-md-4">
-            <p>&copy; @DateTime.Now.Year - Chess Club Manager</p>
+            <p>&copy; @DateTime.Now.Year - @Resources.Resource.ApplicationName</p>
+            <p>&reg; Chess Club Manager Project</p>
 
         </div>
         <div class="col-md-4" style="text-align: center">
