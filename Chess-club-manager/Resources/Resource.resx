@@ -171,6 +171,9 @@
   <data name="News" xml:space="preserve">
     <value>Новости</value>
   </data>
+  <data name="Official" xml:space="preserve">
+    <value>Официальный</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -183,8 +186,14 @@
   <data name="Players" xml:space="preserve">
     <value>Игроки</value>
   </data>
+  <data name="Private" xml:space="preserve">
+    <value>Закрытый</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>Открытый</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
@@ -194,6 +203,45 @@
   </data>
   <data name="Tournaments" xml:space="preserve">
     <value>Турниры</value>
+  </data>
+  <data name="TRNassignedPlayersCount" xml:space="preserve">
+    <value>Участники</value>
+  </data>
+  <data name="TRNcreator" xml:space="preserve">
+    <value>Создатель Турнира</value>
+  </data>
+  <data name="TRNfinish" xml:space="preserve">
+    <value>Завершение</value>
+  </data>
+  <data name="TRNisCompleted" xml:space="preserve">
+    <value>Завершен</value>
+  </data>
+  <data name="TRNisOfficial" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="TRNisPrivate" xml:space="preserve">
+    <value>Доступ</value>
+  </data>
+  <data name="TRNisStarted" xml:space="preserve">
+    <value>Начался</value>
+  </data>
+  <data name="TRNlocation" xml:space="preserve">
+    <value>Место проведения</value>
+  </data>
+  <data name="TRNmaxPlayersCount" xml:space="preserve">
+    <value>Макс. игроков</value>
+  </data>
+  <data name="TRNname" xml:space="preserve">
+    <value>Название Турнира</value>
+  </data>
+  <data name="TRNstart" xml:space="preserve">
+    <value>Начало</value>
+  </data>
+  <data name="TRNtimeControl" xml:space="preserve">
+    <value>Контроль времени</value>
+  </data>
+  <data name="UnOfficial" xml:space="preserve">
+    <value>Неофициальный</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Пользователь</value>

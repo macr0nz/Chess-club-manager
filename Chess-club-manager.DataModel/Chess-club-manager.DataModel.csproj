@@ -43,7 +43,6 @@
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\MailSettings.cs" />
     <Compile Include="Entity\News.cs" />
-    <Compile Include="Entity\Tournament.cs" />
     <Compile Include="Enum\TournamentResult.cs" />
     <Compile Include="Enum\TournamentState.cs" />
     <Compile Include="Enum\TournamentType.cs" />

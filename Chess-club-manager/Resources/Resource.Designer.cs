@@ -223,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Официальный.
+        /// </summary>
+        public static string Official {
+            get {
+                return ResourceManager.GetString("Official", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string OK {
@@ -259,11 +268,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Закрытый.
+        /// </summary>
+        public static string Private {
+            get {
+                return ResourceManager.GetString("Private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Профиль.
         /// </summary>
         public static string Profile {
             get {
                 return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открытый.
+        /// </summary>
+        public static string Public {
+            get {
+                return ResourceManager.GetString("Public", resourceCulture);
             }
         }
         
@@ -291,6 +318,123 @@ namespace Resources {
         public static string Tournaments {
             get {
                 return ResourceManager.GetString("Tournaments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Участники.
+        /// </summary>
+        public static string TRNassignedPlayersCount {
+            get {
+                return ResourceManager.GetString("TRNassignedPlayersCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Создатель Турнира.
+        /// </summary>
+        public static string TRNcreator {
+            get {
+                return ResourceManager.GetString("TRNcreator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Завершение.
+        /// </summary>
+        public static string TRNfinish {
+            get {
+                return ResourceManager.GetString("TRNfinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Завершен.
+        /// </summary>
+        public static string TRNisCompleted {
+            get {
+                return ResourceManager.GetString("TRNisCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Статус.
+        /// </summary>
+        public static string TRNisOfficial {
+            get {
+                return ResourceManager.GetString("TRNisOfficial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Доступ.
+        /// </summary>
+        public static string TRNisPrivate {
+            get {
+                return ResourceManager.GetString("TRNisPrivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Начался.
+        /// </summary>
+        public static string TRNisStarted {
+            get {
+                return ResourceManager.GetString("TRNisStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Место проведения.
+        /// </summary>
+        public static string TRNlocation {
+            get {
+                return ResourceManager.GetString("TRNlocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Макс. игроков.
+        /// </summary>
+        public static string TRNmaxPlayersCount {
+            get {
+                return ResourceManager.GetString("TRNmaxPlayersCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Название Турнира.
+        /// </summary>
+        public static string TRNname {
+            get {
+                return ResourceManager.GetString("TRNname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Начало.
+        /// </summary>
+        public static string TRNstart {
+            get {
+                return ResourceManager.GetString("TRNstart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Контроль времени.
+        /// </summary>
+        public static string TRNtimeControl {
+            get {
+                return ResourceManager.GetString("TRNtimeControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неофициальный.
+        /// </summary>
+        public static string UnOfficial {
+            get {
+                return ResourceManager.GetString("UnOfficial", resourceCulture);
             }
         }
         

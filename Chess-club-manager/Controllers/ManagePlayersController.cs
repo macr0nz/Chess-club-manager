@@ -105,13 +105,20 @@ namespace Chess_club_manager.Controllers
                     PhoneNumber = model.PhoneNumber
                 };
 
-                var dateTimeStamp = DateTime.Now.GetHashCode();
-                if (dateTimeStamp < 0)
-                {
-                    dateTimeStamp *= -1;
-                }
-                var password = model.UserName + dateTimeStamp.ToString();
+                //default password if no email
+                var password = "qwe123";
 
+                if (!string.IsNullOrEmpty(model.Email))
+                {
+                    var dateTimeStamp = DateTime.Now.GetHashCode();
+                    if (dateTimeStamp < 0)
+                    {
+                        dateTimeStamp *= -1;
+                    }
+
+                    password = model.UserName + dateTimeStamp.ToString();
+                }
+                
                 var result = await this.UserManager.CreateAsync(user, password);
 
                 if (result.Succeeded)

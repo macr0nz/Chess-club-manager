@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.Models;
 using Microsoft.AspNet.Identity.EntityFramework;

@@ -13,20 +13,22 @@ using Chess_club_manager.Repository;
 namespace Chess_club_manager.Controllers
 {
     [Culture]
-    public class TournamentsController : Controller
+    [Authorize(Roles = "admin, moderator")]
+    public class ManageTournamentsController : Controller
     {
         private readonly IRepository<Tournament> _tournamentsRepository;
 
-        public TournamentsController()
+        public ManageTournamentsController()
         {
             this._tournamentsRepository = new ChessClubManagerRepository<Tournament>();
         }
-
-        // GET: Tournaments
+        // GET: ManageTournaments
         public ActionResult Index()
         {
-            var allTournaments = this._tournamentsRepository.All()
-                .Select(x => new TournamentDto
+            var allTwithCreators = _tournamentsRepository.All().Include("Creator").ToList();
+
+            var allTournaments = allTwithCreators
+                .Select(x => new ManageTournamentDto
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -38,12 +40,11 @@ namespace Chess_club_manager.Controllers
                     IsPrivate = x.IsPrivate,
                     MaxPlayersCount = x.MaxPlayersCount,
                     IsStarted = x.IsStarted,
-                    IsCompleted = x.IsCompleted
+                    IsCompleted = x.IsCompleted,
+                    CreatorId = x.Creator.Id,
+                    CreatorName = x.Creator.UserName
                 }).ToList();
 
-            //if need nested data 
-            //var allTwithCreators = _tournamentsRepository.All().Include("Creator").ToList();
-            
             return View(allTournaments);
         }
     }

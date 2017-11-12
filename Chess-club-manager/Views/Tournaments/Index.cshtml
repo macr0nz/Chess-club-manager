@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Chess_club_manager.DTO.Tournament.TournamentDto>
+
+@{
+    ViewBag.Title = Resources.Resource.Tournaments;
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+    @if (Request.IsAuthenticated)
+    {
+        <p>
+            @if (User.IsInRole("moderator") || User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("CreateOfficial", "ManageTournaments")" class="btn btn-success"><i class="fa fa-plus-square"></i> Создать официальный турнир</a>
+            }
+
+            <a href="@Url.Action("CreateUnofficial", "ManageTournaments")" class="btn btn-default"><i class="fa fa-plus-square"></i> Создать неофициальный турнир</a>
+        </p>
+    }
+
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Resources.Resource.TRNname
+        </th>
+        <th>
+            @Resources.Resource.TRNstart
+        </th>
+        <th>
+            @Resources.Resource.TRNfinish
+        </th>
+        <th>
+            @Resources.Resource.TRNisOfficial
+        </th>
+        <th>
+            @Resources.Resource.TRNtimeControl
+        </th>
+        <th>
+            @Resources.Resource.TRNlocation
+        </th>
+        <th>
+            @Resources.Resource.TRNisPrivate
+        </th>
+        <th>
+            @Resources.Resource.TRNmaxPlayersCount
+        </th>
+        <th>
+            @Resources.Resource.TRNassignedPlayersCount
+        </th>
+        <th>
+            @Resources.Resource.TRNisStarted
+        </th>
+        <th>
+            @Resources.Resource.TRNisCompleted
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="@Url.Action("Details", "Tournaments", new {id = item.Id})"><b>@item.Name</b></a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Finish)
+        </td>
+        <td>
+            @if (item.IsOfficial)
+            {
+                <label class="label label-success"><i class="fa fa-star"></i> @Resources.Resource.Official</label>
+            }
+            else
+            {
+                <label class="label label-danger"><i class="fa fa-star-o"></i> @Resources.Resource.UnOfficial</label>
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeControl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @if (item.IsPrivate)
+            {
+                <label class="label label-danger"><i class="fa fa-lock"></i> @Resources.Resource.Private</label>
+            }
+            else
+            {
+                <label class="label label-success"><i class="fa fa-unlock"></i> @Resources.Resource.Public</label>
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxPlayersCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignedPlayersCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsStarted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCompleted)
+        </td>
+        <td>
+            <a href="@Url.Action("Details", "Tournaments", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a>
+        </td>
+    </tr>
+}
+
+</table>

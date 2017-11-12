@@ -3,7 +3,7 @@
     public enum TournamentType
     {
         Round = 1,
-        Olympic = 2,
-
+        Swiss = 2,
+        Olympic = 3,
     }
 }
