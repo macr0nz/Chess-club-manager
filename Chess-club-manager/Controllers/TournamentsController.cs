@@ -46,5 +46,12 @@ namespace Chess_club_manager.Controllers
             
             return View(allTournaments);
         }
+
+        public ActionResult Details(int id)
+        {
+            ViewBag.id = id;
+
+            return View();
+        }
     }
 }

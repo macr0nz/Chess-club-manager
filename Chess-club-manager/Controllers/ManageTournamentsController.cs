@@ -17,10 +17,12 @@ namespace Chess_club_manager.Controllers
     public class ManageTournamentsController : Controller
     {
         private readonly IRepository<Tournament> _tournamentsRepository;
+        private readonly IRepository<ApplicationUser> _usersRepository;
 
         public ManageTournamentsController()
         {
             this._tournamentsRepository = new ChessClubManagerRepository<Tournament>();
+            this._usersRepository = new ChessClubManagerRepository<ApplicationUser>();
         }
 
         // GET: ManageTournaments
@@ -74,7 +76,8 @@ namespace Chess_club_manager.Controllers
                     Name = trnCreateDto.Name,
                     Location = trnCreateDto.Location,
                     TimeControl = trnCreateDto.TimeControl,
-                    Start = trnCreateDto.StartDate.Add(trnCreateDto.StartTime.TimeOfDay)
+                    Start = trnCreateDto.StartDate.Add(trnCreateDto.StartTime.TimeOfDay),
+                    IsOfficial = trnCreateDto.IsOfficial
                 };
 
                 if (trnCreateDto.FinishDate != null)
@@ -86,11 +89,20 @@ namespace Chess_club_manager.Controllers
                     }
                 }
 
+                var currentUser = this._usersRepository.All().AsNoTracking().SingleOrDefault(x => x.UserName == User.Identity.Name);
+                if (currentUser != null)
+                {
+                    //tournament.Creator = currentUser;
+                    tournament.CreatorId = currentUser.Id;
+
+                    tournament.Arbitrators = new List<ApplicationUser> {currentUser};
+                }
+                
 
                 //this._tournamentsRepository.Add(tournament);
 
                 //redirect to this tournament page
-                return RedirectToAction("Index", "Tournaments");
+                return RedirectToAction("Details", "Tournaments", new {id = tournament.Id});
             }
 
             return View(trnCreateDto);

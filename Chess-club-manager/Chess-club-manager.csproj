@@ -347,6 +347,7 @@
     <Content Include="Views\Tournaments\Index.cshtml" />
     <Content Include="Views\ManageTournaments\Index.cshtml" />
     <Content Include="Views\ManageTournaments\Create.cshtml" />
+    <Content Include="Views\Tournaments\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
