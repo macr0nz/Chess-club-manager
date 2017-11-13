@@ -6,14 +6,12 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @if (User.IsInRole("moderator") || User.IsInRole("Admin"))
-    {
-        <a href="@Url.Action("CreateOfficial", "ManageTournaments")" class="btn btn-success"><i class="fa fa-plus-square"></i> Создать официальный турнир</a>
-    }
-
-    <a href="@Url.Action("CreateUnofficial", "ManageTournaments")" class="btn btn-default"><i class="fa fa-plus-square"></i> Создать неофициальный турнир</a>
-</p>
+@if (Request.IsAuthenticated)
+{
+    <p>
+        <a href="@Url.Action("Create", "ManageTournaments")" class="btn btn-success"><i class="fa fa-plus-square"></i> @Resources.Resource.TRNcreate</a>
+    </p>
+}
 
 
 <table class="table table-hover table-responsive">

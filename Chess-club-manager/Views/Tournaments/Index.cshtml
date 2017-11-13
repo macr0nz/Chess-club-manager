@@ -10,7 +10,7 @@
     @if (Request.IsAuthenticated)
     {
         <p>
-            <a href="@Url.Action("Create", "ManageTournaments")" class="btn btn-success"><i class="fa fa-plus-square"></i> Создать турнир</a>
+            <a href="@Url.Action("Create", "ManageTournaments")" class="btn btn-success"><i class="fa fa-plus-square"></i> @Resources.Resource.TRNcreate</a>
         </p>
     }
 

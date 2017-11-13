@@ -267,4 +267,7 @@
   <data name="TRNtype" xml:space="preserve">
     <value>Формат Турнира</value>
   </data>
+  <data name="PlayerChart" xml:space="preserve">
+    <value>Диаграмма рейтинга</value>
+  </data>
 </root>

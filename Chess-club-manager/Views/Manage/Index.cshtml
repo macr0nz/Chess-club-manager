@@ -78,16 +78,16 @@
         <div class="list-group">
             @if (Model.HasPassword)
             {
-                <a href="@Url.Action("ChangePassword", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Изменить пароль</b></a>
+                <a href="@Url.Action("ChangePassword", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-lock"></i> <b>Изменить пароль</b></a>
             }
             else
             {
-                <a href="@Url.Action("SetPassword", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Установить пароль</b></a>
+                <a href="@Url.Action("SetPassword", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-lock"></i> <b>Установить пароль</b></a>
             }
             
-            <a href="@Url.Action("Edit", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Редактировать профиль</b></a>
+            <a href="@Url.Action("Edit", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cogs"></i> <b>Редактировать профиль</b></a>
             
-            <a href="@Url.Action("Index", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cog"></i> <b>Изображение Пользователя</b></a>
+            <a href="@Url.Action("Index", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-address-card"></i> <b>Изображение Пользователя</b></a>
 
         </div>
     </div>

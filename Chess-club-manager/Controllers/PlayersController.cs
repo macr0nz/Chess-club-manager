@@ -73,6 +73,12 @@ namespace Chess_club_manager.Controllers
 
         public ActionResult PlayersChart(string id)
         {
+            var user = this._playersRepository.All().SingleOrDefault(p => p.Id == id);
+
+            if (user != null)
+            {
+                ViewBag.CharLabel = $"{user.FirstName} {user.LastName} - {Resources.Resource.PlayerChart}";
+            }
             //get logic
             //form array logic
             //return array to js
