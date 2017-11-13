@@ -17,12 +17,10 @@ namespace Chess_club_manager.Controllers
     public class ManageTournamentsController : Controller
     {
         private readonly IRepository<Tournament> _tournamentsRepository;
-        private readonly IRepository<ApplicationUser> _usersRepository;
-
+        
         public ManageTournamentsController()
         {
             this._tournamentsRepository = new ChessClubManagerRepository<Tournament>();
-            this._usersRepository = new ChessClubManagerRepository<ApplicationUser>();
         }
 
         // GET: ManageTournaments
@@ -67,42 +65,47 @@ namespace Chess_club_manager.Controllers
         {
             if (ModelState.IsValid)
             {
-                var tournament = new Tournament
+                using (var context = new ApplicationDbContext())
                 {
-                    Format = trnCreateDto.Format,
-                    Info = trnCreateDto.Info,
-                    IsPrivate = trnCreateDto.IsPrivate,
-                    MaxPlayersCount = trnCreateDto.MaxPlayersCount,
-                    Name = trnCreateDto.Name,
-                    Location = trnCreateDto.Location,
-                    TimeControl = trnCreateDto.TimeControl,
-                    Start = trnCreateDto.StartDate.Add(trnCreateDto.StartTime.TimeOfDay),
-                    IsOfficial = trnCreateDto.IsOfficial
-                };
-
-                if (trnCreateDto.FinishDate != null)
-                {
-                    tournament.Finish = trnCreateDto.FinishDate;
-                    if (trnCreateDto.FinishTime != null)
+                    var tournament = new Tournament
                     {
-                        tournament.Finish.Value.Add(trnCreateDto.FinishTime.Value.TimeOfDay);
+                        Format = trnCreateDto.Format,
+                        Info = trnCreateDto.Info,
+                        IsPrivate = trnCreateDto.IsPrivate,
+                        MaxPlayersCount = trnCreateDto.MaxPlayersCount,
+                        Name = trnCreateDto.Name,
+                        Location = trnCreateDto.Location,
+                        TimeControl = trnCreateDto.TimeControl,
+                        Start = trnCreateDto.StartDate.Add(trnCreateDto.StartTime.TimeOfDay),
+                        IsOfficial = trnCreateDto.IsOfficial
+                    };
+
+                    if (trnCreateDto.FinishDate != null)
+                    {
+                        tournament.Finish = trnCreateDto.FinishDate;
+                        if (trnCreateDto.FinishTime != null)
+                        {
+                            tournament.Finish.Value.Add(trnCreateDto.FinishTime.Value.TimeOfDay);
+                        }
                     }
-                }
 
-                var currentUser = this._usersRepository.All().AsNoTracking().SingleOrDefault(x => x.UserName == User.Identity.Name);
-                if (currentUser != null)
-                {
-                    //tournament.Creator = currentUser;
-                    tournament.CreatorId = currentUser.Id;
+                    var currentUser = context.Users.SingleOrDefault(x => x.UserName == User.Identity.Name);
+                    if (currentUser != null)
+                    {
+                        tournament.Creator = currentUser;
+                        tournament.CreatorId = currentUser.Id;
 
-                    tournament.Arbitrators = new List<ApplicationUser> {currentUser};
+                        tournament.Arbitrators = new List<ApplicationUser> { currentUser };
+                    }
+
+
+                    context.Tournaments.Add(tournament);
+                    context.SaveChanges();
+
+                    //redirect to this tournament page
+                    return RedirectToAction("Details", "Tournaments", new { id = tournament.Id });
                 }
                 
-
-                //this._tournamentsRepository.Add(tournament);
-
-                //redirect to this tournament page
-                return RedirectToAction("Details", "Tournaments", new {id = tournament.Id});
             }
 
             return View(trnCreateDto);
