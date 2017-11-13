@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -27,7 +28,10 @@ namespace Chess_club_manager.Controllers
         
         public ActionResult Index()
         {
-            var allNews = this.newsRepository.All().OrderByDescending(p => p.CreatedDate).ToList();
+            var allNews = this.newsRepository.All()
+                .AsNoTracking()
+                .OrderByDescending(p => p.CreatedDate)
+                .ToList();
 
             return View(allNews);
         }

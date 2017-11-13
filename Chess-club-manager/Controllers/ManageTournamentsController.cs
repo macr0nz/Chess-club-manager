@@ -95,7 +95,7 @@ namespace Chess_club_manager.Controllers
                         tournament.Creator = currentUser;
                         tournament.CreatorId = currentUser.Id;
 
-                        tournament.Arbitrators = new List<ApplicationUser> { currentUser };
+                        tournament.Arbitrators = new List<ApplicationUser> {currentUser};
                     }
 
 
@@ -109,6 +109,36 @@ namespace Chess_club_manager.Controllers
             }
 
             return View(trnCreateDto);
+        }
+
+        //[TEST]
+        public ActionResult AddRandomPlayers(int id)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var tournament = context.Tournaments.SingleOrDefault(x => x.Id == id);
+                if (tournament == null)
+                {
+                    return HttpNotFound();
+                }
+
+
+                var users = context.Users.Take(5).ToList();
+
+                if (tournament.Players == null)
+                {
+                    tournament.Players = new List<ApplicationUser>();
+                }
+
+                foreach (var user in users)
+                {
+                    tournament.Players.Add(user);
+                }
+
+                context.SaveChanges();
+            }
+            
+            return RedirectToAction("Details", "Tournaments", new {id = id});
         }
     }
 }

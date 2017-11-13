@@ -26,6 +26,7 @@ namespace Chess_club_manager.Controllers
         public ActionResult Index()
         {
             var allTournaments = this._tournamentsRepository.All()
+                .AsNoTracking()
                 .Select(x => new TournamentDto
                 {
                     Id = x.Id,
@@ -49,9 +50,41 @@ namespace Chess_club_manager.Controllers
 
         public ActionResult Details(int id)
         {
-            ViewBag.id = id;
+            var tournament = this._tournamentsRepository.All()
+                .Include("Creator")
+                .Include("Players")
+                .Include("Arbitrators")
+                .AsNoTracking().SingleOrDefault(x => x.Id == id);
 
-            return View();
+            if (tournament == null)
+            {
+                return HttpNotFound();
+            }
+
+            var tournamentView = new TournamentViewDto
+            {
+                Id = tournament.Id,
+                Name = tournament.Name,
+                Location = tournament.Location,
+                Start = tournament.Start,
+                Finish = tournament.Finish,
+                Info = tournament.Info,
+                IsOfficial = tournament.IsOfficial,
+                IsPrivate = tournament.IsPrivate,
+                MaxPlayersCount = tournament.MaxPlayersCount,
+                MaxToursCount = tournament.MaxToursCount,
+                CreatorName = tournament.Creator.FirstName + tournament.Creator.LastName,
+                CreatorId = tournament.Creator.Id,
+                Format = tournament.Format,
+                Players = tournament.Players,
+                Arbitrators = tournament.Arbitrators,
+                IsStarted = tournament.IsStarted,
+                IsCompleted = tournament.IsCompleted,
+                CreatedDate = tournament.CreatedDate,
+                TimeControl = tournament.TimeControl
+            };
+
+            return View(tournamentView);
         }
     }
 }

@@ -28,7 +28,9 @@ namespace Chess_club_manager.Controllers
         // GET: ManageNews
         public ActionResult Index()
         {
-            var allNews = this._newsRepository.All().ToList();
+            var allNews = this._newsRepository.All()
+                .AsNoTracking()
+                .ToList();
 
             return View(allNews);
         }

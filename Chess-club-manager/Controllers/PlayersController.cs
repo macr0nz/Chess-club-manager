@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -27,16 +28,18 @@ namespace Chess_club_manager.Controllers
         public ActionResult Index()
         {
             //except admin
-            var allPlayers = this._playersRepository.All().Select(x => new ViewPlayerDto
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                Title = x.Title,
-                CurrentRating = x.CurrentRating,
-                BirthDay = x.BirthDay,
-                Info = x.Info
-            }).ToList();
+            var allPlayers = this._playersRepository.All()
+                .AsNoTracking()
+                .Select(x => new ViewPlayerDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Title = x.Title,
+                    CurrentRating = x.CurrentRating,
+                    BirthDay = x.BirthDay,
+                    Info = x.Info
+                }).ToList();
 
             return View(allPlayers);
         }

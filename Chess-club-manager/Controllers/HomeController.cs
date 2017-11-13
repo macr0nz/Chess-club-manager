@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Web;
@@ -73,6 +74,7 @@ namespace Chess_club_manager.Controllers
             var playersNumberToReturn = 6;
 
             var players = this.playersRepository.All()
+                .AsNoTracking()
                 .OrderByDescending(p => p.CurrentRating)
                 .Take(playersNumberToReturn)
                 .Select(x => new HomePagePlayerView
@@ -90,6 +92,7 @@ namespace Chess_club_manager.Controllers
         public ActionResult TopNews()
         {
             var news = this.newsRepository.All()
+                .AsNoTracking()
                 .OrderByDescending(p => p.CreatedDate)
                 .Take(4)
                 .ToList();

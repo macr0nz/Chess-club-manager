@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Chess_club_manager.DataModel.Entity;
+using System.Linq;
+using System.Web;
 using Chess_club_manager.DataModel.Enum;
+using Chess_club_manager.Models;
 
-namespace Chess_club_manager.Models
+namespace Chess_club_manager.DTO.Tournament
 {
-    public sealed class Tournament : Entity
+    public class TournamentViewDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Start { get; set; }
         public DateTime? Finish { get; set; }
@@ -18,8 +21,10 @@ namespace Chess_club_manager.Models
         public int MaxToursCount { get; set; }
         public string Info { get; set; }
 
+        public DateTime CreatedDate { get; set; }
+
         public string CreatorId { get; set; }
-        public ApplicationUser Creator { get; set; }
+        public string CreatorName { get; set; }
 
         public ICollection<ApplicationUser> Arbitrators { get; set; }
 
@@ -31,8 +36,10 @@ namespace Chess_club_manager.Models
         public bool IsStarted { get; set; }
         public bool IsCompleted { get; set; }
 
-        //results
-        //list tours
-        //tour = list games
+        //stage?
+
+        //tours
+
+
     }
 }

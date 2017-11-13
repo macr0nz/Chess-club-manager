@@ -1,8 +1,234 @@
-﻿
+﻿@model Chess_club_manager.DTO.Tournament.TournamentViewDto
+
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Name;
 }
 
-<h2>Tournament Details</h2>
-<h2>Id = @ViewBag.id</h2>
 
+
+<div class="row well">
+    
+    <h2 style="text-align: center"><i class="fa fa-star" style="color: gold"></i> @Resources.Resource.Tournament</h2>
+    <h3 style="text-align: center">@Model.Name</h3>
+    <hr/>
+
+<div class="col-md-6">
+    <table class="table table-hover table-striped">
+        <tbody>
+        <tr>
+            <th>
+                @Resources.Resource.TRNstart
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Start)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.TRNfinish
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Finish)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.TRNisOfficial
+            </th>
+            <td>
+                @if (Model.IsOfficial)
+                {
+                    <label class="label label-success"><i class="fa fa-star"></i> @Resources.Resource.Official</label>
+                }
+                else
+                {
+                    <label class="label label-warning"><i class="fa fa-star-o"></i> @Resources.Resource.UnOfficial</label>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.TRNtimeControl
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.TimeControl)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.TRNlocation
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Location)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.TRNisPrivate
+            </th>
+            <td>
+                @if (Model.IsPrivate)
+                {
+                    <label class="label label-danger"><i class="fa fa-lock"></i> @Resources.Resource.Private</label>
+                }
+                else
+                {
+                    <label class="label label-success"><i class="fa fa-unlock"></i> @Resources.Resource.Public</label>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.TRNtype
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Format)
+            </td>
+        </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-6">
+    <table class="table table-hover table-striped">
+        <tbody>
+        <tr>
+            <th>
+                @Resources.Resource.TRNmaxPlayersCount
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.MaxPlayersCount)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.TRNMaxToursCount
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.MaxToursCount)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.TRNcreator
+            </th>
+            <td>
+                <a href="@Url.Action("Details", "Players", new {id = Model.CreatorId})"><i class="fa fa-user"></i> @Model.CreatorName</a>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.CreatedDate)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.TRNisStarted
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.IsStarted)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.TRNisCompleted
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.IsCompleted)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Actions
+            </th>
+            <td>
+                <a href="@Url.Action("Edit", "ManageTournaments", new {id = Model.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
+            </td>
+        </tr>
+            
+        </tbody>
+    </table>
+</div>
+    
+    
+    
+
+</div>
+
+<div class="row well">
+    
+    <div class="col-md-6">
+        <h3 style="text-align: center"><i class="fa fa-star-o"></i> Tours</h3>
+        <hr/>
+        <ul class="nav nav-tabs">
+            <li><a href="#">1st Tour</a></li>
+            <li><a href="#">2nd Tour</a></li>
+            <li><a href="#">3rd Tour</a></li>
+        </ul>
+    </div>
+
+    <div class="col-md-6">
+        <h3 style="text-align: center"><i class="fa fa-info"></i> Info</h3>
+        <hr/>
+        @Html.Raw(Model.Info)
+    </div>
+</div>
+
+<div class="row well">
+    <h3 style="text-align: center"><i class="fa fa-user-o"></i> Players</h3>
+
+    <a href="@Url.Action("AddRandomPlayers", "ManageTournaments", new {id = Model.Id})" class="btn btn-success"><i class="fa fa-plus-square"></i> Add Random Players [TEST]</a>
+    <hr/>
+
+    @if (Model.Players != null)
+    {
+        <table class="table table-hover table-responsive">
+            <tr>
+                <th>
+                    ФИО Игрока
+                </th>
+                <th>
+                    Дата рождения
+                </th>
+                <th>
+                    Титул
+                </th>
+                <th>
+                    Текущий рейтинг
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Players) {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Details", "Players", new {id = item.Id})"><b>@item.FirstName @item.LastName</b></a>
+                    </td>
+                    <td>
+                        @if (item.BirthDay.HasValue)
+                        {
+                            @item.BirthDay.Value.ToShortDateString()
+                        }
+                        else
+                        {
+                            <label class="label label-warning">Не установлено</label>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentRating)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details", "Players", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+</div>

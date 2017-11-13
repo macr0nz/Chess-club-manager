@@ -72,7 +72,7 @@
 
             @if (User.IsInRole("admin") || User.IsInRole("moderator"))
             {
-                <a href="@Url.Action("Edit", "ManagePlayers", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> Редактировать</a>
+                <a href="@Url.Action("Edit", "ManagePlayers", new {id = Model.Id})" class="btn btn-default btn-sm"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
             }
 
         </p>

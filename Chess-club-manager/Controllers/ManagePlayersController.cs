@@ -55,19 +55,21 @@ namespace Chess_club_manager.Controllers
         // GET: ManagePlayers
         public ActionResult Index()
         {
-            var allPlayers = this.playersRepository.All().Select(x => new ViewManagePlayerDto
-            {
-                Id = x.Id,
-                UserName = x.UserName,
-                Email = x.Email,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                Title = x.Title,
-                CurrentRating = x.CurrentRating,
-                BirthDay = x.BirthDay,
-                Info = x.Info,
-                Roles = x.Roles
-            }).ToList();
+            var allPlayers = this.playersRepository.All()
+                .AsNoTracking()
+                .Select(x => new ViewManagePlayerDto
+                {
+                    Id = x.Id,
+                    UserName = x.UserName,
+                    Email = x.Email,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Title = x.Title,
+                    CurrentRating = x.CurrentRating,
+                    BirthDay = x.BirthDay,
+                    Info = x.Info,
+                    Roles = x.Roles
+                }).ToList();
 
             return View(allPlayers);
         }
