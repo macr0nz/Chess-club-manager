@@ -18,7 +18,7 @@ namespace Chess_club_manager.Models
         public int MaxToursCount { get; set; }
         public string Info { get; set; }
 
-        //public string CreatorId { get; set; }
+        public string CreatorId { get; set; }
         public ApplicationUser Creator { get; set; }
 
         public ICollection<ApplicationUser> Arbitrators { get; set; }

@@ -1,0 +1,146 @@
+﻿@model Chess_club_manager.DTO.Tournament.CreateTournamentDto
+
+@{
+    ViewBag.Title = Resources.Resource.TRNcreate;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@Resources.Resource.Tournament</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <div class="form-group">
+            <label class="control-label col-md-2">@Resources.Resource.TRNname</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <h4><label class="control-label col-md-2"><label class="label label-success "><i class="fa fa-star"></i> @Resources.Resource.Official</label></label></h4>
+            <div class="col-md-10">
+                @if (User.IsInRole("moderator") || User.IsInRole("admin"))
+                {
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsOfficial, new { @class = "form -control" })
+                        @Html.ValidationMessageFor(model => model.IsOfficial, "", new {@class = "text-danger"})
+                    </div>
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.IsOfficial, new { @class = "form-control" })
+                }
+
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            <label class="control-label col-md-2">@Resources.Resource.TRNstart</label>
+            <div class="col-md-10">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                
+                    @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            <label class="control-label col-md-2">@Resources.Resource.TRNfinish</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FinishDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FinishDate, "", new { @class = "text-danger" })
+                
+                @Html.EditorFor(model => model.FinishTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FinishTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-md-2">@Resources.Resource.TRNtype</label>
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(x => x.Format, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">@Resources.Resource.TRNtimeControl</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TimeControl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TimeControl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">@Resources.Resource.TRNlocation</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            <label class="control-label col-md-2">@Resources.Resource.TRNmaxPlayersCount</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaxPlayersCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MaxPlayersCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <h4><label class="control-label col-md-2"><label class="label label-danger"><i class="fa fa-lock"></i> @Resources.Resource.Private</label></label></h4>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsPrivate, new { @class = "form -control" })
+                    @Html.ValidationMessageFor(model => model.IsPrivate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Info, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                
+                @Html.TextAreaFor(model => model.Info, new { @class = "form-control", id = "editor" })
+                @Html.ValidationMessageFor(model => model.Info, "", new { @class = "text-danger" })
+            </div>
+            <script>
+                ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        console.log(editor);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            </script>
+        </div>
+
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> @Resources.Resource.TRNcreate</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"></i> @Resources.Resource.BackToList</a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

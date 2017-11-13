@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sweed Sugar Chess.
         /// </summary>
         public static string ApplicationName {
@@ -313,6 +322,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Турнир.
+        /// </summary>
+        public static string Tournament {
+            get {
+                return ResourceManager.GetString("Tournament", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Турниры.
         /// </summary>
         public static string Tournaments {
@@ -327,6 +345,15 @@ namespace Resources {
         public static string TRNassignedPlayersCount {
             get {
                 return ResourceManager.GetString("TRNassignedPlayersCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Создать Турнир.
+        /// </summary>
+        public static string TRNcreate {
+            get {
+                return ResourceManager.GetString("TRNcreate", resourceCulture);
             }
         }
         
@@ -403,6 +430,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Максимальное количество туров.
+        /// </summary>
+        public static string TRNMaxToursCount {
+            get {
+                return ResourceManager.GetString("TRNMaxToursCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Название Турнира.
         /// </summary>
         public static string TRNname {
@@ -426,6 +462,15 @@ namespace Resources {
         public static string TRNtimeControl {
             get {
                 return ResourceManager.GetString("TRNtimeControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Формат Турнира.
+        /// </summary>
+        public static string TRNtype {
+            get {
+                return ResourceManager.GetString("TRNtype", resourceCulture);
             }
         }
         

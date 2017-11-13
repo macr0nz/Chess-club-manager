@@ -195,7 +195,7 @@
     <Compile Include="DTO\Arbitrators\CreateArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\EditArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\ViewArbitratorDto.cs" />
-    <Compile Include="DTO\MailSettingsDto.cs" />
+    <Compile Include="DTO\MailSettings\MailSettingsDto.cs" />
     <Compile Include="DTO\Manage\EditUserSelfDto.cs" />
     <Compile Include="DTO\News\EditNewsDto.cs" />
     <Compile Include="DTO\News\CreateNewsDto.cs" />
@@ -206,6 +206,7 @@
     <Compile Include="DTO\Players\PlayerDetailsDto.cs" />
     <Compile Include="DTO\Players\ViewManagePlayerDto.cs" />
     <Compile Include="DTO\Players\ViewPlayerDto.cs" />
+    <Compile Include="DTO\Tournament\CreateTournamentDto.cs" />
     <Compile Include="DTO\Tournament\ManageTournamentDto.cs" />
     <Compile Include="DTO\Tournament\TournamentDto.cs" />
     <Compile Include="Filters\CultureAttribute.cs" />
@@ -227,7 +228,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Resource.Designer.cs">
+    <Compile Include="Resources\Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
@@ -345,6 +346,7 @@
     <Content Include="Views\MailSettings\Edit.cshtml" />
     <Content Include="Views\Tournaments\Index.cshtml" />
     <Content Include="Views\ManageTournaments\Index.cshtml" />
+    <Content Include="Views\ManageTournaments\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -367,8 +369,8 @@
     <EmbeddedResource Include="Resources\Resource.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -1,4 +1,4 @@
-﻿namespace Chess_club_manager.DTO
+﻿namespace Chess_club_manager.DTO.MailSettings
 {
     public class MailSettingsDto
     {

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO;
+using Chess_club_manager.DTO.MailSettings;
 using Chess_club_manager.DTO.News;
 using Chess_club_manager.Filters;
 using Chess_club_manager.Repository;

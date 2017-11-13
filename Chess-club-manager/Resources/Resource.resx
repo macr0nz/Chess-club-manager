@@ -252,4 +252,19 @@
   <data name="Users" xml:space="preserve">
     <value>Пользователи</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="Tournament" xml:space="preserve">
+    <value>Турнир</value>
+  </data>
+  <data name="TRNcreate" xml:space="preserve">
+    <value>Создать Турнир</value>
+  </data>
+  <data name="TRNMaxToursCount" xml:space="preserve">
+    <value>Максимальное количество туров</value>
+  </data>
+  <data name="TRNtype" xml:space="preserve">
+    <value>Формат Турнира</value>
+  </data>
 </root>

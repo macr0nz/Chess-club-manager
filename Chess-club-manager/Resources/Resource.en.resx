@@ -171,6 +171,45 @@
   <data name="Tournaments" xml:space="preserve">
     <value>Tournaments</value>
   </data>
+  <data name="TRNassignedPlayersCount" xml:space="preserve">
+    <value>Assigned Players</value>
+  </data>
+  <data name="TRNcreator" xml:space="preserve">
+    <value>Tournament Creator</value>
+  </data>
+  <data name="TRNfinish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="TRNisCompleted" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="TRNisOfficial" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TRNisPrivate" xml:space="preserve">
+    <value>Access</value>
+  </data>
+  <data name="TRNisStarted" xml:space="preserve">
+    <value>Started</value>
+  </data>
+  <data name="TRNlocation" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="TRNmaxPlayersCount" xml:space="preserve">
+    <value>Max Players Count</value>
+  </data>
+  <data name="TRNname" xml:space="preserve">
+    <value>Tournament Name</value>
+  </data>
+  <data name="TRNstart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="TRNtimeControl" xml:space="preserve">
+    <value>Time Control</value>
+  </data>
+  <data name="UnOfficial" xml:space="preserve">
+    <value>Unofficial</value>
+  </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>
   </data>
