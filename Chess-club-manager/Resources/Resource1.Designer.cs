@@ -19,7 +19,7 @@ namespace Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resource {
@@ -66,6 +66,15 @@ namespace Resources {
         public static string Add {
             get {
                 return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Все игроки.
+        /// </summary>
+        public static string AllPlayers {
+            get {
+                return ResourceManager.GetString("AllPlayers", resourceCulture);
             }
         }
         
@@ -286,6 +295,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Титул.
+        /// </summary>
+        public static string PlayerTitle {
+            get {
+                return ResourceManager.GetString("PlayerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Закрытый.
         /// </summary>
         public static string Private {
@@ -318,6 +336,33 @@ namespace Resources {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Текущие Турниры.
+        /// </summary>
+        public static string TopCurrentTrns {
+            get {
+                return ResourceManager.GetString("TopCurrentTrns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Близжайшие Турниры.
+        /// </summary>
+        public static string TopFutureTrns {
+            get {
+                return ResourceManager.GetString("TopFutureTrns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Прошедшие Турниры.
+        /// </summary>
+        public static string TopLastTrns {
+            get {
+                return ResourceManager.GetString("TopLastTrns", resourceCulture);
             }
         }
         
@@ -381,6 +426,15 @@ namespace Resources {
         public static string TRNfinish {
             get {
                 return ResourceManager.GetString("TRNfinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Формат Турнира.
+        /// </summary>
+        public static string TRNformat {
+            get {
+                return ResourceManager.GetString("TRNformat", resourceCulture);
             }
         }
         
@@ -466,7 +520,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Контроль времени.
+        ///   Looks up a localized string similar to Контроль времени (мин.).
         /// </summary>
         public static string TRNtimeControl {
             get {

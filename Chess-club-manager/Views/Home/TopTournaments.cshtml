@@ -1,0 +1,185 @@
+﻿@model Chess_club_manager.DTO.Tournament.HomePageTournamentView
+
+<h4>@Resources.Resource.TopCurrentTrns</h4>
+<table class="table table-condensed well" id="currentTournaments">
+    <thead>
+    <tr>
+        <th>@Resources.Resource.TRNname</th>
+        <th>@Resources.Resource.TRNstart</th>
+        <th>@Resources.Resource.TRNfinish</th>
+        <th>@Resources.Resource.TRNisOfficial</th>
+        <th>@Resources.Resource.TRNisPrivate</th>
+        <th>@Resources.Resource.TRNformat</th>
+        <th>@Resources.Resource.TRNmaxPlayersCount</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    
+    @foreach (var item in Model.CurrentTournaments)
+    {
+        <tr>
+            <td><a href="@Url.Action("Details", "Tournaments", new {id = item.Id})"><b>@item.Name</b></a></td>
+            <td>@item.Start</td>
+            <td>@item.Finish</td>
+            <td>@if (item.IsPrivate)
+                {
+                    <label class="label label-danger"><i class="fa fa-lock"></i> @Resources.Resource.Private</label>
+                }
+                else
+                {
+                    <label class="label label-success"><i class="fa fa-unlock"></i> @Resources.Resource.Public</label>
+                }
+            </td>
+            <td>@if (item.IsOfficial)
+                {
+                    <label class="label label-success"><i class="fa fa-star"></i> @Resources.Resource.Official</label>
+                }
+                else
+                {
+                    <label class="label label-warning"><i class="fa fa-star-o"></i> @Resources.Resource.UnOfficial</label>
+                }
+            </td>
+            <td>@item.Format</td>
+            <td>@item.MaxPlayersCount</td>
+        </tr>
+    }
+        
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><a href="@Url.Action("Index", "Tournaments")" class="btn btn-default btn-xs"><i class="fa fa-star-o"></i> @Resources.Resource.Tournaments</a></td>
+    </tr>
+    </tbody>
+</table>
+
+@*///////////////////////////////////////////////////////////*@
+
+<h4>@Resources.Resource.TopFutureTrns</h4>
+<table class="table table-condensed well" id="futureTournaments">
+    <thead>
+        <tr>
+            <th>@Resources.Resource.TRNname</th>
+            <th>@Resources.Resource.TRNstart</th>
+            <th>@Resources.Resource.TRNfinish</th>
+            <th>@Resources.Resource.TRNisOfficial</th>
+            <th>@Resources.Resource.TRNisPrivate</th>
+            <th>@Resources.Resource.TRNformat</th>
+            <th>@Resources.Resource.TRNmaxPlayersCount</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.FutureTournaments)
+        {
+            <tr>
+                <td><a href="@Url.Action("Details", "Tournaments", new {id = item.Id})"><b>@item.Name</b></a></td>
+                <td>@item.Start</td>
+                <td>@item.Finish</td>
+                <td>
+                    @if (item.IsPrivate)
+                {
+                    <label class="label label-danger"><i class="fa fa-lock"></i> @Resources.Resource.Private</label>
+                }
+                else
+                {
+                    <label class="label label-success"><i class="fa fa-unlock"></i> @Resources.Resource.Public</label>
+                }
+            </td>
+            <td>
+                @if (item.IsOfficial)
+                {
+                <label class="label label-success"><i class="fa fa-star"></i> @Resources.Resource.Official</label>
+            }
+            else
+            {
+                <label class="label label-warning"><i class="fa fa-star-o"></i> @Resources.Resource.UnOfficial</label>
+            }
+        </td>
+        <td>@item.Format</td>
+        <td>@item.MaxPlayersCount</td>
+    </tr>
+        }
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="@Url.Action("Index", "Tournaments")" class="btn btn-default btn-xs"><i class="fa fa-star-o"></i> @Resources.Resource.Tournaments</a></td>
+        </tr>
+    </tbody>
+</table>
+
+
+@*///////////////////////////////////////////////////////////*@
+
+
+<h4>@Resources.Resource.TopLastTrns</h4>
+<table class="table table-condensed well" id="lastTournaments">
+    <thead>
+        <tr>
+            <th>@Resources.Resource.TRNname</th>
+            <th>@Resources.Resource.TRNstart</th>
+            <th>@Resources.Resource.TRNfinish</th>
+            <th>@Resources.Resource.TRNisOfficial</th>
+            <th>@Resources.Resource.TRNisPrivate</th>
+            <th>@Resources.Resource.TRNformat</th>
+            <th>@Resources.Resource.TRNmaxPlayersCount</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.LastTournaments)
+        {
+            <tr>
+                <td><a href="@Url.Action("Details", "Tournaments", new {id = item.Id})"><b>@item.Name</b></a></td>
+                <td>@item.Start</td>
+                <td>@item.Finish</td>
+                <td>
+                    @if (item.IsPrivate)
+                {
+                    <label class="label label-danger"><i class="fa fa-lock"></i> @Resources.Resource.Private</label>
+                }
+                else
+                {
+                    <label class="label label-success"><i class="fa fa-unlock"></i> @Resources.Resource.Public</label>
+                }
+            </td>
+            <td>
+                @if (item.IsOfficial)
+                {
+                <label class="label label-success"><i class="fa fa-star"></i> @Resources.Resource.Official</label>
+            }
+            else
+            {
+                <label class="label label-warning"><i class="fa fa-star-o"></i> @Resources.Resource.UnOfficial</label>
+            }
+        </td>
+        <td>@item.Format</td>
+        <td>@item.MaxPlayersCount</td>
+    </tr>
+        }
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="@Url.Action("Index", "Tournaments")" class="btn btn-default btn-xs"><i class="fa fa-star-o"></i> @Resources.Resource.Tournaments</a></td>
+        </tr>
+    </tbody>
+</table>
+
+
+

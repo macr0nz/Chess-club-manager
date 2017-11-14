@@ -1,24 +1,30 @@
 ﻿@model IEnumerable<Chess_club_manager.DTO.Players.HomePagePlayerView>
 
-    
-@foreach (var player in Model)
-{
-    <div class="col-md-4">
+<table class="table well">
+    <thead>
+    <tr>
+        <th></th>
+        <th><i class="fa fa-user"></i> @Resources.Resource.User</th>
+        <th><i class="fa fa-star-o"></i> @Resources.Resource.PlayerRating</th>
+        <th><i class="fa fa-info"></i> @Resources.Resource.PlayerTitle</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var player in Model)
+    {
+        <tr>
+            <td><img src="~/Resources/Images/user.png" class="media-object" style="width: 40px"></td>
+            <td><a href="@Url.Action("Details", "Players", new {id = player.Id})"><b>@player.FirstName @player.LastName</b></a></td>
+            <td>@player.CurrentRating</td>
+            <td>@player.Title</td>
+        </tr>
+    }
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><a href="@Url.Action("Index", "Players")" class="btn btn-default btn-xs"><i class="fa fa-user"></i> @Resources.Resource.AllPlayers</a></td>
+    </tr>
+    </tbody>
+</table>  
 
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <b><i class="fa fa-user"></i> @player.FirstName @player.LastName</b>
-                
-            </div>
-            <div class="panel-body">
-                <p><b> @Resources.Resource.PlayerRating:</b> @player.CurrentRating</p>
-                <b>@Resources.Resource.PlayerInfo:</b>
-                <p>@player.Info</p>
-            </div>
-            <div class="panel-footer">
-                <a href="@Url.Action("Details", "Players", new {id = player.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i></a>
-            </div>
-        </div>
-
-    </div>
-}

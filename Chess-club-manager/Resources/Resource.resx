@@ -238,7 +238,7 @@
     <value>Начало</value>
   </data>
   <data name="TRNtimeControl" xml:space="preserve">
-    <value>Контроль времени</value>
+    <value>Контроль времени (мин.)</value>
   </data>
   <data name="UnOfficial" xml:space="preserve">
     <value>Неофициальный</value>
@@ -269,5 +269,23 @@
   </data>
   <data name="PlayerChart" xml:space="preserve">
     <value>Диаграмма рейтинга</value>
+  </data>
+  <data name="AllPlayers" xml:space="preserve">
+    <value>Все игроки</value>
+  </data>
+  <data name="PlayerTitle" xml:space="preserve">
+    <value>Титул</value>
+  </data>
+  <data name="TopCurrentTrns" xml:space="preserve">
+    <value>Текущие Турниры</value>
+  </data>
+  <data name="TopFutureTrns" xml:space="preserve">
+    <value>Близжайшие Турниры</value>
+  </data>
+  <data name="TopLastTrns" xml:space="preserve">
+    <value>Прошедшие Турниры</value>
+  </data>
+  <data name="TRNformat" xml:space="preserve">
+    <value>Формат Турнира</value>
   </data>
 </root>

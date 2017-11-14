@@ -207,6 +207,7 @@
     <Compile Include="DTO\Players\ViewManagePlayerDto.cs" />
     <Compile Include="DTO\Players\ViewPlayerDto.cs" />
     <Compile Include="DTO\Tournament\CreateTournamentDto.cs" />
+    <Compile Include="DTO\Tournament\HomePageTournamentView.cs" />
     <Compile Include="DTO\Tournament\ManageTournamentDto.cs" />
     <Compile Include="DTO\Tournament\TournamentDto.cs" />
     <Compile Include="DTO\Tournament\TournamentViewDto.cs" />
@@ -267,6 +268,7 @@
     <Content Include="Resources\Images\ico_png.ico" />
     <Content Include="Resources\Images\ico_png.png" />
     <Content Include="Resources\Images\Logo.png" />
+    <Content Include="Resources\Images\sweed_ico.ico" />
     <Content Include="Resources\Images\user.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -350,6 +352,7 @@
     <Content Include="Views\ManageTournaments\Index.cshtml" />
     <Content Include="Views\ManageTournaments\Create.cshtml" />
     <Content Include="Views\Tournaments\Details.cshtml" />
+    <Content Include="Views\Home\TopTournaments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
