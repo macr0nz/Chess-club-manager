@@ -19,7 +19,7 @@ namespace Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resource {
@@ -57,6 +57,15 @@ namespace Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Действия.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
             }
         }
         
@@ -129,6 +138,15 @@ namespace Resources {
         public static string Create {
             get {
                 return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дата Создания.
+        /// </summary>
+        public static string CreatedDate {
+            get {
+                return ResourceManager.GetString("CreatedDate", resourceCulture);
             }
         }
         
@@ -394,6 +412,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить Арбитра.
+        /// </summary>
+        public static string TRNaddArbitrator {
+            get {
+                return ResourceManager.GetString("TRNaddArbitrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Участники.
         /// </summary>
         public static string TRNassignedPlayersCount {
@@ -435,6 +462,15 @@ namespace Resources {
         public static string TRNformat {
             get {
                 return ResourceManager.GetString("TRNformat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дополнительная Информация.
+        /// </summary>
+        public static string TRNinfo {
+            get {
+                return ResourceManager.GetString("TRNinfo", resourceCulture);
             }
         }
         
@@ -525,6 +561,24 @@ namespace Resources {
         public static string TRNtimeControl {
             get {
                 return ResourceManager.GetString("TRNtimeControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тур.
+        /// </summary>
+        public static string TRNtour {
+            get {
+                return ResourceManager.GetString("TRNtour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Туры.
+        /// </summary>
+        public static string TRNtours {
+            get {
+                return ResourceManager.GetString("TRNtours", resourceCulture);
             }
         }
         

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Configuration;
+using System.Data.Entity;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -32,6 +33,37 @@ namespace Chess_club_manager.Repository
             return new ApplicationDbContext();
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(x => x.CreatedTournaments)
+                .WithRequired(x => x.Creator).HasForeignKey(x => x.CreatorId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(user => user.PlayedTournaments)
+                .WithMany(trn => trn.Players)
+                .Map(m =>
+                {
+                    m.ToTable("UsersPlayedTournaments");
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("TournamentId");
+                });
+
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(user => user.ArbittedTournaments)
+                .WithMany(trn => trn.Arbitrators)
+                .Map(m =>
+                {
+                    m.ToTable("UsersArbittedTournaments");
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("TournamentId");
+                });
+
+
+            base.OnModelCreating(modelBuilder);
+        }
 
     }
 }

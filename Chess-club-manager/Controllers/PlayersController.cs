@@ -60,7 +60,7 @@ namespace Chess_club_manager.Controllers
                 Info = x.Info,
                 CurrentRating = x.CurrentRating,
                 Title = x.Title,
-                Tournaments = x.Tournaments,
+                Tournaments = x.PlayedTournaments,
                 UserName = x.UserName,
                 PhoneNumber = x.PhoneNumber,
                 Email = x.Email,

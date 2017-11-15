@@ -13,7 +13,7 @@
     <hr/>
 
 <div class="col-md-6">
-    <table class="table table-hover table-striped">
+    <table class="table table-hover table-striped table-responsive">
         <tbody>
         <tr>
             <th>
@@ -23,14 +23,7 @@
                 @Html.DisplayFor(model => model.Start)
             </td>
         </tr>
-        <tr>
-            <th>
-                @Resources.Resource.TRNfinish
-            </th>
-            <td>
-                @Html.DisplayFor(model => model.Finish)
-            </td>
-        </tr>
+        
         <tr>
             <th>
                 @Resources.Resource.TRNisOfficial
@@ -77,22 +70,8 @@
                 }
             </td>
         </tr>
-        <tr>
-            <th>
-                @Resources.Resource.TRNtype
-            </th>
-            <td>
-                @Html.DisplayFor(model => model.Format)
-            </td>
-        </tr>
-            
-        </tbody>
-    </table>
-</div>
 
-<div class="col-md-6">
-    <table class="table table-hover table-striped">
-        <tbody>
+            
         <tr>
             <th>
                 @Resources.Resource.TRNmaxPlayersCount
@@ -101,6 +80,18 @@
                 @Html.DisplayFor(model => model.MaxPlayersCount)
             </td>
         </tr>
+
+
+        <tr>
+            <th>
+                @Resources.Resource.TRNtype
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Format)
+            </td>
+        </tr>
+        
+
         <tr>
             <th>
                 @Resources.Resource.TRNMaxToursCount
@@ -109,6 +100,24 @@
                 @Html.DisplayFor(model => model.MaxToursCount)
             </td>
         </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-6">
+    <table class="table table-hover table-striped table-responsive">
+        <tbody>
+        
+        <tr>
+            <th>
+                @Resources.Resource.TRNfinish
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Finish)
+            </td>
+        </tr>
+
         <tr>
             <th>
                 @Resources.Resource.TRNcreator
@@ -119,7 +128,7 @@
         </tr>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
+                @Resources.Resource.CreatedDate
             </th>
             <td>
                 @Html.DisplayFor(model => model.CreatedDate)
@@ -141,15 +150,29 @@
                 @Html.DisplayFor(model => model.IsCompleted)
             </td>
         </tr>
+
         <tr>
             <th>
-                Actions
+                @Resources.Resource.Arbitrators
+            </th>
+            <td>
+                @foreach (var arbitrator in Model.Arbitrators)
+                {
+                    <a href="@Url.Action("Details", "Players", new {id = arbitrator.Id})"><i class="fa fa-user"></i> @arbitrator.FirstNameLastName</a>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Resources.Resource.Actions
             </th>
             <td>
                 <a href="@Url.Action("Edit", "ManageTournaments", new {id = Model.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
+                <a href="@Url.Action("Edit", "ManageTournaments", new {id = Model.Id})" class="btn btn-default btn-xs"><i class="fa fa-user"></i> @Resources.Resource.TRNaddArbitrator</a>
             </td>
         </tr>
-            
+
         </tbody>
     </table>
 </div>
@@ -162,31 +185,31 @@
 <div class="row well">
     
     <div class="col-md-6">
-        <h3 style="text-align: center"><i class="fa fa-star-o"></i> Tours</h3>
+        <h3 style="text-align: center"><i class="fa fa-star-o"></i> @Resources.Resource.TRNtours</h3>
         <hr/>
         <ul class="nav nav-tabs">
-            <li><a href="#">1st Tour</a></li>
+            <li><a href="#">1st @Resources.Resource.TRNtour</a></li>
             <li><a href="#">2nd Tour</a></li>
             <li><a href="#">3rd Tour</a></li>
         </ul>
     </div>
 
     <div class="col-md-6">
-        <h3 style="text-align: center"><i class="fa fa-info"></i> Info</h3>
+        <h3 style="text-align: center"><i class="fa fa-info"></i> @Resources.Resource.TRNinfo</h3>
         <hr/>
         @Html.Raw(Model.Info)
     </div>
 </div>
 
 <div class="row well">
-    <h3 style="text-align: center"><i class="fa fa-user-o"></i> Players</h3>
+    <h3 style="text-align: center"><i class="fa fa-user-o"></i> @Resources.Resource.Players</h3>
 
     <a href="@Url.Action("AddRandomPlayers", "ManageTournaments", new {id = Model.Id})" class="btn btn-success"><i class="fa fa-plus-square"></i> Add Random Players [TEST]</a>
     <hr/>
 
     @if (Model.Players != null)
     {
-        <table class="table table-hover table-responsive">
+        <table class="table table-hover ">
             <tr>
                 <th>
                     ФИО Игрока
@@ -205,7 +228,7 @@
             @foreach (var item in Model.Players) {
                 <tr>
                     <td>
-                        <a href="@Url.Action("Details", "Players", new {id = item.Id})"><b>@item.FirstName @item.LastName</b></a>
+                        <a href="@Url.Action("Details", "Players", new {id = item.Id})"><b>@item.FirstNameLastName</b></a>
                     </td>
                     <td>
                         @if (item.BirthDay.HasValue)

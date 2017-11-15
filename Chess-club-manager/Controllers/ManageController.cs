@@ -91,7 +91,7 @@ namespace Chess_club_manager.Controllers
 
             model.Roles = user.Roles;
 
-            model.Tournaments = user.Tournaments;
+            model.Tournaments = user.PlayedTournaments;
 
             return View(model);
         }

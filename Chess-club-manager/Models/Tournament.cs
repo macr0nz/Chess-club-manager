@@ -18,15 +18,15 @@ namespace Chess_club_manager.Models
         public int MaxToursCount { get; set; }
         public string Info { get; set; }
 
+        public TournamentType Format { get; set; }
+
         public string CreatorId { get; set; }
         public ApplicationUser Creator { get; set; }
 
+        public ICollection<ApplicationUser> Players { get; set; }
         public ICollection<ApplicationUser> Arbitrators { get; set; }
 
-        public TournamentType Format { get; set; }
-
-        public ICollection<ApplicationUser> Players { get; set; }
-
+        
         //state
         public bool IsStarted { get; set; }
         public bool IsCompleted { get; set; }

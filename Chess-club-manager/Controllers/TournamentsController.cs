@@ -39,7 +39,8 @@ namespace Chess_club_manager.Controllers
                     IsPrivate = x.IsPrivate,
                     MaxPlayersCount = x.MaxPlayersCount,
                     IsStarted = x.IsStarted,
-                    IsCompleted = x.IsCompleted
+                    IsCompleted = x.IsCompleted,
+                    AssignedPlayersCount = x.Players.Count
                 }).ToList();
 
             //if need nested data 
@@ -73,11 +74,27 @@ namespace Chess_club_manager.Controllers
                 IsPrivate = tournament.IsPrivate,
                 MaxPlayersCount = tournament.MaxPlayersCount,
                 MaxToursCount = tournament.MaxToursCount,
-                CreatorName = tournament.Creator.FirstName + tournament.Creator.LastName,
+                CreatorName = $"{tournament.Creator.FirstName} {tournament.Creator.LastName}",
                 CreatorId = tournament.Creator.Id,
                 Format = tournament.Format,
-                Players = tournament.Players,
-                Arbitrators = tournament.Arbitrators,
+
+                Players = tournament.Players.Select(x => new TournamentViewPlayerLightDto
+                {
+                    Id = x.Id,
+                    UserName = x.UserName,
+                    FirstNameLastName = $"{x.FirstName} {x.LastName}",
+                    BirthDay = x.BirthDay,
+                    CurrentRating = x.CurrentRating,
+                    Title = x.Title
+                }).ToList(),
+
+                Arbitrators = tournament.Arbitrators.Select(x => new TournamentViewUserLightDto
+                {
+                    Id = x.Id,
+                    UserName = x.UserName,
+                    FirstNameLastName = $"{x.FirstName} {x.LastName}"
+                }).ToList(),
+
                 IsStarted = tournament.IsStarted,
                 IsCompleted = tournament.IsCompleted,
                 CreatedDate = tournament.CreatedDate,

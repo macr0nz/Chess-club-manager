@@ -9,15 +9,11 @@
 
 <table class="table table-hover table-responsive">
     <tr>
+        <th></th>
         <th>
             ФИО Игрока
         </th>
-        @*<th>
-            Имя
-        </th>
-        <th>
-            Фамилия
-        </th>*@
+        
         <th>
             Дата рождения
         </th>
@@ -27,23 +23,20 @@
         <th>
             Текущий рейтинг
         </th>
-        @*<th>
-            Информация
-        </th>*@
+        
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            <img src="~/Resources/Images/user.png" class="media-object" style="width: 40px">
+        </td>
+
+        <td>
             <a href="@Url.Action("Details", "Players", new {id = item.Id})"><b>@item.FirstName @item.LastName</b></a>
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>*@
+
         <td>
             @if (item.BirthDay.HasValue)
             {
@@ -60,9 +53,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.CurrentRating)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Info)
-        </td>*@
+
         <td>
             <a href="@Url.Action("Details", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a>
         </td>

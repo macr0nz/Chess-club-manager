@@ -288,4 +288,22 @@
   <data name="TRNformat" xml:space="preserve">
     <value>Формат Турнира</value>
   </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Действия</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Дата Создания</value>
+  </data>
+  <data name="TRNaddArbitrator" xml:space="preserve">
+    <value>Добавить Арбитра</value>
+  </data>
+  <data name="TRNinfo" xml:space="preserve">
+    <value>Дополнительная Информация</value>
+  </data>
+  <data name="TRNtour" xml:space="preserve">
+    <value>Тур</value>
+  </data>
+  <data name="TRNtours" xml:space="preserve">
+    <value>Туры</value>
+  </data>
 </root>

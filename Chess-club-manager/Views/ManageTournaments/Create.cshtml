@@ -109,7 +109,7 @@
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(model => model.Info, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">@Resources.Resource.TRNinfo</label>
             <div class="col-md-6">
                 
                 @Html.TextAreaFor(model => model.Info, new { @class = "form-control", id = "editor" })

@@ -26,11 +26,13 @@ namespace Chess_club_manager.DTO.Tournament
         public string CreatorId { get; set; }
         public string CreatorName { get; set; }
 
-        public ICollection<ApplicationUser> Arbitrators { get; set; }
-
         public TournamentType Format { get; set; }
 
-        public ICollection<ApplicationUser> Players { get; set; }
+        public ICollection<TournamentViewUserLightDto> Arbitrators { get; set; }
+
+        
+
+        public ICollection<TournamentViewPlayerLightDto> Players { get; set; }
 
         //state
         public bool IsStarted { get; set; }
@@ -42,4 +44,24 @@ namespace Chess_club_manager.DTO.Tournament
 
 
     }
+
+    public class TournamentViewUserLightDto
+    {
+        public string Id { get; set; }
+        public string UserName { get; set; }
+        public string FirstNameLastName { get; set; }
+    }
+
+    public class TournamentViewPlayerLightDto
+    {
+        public string Id { get; set; }
+        public string UserName { get; set; }
+        public string FirstNameLastName { get; set; }
+        public DateTime? BirthDay { get; set; }
+        public string Title { get; set; }
+
+        public int CurrentRating { get; set; }
+    }
+
+
 }
