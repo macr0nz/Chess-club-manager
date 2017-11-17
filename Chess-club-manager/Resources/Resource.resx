@@ -294,8 +294,8 @@
   <data name="CreatedDate" xml:space="preserve">
     <value>Дата Создания</value>
   </data>
-  <data name="TRNaddArbitrator" xml:space="preserve">
-    <value>Добавить Арбитра</value>
+  <data name="TRNmanageArbitrators" xml:space="preserve">
+    <value>Управление Арбитрами</value>
   </data>
   <data name="TRNinfo" xml:space="preserve">
     <value>Дополнительная Информация</value>
@@ -305,5 +305,11 @@
   </data>
   <data name="TRNtours" xml:space="preserve">
     <value>Туры</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Убрать</value>
+  </data>
+  <data name="TRNmanagePlayers" xml:space="preserve">
+    <value>Управление Игроками</value>
   </data>
 </root>

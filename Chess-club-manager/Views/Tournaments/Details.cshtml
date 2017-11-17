@@ -168,9 +168,12 @@
                 @Resources.Resource.Actions
             </th>
             <td>
-                <a href="@Url.Action("Edit", "ManageTournaments", new {id = Model.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
-                <a href="@Url.Action("Edit", "ManageTournaments", new {id = Model.Id})" class="btn btn-default btn-xs"><i class="fa fa-user"></i> @Resources.Resource.TRNaddArbitrator</a>
-            </td>
+                @if (Model.AccessPassed)
+                {
+                    <a href="@Url.Action("Edit", "ManageTournaments", new {id = Model.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
+                    <a href="@Url.Action("ManageArbitrators", "ManageTournaments", new {id = Model.Id})" class="btn btn-default btn-xs"><i class="fa fa-user"></i> @Resources.Resource.TRNmanageArbitrators</a>
+                }
+             </td>
         </tr>
 
         </tbody>
@@ -203,8 +206,13 @@
 
 <div class="row well">
     <h3 style="text-align: center"><i class="fa fa-user-o"></i> @Resources.Resource.Players</h3>
-
-    <a href="@Url.Action("AddRandomPlayers", "ManageTournaments", new {id = Model.Id})" class="btn btn-success"><i class="fa fa-plus-square"></i> Add Random Players [TEST]</a>
+    
+@if (Model.AccessPassed)
+{
+    <a href="@Url.Action("AddRandomPlayers", "ManageTournaments", new {id = Model.Id})" class="btn btn-success">
+        <i class="fa fa-plus-square"></i> @Resources.Resource.TRNmanagePlayers
+    </a>
+}
     <hr/>
 
     @if (Model.Players != null)

@@ -1,0 +1,156 @@
+﻿@model Chess_club_manager.DTO.Tournament.ManageTournamentArbitratorsViewDto
+
+@{
+    ViewBag.Title = "ManageArbitrators";
+}
+
+
+<div class="row well">
+    <div class="col-md-6">
+        <table class="table table-hover table-striped table-responsive">
+            <tbody>
+            <tr>
+                <th>
+                    @Resources.Resource.Tournament
+                </th>
+                <td>
+                    <a href="@Url.Action("Details", "Tournaments", new {id = Model.TournamentId})"><i class="fa fa-star"></i> @Model.TournamentName</a>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Resources.Resource.TRNstart
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Start)
+                </td>
+            </tr>
+
+            
+
+            <tr>
+                <th>
+                    @Resources.Resource.TRNisOfficial
+                </th>
+                <td>
+                    @if (Model.IsOfficial)
+                    {
+                        <label class="label label-success"><i class="fa fa-star"></i> @Resources.Resource.Official</label>
+                    }
+                    else
+                    {
+                        <label class="label label-warning"><i class="fa fa-star-o"></i> @Resources.Resource.UnOfficial</label>
+                    }
+                </td>
+            </tr>
+
+            
+
+            </tbody>
+        </table>
+    </div>
+    
+    
+    @*/////////////*@
+    
+    <div class="col-md-6">
+        <table class="table table-hover table-striped table-responsive">
+            <tbody>
+            
+            <tr>
+                <th>
+                    @Resources.Resource.TRNcreator
+                </th>
+                <td>
+                    <a href="@Url.Action("Details", "Players", new {id = Model.CreatorId})"><i class="fa fa-user"></i> @Model.CreatorName</a>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Resources.Resource.TRNfinish
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Finish)
+                </td>
+            </tr>
+
+
+            <tr>
+                <th>
+                    @Resources.Resource.TRNisPrivate
+                </th>
+                <td>
+                    @if (Model.IsPrivate)
+                    {
+                        <label class="label label-danger"><i class="fa fa-lock"></i> @Resources.Resource.Private</label>
+                    }
+                    else
+                    {
+                        <label class="label label-success"><i class="fa fa-unlock"></i> @Resources.Resource.Public</label>
+                    }
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+<a class="btn btn-warning" href="@Url.Action("Details", "Tournaments", new {id = Model.TournamentId})"><i class="fa fa-arrow-left"></i> Back</a>
+<hr/>
+
+<div class="row well">
+    
+    <div class="col-md-8 ">
+        <h3 style="text-align: center">@Resources.Resource.Arbitrators</h3>
+        <hr/>
+
+        <table class="table ">
+            <thead>
+            <tr>
+                <th></th>
+                <th><i class="fa fa-user"></i> @Resources.Resource.User</th>
+                <th><i class="fa fa-star-o"></i> @Resources.Resource.PlayerRating</th>
+                <th><i class="fa fa-info"></i> @Resources.Resource.PlayerTitle</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var user in Model.Arbitrators)
+            {
+                <tr>
+                    <td><img src="~/Resources/Images/user.png" class="media-object" style="width: 40px"></td>
+                    <td><a href="@Url.Action("Details", "Players", new {id = user.Id})"><i class="fa fa-user"></i><b> @user.FirstNameLastName</b></a></td>
+                    <td>@user.CurrentRating</td>
+                    <td><a href="@Url.Action("RemoveArbitratorFromTournament", "ManageTournaments", new {tournamentId = Model.TournamentId, userId = user.Id})"
+                           class="btn btn-danger"><i class="fa fa-crop"></i> @Resources.Resource.Remove</a></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4 ">
+        @if (Model.Users != null)
+        {
+            using (Html.BeginForm("AddArbitratorToATournament", "ManageTournaments", FormMethod.Post))
+            {
+                @Html.Hidden("tournamentId", Model.TournamentId)
+                <h3 style="text-align: center">@Resources.Resource.Add</h3>
+                <hr/>
+                
+                
+                @Html.DropDownList("userId", Model.Users, new {@class = "form-control"})
+               
+                <hr/>
+
+                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> @Resources.Resource.Add</button>
+            }
+        }
+        
+
+    </div>
+
+</div>

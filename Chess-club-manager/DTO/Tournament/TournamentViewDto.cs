@@ -39,6 +39,7 @@ namespace Chess_club_manager.DTO.Tournament
         public bool IsCompleted { get; set; }
 
         //stage?
+        public bool AccessPassed { get; set; }
 
         //tours
 

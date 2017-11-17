@@ -17,10 +17,12 @@ namespace Chess_club_manager.Controllers
     public class ManageTournamentsController : Controller
     {
         private readonly IRepository<Tournament> _tournamentsRepository;
+        private readonly IRepository<ApplicationUser> _usersRepository;
         
         public ManageTournamentsController()
         {
             this._tournamentsRepository = new ChessClubManagerRepository<Tournament>();
+            this._usersRepository = new ChessClubManagerRepository<ApplicationUser>();
         }
 
         // GET: ManageTournaments
@@ -30,6 +32,7 @@ namespace Chess_club_manager.Controllers
             var allTwithCreators = _tournamentsRepository.All().Include("Creator").ToList();
 
             var allTournaments = allTwithCreators
+                .OrderByDescending(x => x.CreatedDate)
                 .Select(x => new ManageTournamentDto
                 {
                     Id = x.Id,
@@ -140,5 +143,151 @@ namespace Chess_club_manager.Controllers
             
             return RedirectToAction("Details", "Tournaments", new {id = id});
         }
+
+        public ActionResult ManageArbitrators(int? id)
+        {
+            if (id == null) return HttpNotFound();
+
+            var tournament = this._tournamentsRepository.All()
+                .Include("Arbitrators")
+                .Include("Creator")
+                .AsNoTracking()
+                .SingleOrDefault(x => x.Id == id);
+
+            if (tournament == null) return HttpNotFound();
+
+            var access = false;
+            if (Request.IsAuthenticated)
+            {
+                access = tournament.Arbitrators.Select(x => x.UserName).Contains(User.Identity.Name);
+
+                if (!access)
+                {
+                    access = User.IsInRole("moderator");
+
+                    if (!access)
+                    {
+                        access = User.IsInRole("admin");
+                    }
+                }
+            }
+
+            if (!access) return RedirectToAction("Details", "Tournaments", new {id = tournament.Id});
+
+
+            var allUsers = this._usersRepository.All()
+                .AsNoTracking()
+                .AsEnumerable()
+                .OrderBy(x => x.FirstName)
+                .Select(x => new SelectListItem
+                {
+                    Value = x.Id,
+                    Text = $"{x.FirstName} {x.LastName}"
+                }).ToList();
+
+            
+
+            var tournamentView = new ManageTournamentArbitratorsViewDto
+            {
+                TournamentId = tournament.Id,
+                TournamentName = tournament.Name,
+                Start = tournament.Start,
+                Finish = tournament.Finish,
+                IsOfficial = tournament.IsOfficial,
+                IsPrivate = tournament.IsPrivate,
+                Arbitrators = tournament.Arbitrators.Select(x => new ArbitratorLightDto
+                {
+                    Id = x.Id,
+                    CurrentRating = x.CurrentRating,
+                    FirstNameLastName = $"{x.FirstName} {x.LastName}",
+                    Title = x.Title
+                }).ToList(),
+                Users = allUsers,
+                CreatorId = tournament.Creator.Id,
+                CreatorName = $"{tournament.Creator.FirstName} {tournament.Creator.LastName}"
+            };
+
+
+
+            return View(tournamentView);
+        }
+
+        [HttpPost]
+        public ActionResult AddArbitratorToATournament(int tournamentId, string userId)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var tournament = context.Tournaments
+                    .Include("Arbitrators")
+                    .SingleOrDefault(x => x.Id == tournamentId);
+
+                var user = context.Users.SingleOrDefault(x => x.Id == userId);
+
+                if (tournament == null || user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                var access = false;
+                if (Request.IsAuthenticated)
+                {
+                    access = tournament.Arbitrators.Select(x => x.UserName).Contains(User.Identity.Name);
+
+                    if (!access)
+                    {
+                        access = User.IsInRole("moderator");
+
+                        if (!access)
+                        {
+                            access = User.IsInRole("admin");
+                        }
+                    }
+                }
+
+                if (!access) return RedirectToAction("Details", "Tournaments", new { id = tournament.Id });
+
+                tournament.Arbitrators.Add(user);
+
+                context.SaveChanges();
+
+                return RedirectToAction("ManageArbitrators", new { id = tournament.Id });
+            }
+            
+        }
+
+        
+        [HttpGet]
+        public ActionResult RemoveArbitratorFromTournament(int tournamentId, string userId)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var tournament = context.Tournaments
+                    .Include("Arbitrators")
+                    .SingleOrDefault(x => x.Id == tournamentId);
+
+                var user = context.Users.SingleOrDefault(x => x.Id == userId);
+
+                if (tournament == null || user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                var userToRemove = tournament.Arbitrators.SingleOrDefault(x => x.Id == userId);
+
+                if (userToRemove != null)
+                {
+                    //block to revome creator from arbitrators
+                    if (userToRemove != tournament.Creator)
+                    {
+                        tournament.Arbitrators.Remove(user);
+                        context.SaveChanges();
+                    }
+                }
+
+                return RedirectToAction("ManageArbitrators", new { id = tournament.Id });
+            }
+        }
+
+
     }
 }

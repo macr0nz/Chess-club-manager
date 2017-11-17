@@ -349,6 +349,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Убрать.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Сохранить.
         /// </summary>
         public static string Save {
@@ -408,15 +417,6 @@ namespace Resources {
         public static string Tournaments {
             get {
                 return ResourceManager.GetString("Tournaments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Добавить Арбитра.
-        /// </summary>
-        public static string TRNaddArbitrator {
-            get {
-                return ResourceManager.GetString("TRNaddArbitrator", resourceCulture);
             }
         }
         
@@ -516,6 +516,24 @@ namespace Resources {
         public static string TRNlocation {
             get {
                 return ResourceManager.GetString("TRNlocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Управление Арбитрами.
+        /// </summary>
+        public static string TRNmanageArbitrators {
+            get {
+                return ResourceManager.GetString("TRNmanageArbitrators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Управление Игроками.
+        /// </summary>
+        public static string TRNmanagePlayers {
+            get {
+                return ResourceManager.GetString("TRNmanagePlayers", resourceCulture);
             }
         }
         
