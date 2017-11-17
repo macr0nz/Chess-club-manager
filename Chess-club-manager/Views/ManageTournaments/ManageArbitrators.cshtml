@@ -133,7 +133,7 @@
     </div>
 
     <div class="col-md-4 ">
-        @if (Model.Users != null)
+        @if (Model.Users != null && Model.Users.Any())
         {
             using (Html.BeginForm("AddArbitratorToATournament", "ManageTournaments", FormMethod.Post))
             {

@@ -178,6 +178,7 @@ namespace Chess_club_manager.Controllers
             var allUsers = this._usersRepository.All()
                 .AsNoTracking()
                 .AsEnumerable()
+                .Where(p => !tournament.Arbitrators.Select(x => x.UserName).Contains(p.UserName))
                 .OrderBy(x => x.FirstName)
                 .Select(x => new SelectListItem
                 {
