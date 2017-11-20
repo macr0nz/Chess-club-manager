@@ -137,7 +137,7 @@ namespace Chess_club_manager.Controllers
                 }).Take(5).ToList();
 
             topTournaments.LastTournaments = this.tournamentsRepository.All().AsNoTracking()
-                .Where(x =>  x.IsCompleted && x.Finish > DateTime.Now )
+                .Where(x =>  x.IsCompleted && x.Finish <= DateTime.Now )
                 .Select(x => new HomePageTournament
                 {
                     Id = x.Id,
