@@ -29,7 +29,7 @@
                 @if (User.IsInRole("moderator") || User.IsInRole("admin"))
                 {
                     <div class="checkbox">
-                        @Html.EditorFor(model => model.IsOfficial, new { @class = "form -control" })
+                        @Html.EditorFor(model => model.IsOfficial, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.IsOfficial, "", new {@class = "text-danger"})
                     </div>
                 }

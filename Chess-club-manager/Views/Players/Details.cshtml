@@ -1,4 +1,5 @@
-﻿@model Chess_club_manager.DTO.Players.PlayerDetailsDto
+﻿@using Chess_club_manager.Helpers
+@model Chess_club_manager.DTO.Players.PlayerDetailsDto
 
 @{
     ViewBag.Title = Resources.Resource.UserDetails;
@@ -52,7 +53,7 @@
                         }
 
                         <dt>Birth Day:</dt>
-                        <dd>@Model.BirthDay</dd>
+                        <dd>@Model.BirthDay.ToShortDateUI()</dd>
 
                         <dt>Title:</dt>
                         <dd>@Model.Title</dd>

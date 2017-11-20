@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Chess_club_manager.DataModel.Entity.News>
+﻿@using Chess_club_manager.Helpers
+@model IEnumerable<Chess_club_manager.DataModel.Entity.News>
 
 @{
     ViewBag.Title = "Новости";
@@ -12,7 +13,7 @@
     {
         <div class="col-md-4">
             <div class="well">
-                <label class="label label-info">@item.CreatedDate.ToShortDateString()</label>
+                <label class="label label-info">@item.CreatedDate.ToUIformat()</label>
                 <p><span class="fa fa-newspaper-o"></span><b> @item.Title</b></p>
                 <p>@Html.Raw(item.Content)</p>
                 <hr/>

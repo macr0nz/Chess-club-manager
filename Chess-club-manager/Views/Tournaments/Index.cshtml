@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Chess_club_manager.DTO.Tournament.TournamentDto>
+﻿@using Chess_club_manager.Helpers
+@model IEnumerable<Chess_club_manager.DTO.Tournament.TournamentDto>
 
 @{
     ViewBag.Title = Resources.Resource.Tournaments;
@@ -59,10 +60,10 @@
             <a href="@Url.Action("Details", "Tournaments", new {id = item.Id})"><b>@item.Name</b></a>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Start)
+            @item.Start.ToUIformat()
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Finish)
+            @item.Finish.ToUIformat()
         </td>
         <td>
             @if (item.IsOfficial)

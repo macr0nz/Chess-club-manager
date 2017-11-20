@@ -125,8 +125,18 @@
                     <td><a href="@Url.Action("Details", "Players", new {id = user.Id})"><i class="fa fa-user"></i><b> @user.FirstNameLastName</b></a></td>
                     <td>@user.CurrentRating</td>
                     <td>@user.Title</td>
-                    <td><a href="@Url.Action("RemoveArbitratorFromTournament", "ManageTournaments", new {tournamentId = Model.TournamentId, userId = user.Id})"
-                           class="btn btn-danger"><i class="fa fa-crop"></i> @Resources.Resource.Remove</a></td>
+
+                    @if (user.Id == Model.CreatorId)
+                    {
+                        <td><a href="#"class="btn btn-danger disabled"><i class="fa fa-crop"></i> @Resources.Resource.Remove</a></td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a href="@Url.Action("RemoveArbitratorFromTournament", "ManageTournaments", new {tournamentId = Model.TournamentId, userId = user.Id})"
+                               class="btn btn-danger"><i class="fa fa-crop"></i>@Resources.Resource.Remove</a>
+                        </td>
+                    }
                 </tr>
             }
             </tbody>
