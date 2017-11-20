@@ -21,25 +21,26 @@
 
 <div class="row">
     <div class="col-md-8">
-        <div class="col-md-12">
-            <h3 style="text-align: center"><i class="fa fa-star-o "></i> Турниры</h3>
-            <hr />
+        <div class="col-md-12 table-responsive">
+            <h3 style="text-align: center"><i class="fa fa-star-o "></i> Турниры
+            </h3>
+            <hr/>
             @Html.Action("TopTournaments", "Home")
 
         </div>
 
         <div class="col-md-12">
             <h3 style="text-align: center"><i class="fa fa-bar-chart "></i> @Resources.Resource.TopPlayersRating</h3>
-            <hr />
+            <hr/>
             @Html.Action("TopPlayers", "Home")
 
         </div>
     </div>
-    
-    
+
+
     <div class="col-md-4">
         <h3 style="text-align: center"><i class="fa fa-bullhorn"></i> @Resources.Resource.News</h3>
-        <hr />
+        <hr/>
         @Html.Action("TopNews", "Home")
     </div>
 </div>
