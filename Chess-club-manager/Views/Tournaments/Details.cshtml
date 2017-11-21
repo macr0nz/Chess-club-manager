@@ -210,7 +210,7 @@
     
 @if (Model.AccessPassed)
 {
-    <a href="@Url.Action("AddRandomPlayers", "ManageTournaments", new {id = Model.Id})" class="btn btn-success">
+    <a href="@Url.Action("ManagePlayers", "ManageTournaments", new {id = Model.Id})" class="btn btn-success">
         <i class="fa fa-plus-square"></i> @Resources.Resource.TRNmanagePlayers
     </a>
 }

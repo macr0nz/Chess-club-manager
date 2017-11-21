@@ -114,34 +114,148 @@ namespace Chess_club_manager.Controllers
             return View(trnCreateDto);
         }
 
-        //[TEST]
-        public ActionResult AddRandomPlayers(int id)
+        public ActionResult ManagePlayers(int? id)
         {
-            var tournament = this._unitOfWork.TournamentsRepository.All()
+            if (id == null) return HttpNotFound();
+
+            var tournament = this._unitOfWork.TournamentsRepository
+                .All()
+                .Include(x => x.Players)
+                .Include(x => x.Creator)
+                .Include(x => x.Arbitrators)
+                .AsNoTracking()
                 .SingleOrDefault(x => x.Id == id);
 
-            if (tournament == null)
+            if (tournament == null) return HttpNotFound();
+
+            var access = false;
+            if (Request.IsAuthenticated)
+            {
+                access = tournament.Arbitrators.Select(x => x.UserName).Contains(User.Identity.Name);
+
+                if (!access)
+                {
+                    access = User.IsInRole("moderator");
+
+                    if (!access)
+                    {
+                        access = User.IsInRole("admin");
+                    }
+                }
+            }
+
+            if (!access) return RedirectToAction("Details", "Tournaments", new { id = tournament.Id });
+
+
+            var allUsers = this._unitOfWork.UsersRepository
+                .All()
+                .AsNoTracking()
+                .AsEnumerable()
+                .Where(p => !tournament.Players.Select(x => x.UserName).Contains(p.UserName))
+                .OrderBy(x => x.FirstName)
+                .Select(x => new SelectListItem
+                {
+                    Value = x.Id,
+                    Text = $"{x.FirstName} {x.LastName}"
+                }).ToList();
+            
+
+            var tournamentView = new ManageTournamentPlayersViewDto()
+            {
+                TournamentId = tournament.Id,
+                TournamentName = tournament.Name,
+                Start = tournament.Start,
+                Finish = tournament.Finish,
+                IsOfficial = tournament.IsOfficial,
+                IsPrivate = tournament.IsPrivate,
+                Players = tournament.Players.Select(x => new PlayerLightDto()
+                {
+                    Id = x.Id,
+                    CurrentRating = x.CurrentRating,
+                    FirstNameLastName = $"{x.FirstName} {x.LastName}",
+                    Title = x.Title
+                }).ToList(),
+                Users = allUsers,
+                CreatorId = tournament.Creator.Id,
+                CreatorName = $"{tournament.Creator.FirstName} {tournament.Creator.LastName}"
+            };
+
+            return View(tournamentView);
+        }
+        
+
+        [HttpPost]
+        public ActionResult AddPlayerToATournament(int tournamentId, string userId)
+        {
+            var tournament = this._unitOfWork.TournamentsRepository
+                .All()
+                .Include(x => x.Players)
+                .Include(x => x.Arbitrators)
+                .SingleOrDefault(x => x.Id == tournamentId);
+
+            var user = this._unitOfWork.UsersRepository
+                .All().SingleOrDefault(x => x.Id == userId);
+
+            if (tournament == null || user == null)
             {
                 return HttpNotFound();
             }
 
-            var users = this._unitOfWork.UsersRepository.All().Take(5).ToList();
-
-            if (tournament.Players == null)
+            var access = false;
+            if (Request.IsAuthenticated)
             {
-                tournament.Players = new List<ApplicationUser>();
+                access = tournament.Arbitrators.Select(x => x.UserName).Contains(User.Identity.Name);
+
+                if (!access)
+                {
+                    access = User.IsInRole("moderator");
+
+                    if (!access)
+                    {
+                        access = User.IsInRole("admin");
+                    }
+                }
             }
 
-            foreach (var user in users)
-            {
-                tournament.Players.Add(user);
-            }
+            if (!access) return RedirectToAction("Details", "Tournaments", new { id = tournament.Id });
+
+            tournament.Players.Add(user);
 
             this._unitOfWork.TournamentsRepository.Update(tournament);
 
-
-            return RedirectToAction("Details", "Tournaments", new {id = id});
+            return RedirectToAction("ManagePlayers", new { id = tournament.Id });
         }
+
+        
+        [HttpGet]
+        public ActionResult RemovePlayerFromTournament(int tournamentId, string userId)
+        {
+            var tournament = this._unitOfWork.TournamentsRepository
+                .All()
+                .Include(x => x.Players)
+                .SingleOrDefault(x => x.Id == tournamentId);
+
+            var user = this._unitOfWork.UsersRepository
+                .All().SingleOrDefault(x => x.Id == userId);
+
+            if (tournament == null || user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var userToRemove = tournament.Players.SingleOrDefault(x => x.Id == userId);
+
+            if (userToRemove != null)
+            {
+                tournament.Players.Remove(user);
+
+                this._unitOfWork.TournamentsRepository.Update(tournament);
+            }
+
+            return RedirectToAction("ManagePlayers", new { id = tournament.Id });
+        }
+
+        
 
         public ActionResult ManageArbitrators(int? id)
         {
@@ -149,8 +263,8 @@ namespace Chess_club_manager.Controllers
 
             var tournament = this._unitOfWork.TournamentsRepository
                 .All()
-                .Include("Arbitrators")
-                .Include("Creator")
+                .Include(x => x.Arbitrators)
+                .Include(x => x.Creator)
                 .AsNoTracking()
                 .SingleOrDefault(x => x.Id == id);
 
@@ -208,9 +322,7 @@ namespace Chess_club_manager.Controllers
                 CreatorId = tournament.Creator.Id,
                 CreatorName = $"{tournament.Creator.FirstName} {tournament.Creator.LastName}"
             };
-
-
-
+            
             return View(tournamentView);
         }
 
