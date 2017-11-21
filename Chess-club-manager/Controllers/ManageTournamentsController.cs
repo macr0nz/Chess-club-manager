@@ -16,20 +16,19 @@ namespace Chess_club_manager.Controllers
     [Authorize]
     public class ManageTournamentsController : Controller
     {
-        private readonly IRepository<Tournament> _tournamentsRepository;
-        private readonly IRepository<ApplicationUser> _usersRepository;
-        
+        private readonly ChessClubManagerUnitOfWork _unitOfWork;
+
         public ManageTournamentsController()
         {
-            this._tournamentsRepository = new ChessClubManagerRepository<Tournament>();
-            this._usersRepository = new ChessClubManagerRepository<ApplicationUser>();
+            this._unitOfWork = new ChessClubManagerUnitOfWork();
         }
 
         // GET: ManageTournaments
         [Authorize(Roles = "admin, moderator")]
         public ActionResult Index()
         {
-            var allTwithCreators = _tournamentsRepository.All().Include("Creator").ToList();
+            var allTwithCreators = this._unitOfWork.TournamentsRepository
+                .All().Include("Creator").ToList();
 
             var allTournaments = allTwithCreators
                 .OrderByDescending(x => x.CreatedDate)
@@ -68,47 +67,48 @@ namespace Chess_club_manager.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var context = new ApplicationDbContext())
+                var tournament = new Tournament
                 {
-                    var tournament = new Tournament
-                    {
-                        Format = trnCreateDto.Format,
-                        Info = trnCreateDto.Info,
-                        IsPrivate = trnCreateDto.IsPrivate,
-                        MaxPlayersCount = trnCreateDto.MaxPlayersCount,
-                        Name = trnCreateDto.Name,
-                        Location = trnCreateDto.Location,
-                        TimeControl = trnCreateDto.TimeControl,
-                        Start = trnCreateDto.StartDate.Add(trnCreateDto.StartTime.TimeOfDay),
-                        IsOfficial = trnCreateDto.IsOfficial
-                    };
+                    Format = trnCreateDto.Format,
+                    Info = trnCreateDto.Info,
+                    IsPrivate = trnCreateDto.IsPrivate,
+                    MaxPlayersCount = trnCreateDto.MaxPlayersCount,
+                    Name = trnCreateDto.Name,
+                    Location = trnCreateDto.Location,
+                    TimeControl = trnCreateDto.TimeControl,
+                    Start = trnCreateDto.StartDate.Add(trnCreateDto.StartTime.TimeOfDay),
+                    IsOfficial = trnCreateDto.IsOfficial
+                };
 
-                    if (trnCreateDto.FinishDate != null)
+                if (trnCreateDto.FinishDate != null)
+                {
+                    tournament.Finish = trnCreateDto.FinishDate;
+                    if (trnCreateDto.FinishTime != null)
                     {
-                        tournament.Finish = trnCreateDto.FinishDate;
-                        if (trnCreateDto.FinishTime != null)
-                        {
-                            tournament.Finish.Value.Add(trnCreateDto.FinishTime.Value.TimeOfDay);
-                        }
+                        tournament.Finish.Value.Add(trnCreateDto.FinishTime.Value.TimeOfDay);
                     }
-
-                    var currentUser = context.Users.SingleOrDefault(x => x.UserName == User.Identity.Name);
-                    if (currentUser != null)
-                    {
-                        tournament.Creator = currentUser;
-                        tournament.CreatorId = currentUser.Id;
-
-                        tournament.Arbitrators = new List<ApplicationUser> {currentUser};
-                    }
-
-
-                    context.Tournaments.Add(tournament);
-                    context.SaveChanges();
-
-                    //redirect to this tournament page
-                    return RedirectToAction("Details", "Tournaments", new { id = tournament.Id });
                 }
-                
+
+
+                var currentUser = this._unitOfWork.UsersRepository.All()
+                    .SingleOrDefault(x => x.UserName == User.Identity.Name);
+
+                if (currentUser != null)
+                {
+                    tournament.Creator = currentUser;
+                    tournament.CreatorId = currentUser.Id;
+
+                    tournament.Arbitrators = new List<ApplicationUser> {currentUser};
+                }
+
+
+                this._unitOfWork.TournamentsRepository.Add(tournament);
+
+
+                //redirect to this tournament page
+                return RedirectToAction("Details", "Tournaments", new {id = tournament.Id});
+
+
             }
 
             return View(trnCreateDto);
@@ -117,30 +117,29 @@ namespace Chess_club_manager.Controllers
         //[TEST]
         public ActionResult AddRandomPlayers(int id)
         {
-            using (var context = new ApplicationDbContext())
+            var tournament = this._unitOfWork.TournamentsRepository.All()
+                .SingleOrDefault(x => x.Id == id);
+
+            if (tournament == null)
             {
-                var tournament = context.Tournaments.SingleOrDefault(x => x.Id == id);
-                if (tournament == null)
-                {
-                    return HttpNotFound();
-                }
-
-
-                var users = context.Users.Take(5).ToList();
-
-                if (tournament.Players == null)
-                {
-                    tournament.Players = new List<ApplicationUser>();
-                }
-
-                foreach (var user in users)
-                {
-                    tournament.Players.Add(user);
-                }
-
-                context.SaveChanges();
+                return HttpNotFound();
             }
-            
+
+            var users = this._unitOfWork.UsersRepository.All().Take(5).ToList();
+
+            if (tournament.Players == null)
+            {
+                tournament.Players = new List<ApplicationUser>();
+            }
+
+            foreach (var user in users)
+            {
+                tournament.Players.Add(user);
+            }
+
+            this._unitOfWork.TournamentsRepository.Update(tournament);
+
+
             return RedirectToAction("Details", "Tournaments", new {id = id});
         }
 
@@ -148,7 +147,8 @@ namespace Chess_club_manager.Controllers
         {
             if (id == null) return HttpNotFound();
 
-            var tournament = this._tournamentsRepository.All()
+            var tournament = this._unitOfWork.TournamentsRepository
+                .All()
                 .Include("Arbitrators")
                 .Include("Creator")
                 .AsNoTracking()
@@ -175,7 +175,8 @@ namespace Chess_club_manager.Controllers
             if (!access) return RedirectToAction("Details", "Tournaments", new {id = tournament.Id});
 
 
-            var allUsers = this._usersRepository.All()
+            var allUsers = this._unitOfWork.UsersRepository
+                .All()
                 .AsNoTracking()
                 .AsEnumerable()
                 .Where(p => !tournament.Arbitrators.Select(x => x.UserName).Contains(p.UserName))
@@ -186,7 +187,7 @@ namespace Chess_club_manager.Controllers
                     Text = $"{x.FirstName} {x.LastName}"
                 }).ToList();
 
-            
+
 
             var tournamentView = new ManageTournamentArbitratorsViewDto
             {
@@ -216,79 +217,77 @@ namespace Chess_club_manager.Controllers
         [HttpPost]
         public ActionResult AddArbitratorToATournament(int tournamentId, string userId)
         {
-            using (var context = new ApplicationDbContext())
+            var tournament = this._unitOfWork.TournamentsRepository
+                .All()
+                .Include("Arbitrators")
+                .SingleOrDefault(x => x.Id == tournamentId);
+
+            var user = this._unitOfWork.UsersRepository
+                .All().SingleOrDefault(x => x.Id == userId);
+
+            if (tournament == null || user == null)
             {
-                var tournament = context.Tournaments
-                    .Include("Arbitrators")
-                    .SingleOrDefault(x => x.Id == tournamentId);
+                return HttpNotFound();
+            }
 
-                var user = context.Users.SingleOrDefault(x => x.Id == userId);
+            var access = false;
+            if (Request.IsAuthenticated)
+            {
+                access = tournament.Arbitrators.Select(x => x.UserName).Contains(User.Identity.Name);
 
-                if (tournament == null || user == null)
+                if (!access)
                 {
-                    return HttpNotFound();
-                }
-
-                var access = false;
-                if (Request.IsAuthenticated)
-                {
-                    access = tournament.Arbitrators.Select(x => x.UserName).Contains(User.Identity.Name);
+                    access = User.IsInRole("moderator");
 
                     if (!access)
                     {
-                        access = User.IsInRole("moderator");
-
-                        if (!access)
-                        {
-                            access = User.IsInRole("admin");
-                        }
+                        access = User.IsInRole("admin");
                     }
                 }
-
-                if (!access) return RedirectToAction("Details", "Tournaments", new { id = tournament.Id });
-
-                tournament.Arbitrators.Add(user);
-
-                context.SaveChanges();
-
-                return RedirectToAction("ManageArbitrators", new { id = tournament.Id });
             }
-            
+
+            if (!access) return RedirectToAction("Details", "Tournaments", new {id = tournament.Id});
+
+            tournament.Arbitrators.Add(user);
+
+            this._unitOfWork.TournamentsRepository.Update(tournament);
+
+            return RedirectToAction("ManageArbitrators", new {id = tournament.Id});
         }
 
-        
+
         [HttpGet]
         public ActionResult RemoveArbitratorFromTournament(int tournamentId, string userId)
         {
-            using (var context = new ApplicationDbContext())
+
+            var tournament = this._unitOfWork.TournamentsRepository
+                .All()
+                .Include("Arbitrators")
+                .SingleOrDefault(x => x.Id == tournamentId);
+
+            var user = this._unitOfWork.UsersRepository
+                .All().SingleOrDefault(x => x.Id == userId);
+
+            if (tournament == null || user == null)
             {
-                var tournament = context.Tournaments
-                    .Include("Arbitrators")
-                    .SingleOrDefault(x => x.Id == tournamentId);
-
-                var user = context.Users.SingleOrDefault(x => x.Id == userId);
-
-                if (tournament == null || user == null)
-                {
-                    return HttpNotFound();
-                }
-
-                var userToRemove = tournament.Arbitrators.SingleOrDefault(x => x.Id == userId);
-
-                if (userToRemove != null)
-                {
-                    //block to revome creator from arbitrators
-                    if (userToRemove != tournament.Creator)
-                    {
-                        tournament.Arbitrators.Remove(user);
-                        context.SaveChanges();
-                    }
-                }
-
-                return RedirectToAction("ManageArbitrators", new { id = tournament.Id });
+                return HttpNotFound();
             }
+
+            var userToRemove = tournament.Arbitrators.SingleOrDefault(x => x.Id == userId);
+
+            if (userToRemove != null)
+            {
+                //block to revome creator from arbitrators
+                if (userToRemove != tournament.Creator)
+                {
+                    tournament.Arbitrators.Remove(user);
+                    this._unitOfWork.TournamentsRepository.Update(tournament);
+                }
+            }
+
+            return RedirectToAction("ManageArbitrators", new {id = tournament.Id});
         }
-
-
     }
+
+
 }

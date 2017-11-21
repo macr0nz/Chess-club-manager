@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Chess_club_manager.DataModel.Entity;
+using Chess_club_manager.DataModel.Repository;
+using Chess_club_manager.Models;
+
+namespace Chess_club_manager.Repository
+{
+    public class ChessClubManagerUnitOfWork : IDisposable
+    {
+        private readonly ApplicationDbContext _context;
+        private bool _disposed;
+
+        public IRepository<Tournament> TournamentsRepository { get; }
+        public IRepository<ApplicationUser> UsersRepository { get; }
+        public IRepository<News> NewsRepository { get; }
+        public IRepository<MailSettings> MailSettingsRepository { get; }
+
+        public ChessClubManagerUnitOfWork()
+        {
+            _context = new ApplicationDbContext();
+
+            TournamentsRepository = new ChessClubManagerRepository<Tournament>(_context);
+            UsersRepository = new ChessClubManagerRepository<ApplicationUser>(_context);
+            NewsRepository = new ChessClubManagerRepository<News>(_context);
+            MailSettingsRepository = new ChessClubManagerRepository<MailSettings>(_context);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        public virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            _disposed = true;
+        }
+    }
+}

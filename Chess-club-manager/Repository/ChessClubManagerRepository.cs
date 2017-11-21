@@ -12,6 +12,12 @@ namespace Chess_club_manager.Repository
         private readonly ApplicationDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
+        public ChessClubManagerRepository(ApplicationDbContext context)
+        {
+            this._context = context;
+            this._dbSet = _context.Set<TEntity>();
+        }
+
         public ChessClubManagerRepository()
         {
             this._context = new ApplicationDbContext();

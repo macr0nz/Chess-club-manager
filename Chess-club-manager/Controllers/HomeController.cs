@@ -18,16 +18,12 @@ namespace Chess_club_manager.Controllers
     [Culture]
     public class HomeController : Controller
     {
-        private readonly IRepository<ApplicationUser> playersRepository;
-        private readonly IRepository<News> newsRepository;
-        private readonly IRepository<Tournament> tournamentsRepository;
+        private readonly ChessClubManagerUnitOfWork _unitOfWork;
 
         
         public HomeController()
         {
-            this.playersRepository = new ChessClubManagerRepository<ApplicationUser>();
-            this.newsRepository = new ChessClubManagerRepository<News>();
-            this.tournamentsRepository = new ChessClubManagerRepository<Tournament>();
+            this._unitOfWork = new ChessClubManagerUnitOfWork();
         }
 
         public ActionResult Index()
@@ -76,7 +72,7 @@ namespace Chess_club_manager.Controllers
         {
             var playersNumberToReturn = 6;
 
-            var players = this.playersRepository.All()
+            var players = this._unitOfWork.UsersRepository.All()
                 .AsNoTracking()
                 .OrderByDescending(p => p.CurrentRating)
                 .Take(playersNumberToReturn)
@@ -95,7 +91,7 @@ namespace Chess_club_manager.Controllers
 
         public ActionResult TopNews()
         {
-            var news = this.newsRepository.All()
+            var news = this._unitOfWork.NewsRepository.All()
                 .AsNoTracking()
                 .OrderByDescending(p => p.CreatedDate)
                 .Take(4)
@@ -108,7 +104,8 @@ namespace Chess_club_manager.Controllers
         {
             var topTournaments = new HomePageTournamentView();
 
-            topTournaments.CurrentTournaments = this.tournamentsRepository.All().AsNoTracking()
+            topTournaments.CurrentTournaments = this._unitOfWork.TournamentsRepository
+                .All().AsNoTracking()
                 .Where(x => x.IsStarted && !x.IsCompleted)
                 .Select(x => new HomePageTournament
                 {
@@ -122,7 +119,8 @@ namespace Chess_club_manager.Controllers
                     Format = x.Format
                 }).Take(5).ToList();
 
-            topTournaments.FutureTournaments = this.tournamentsRepository.All().AsNoTracking()
+            topTournaments.FutureTournaments = this._unitOfWork.TournamentsRepository
+                .All().AsNoTracking()
                 .Where(x => !x.IsStarted && x.Start > DateTime.Now)
                 .Select(x => new HomePageTournament
                 {
@@ -136,7 +134,8 @@ namespace Chess_club_manager.Controllers
                     Format = x.Format
                 }).Take(5).ToList();
 
-            topTournaments.LastTournaments = this.tournamentsRepository.All().AsNoTracking()
+            topTournaments.LastTournaments = this._unitOfWork.TournamentsRepository
+                .All().AsNoTracking()
                 .Where(x =>  x.IsCompleted && x.Finish <= DateTime.Now )
                 .Select(x => new HomePageTournament
                 {
