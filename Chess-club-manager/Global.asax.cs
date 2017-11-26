@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Chess_club_manager.BackgroundJobs;
 
 namespace Chess_club_manager
 {
@@ -16,6 +17,9 @@ namespace Chess_club_manager
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //tournament start background job 
+            TournamentStartSheduler.Start();
         }
     }
 }
