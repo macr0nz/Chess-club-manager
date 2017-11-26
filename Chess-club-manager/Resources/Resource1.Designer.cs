@@ -19,7 +19,7 @@ namespace Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resource {
@@ -214,6 +214,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ошибка.
+        /// </summary>
+        public static string LogError {
+            get {
+                return ResourceManager.GetString("LogError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вход.
         /// </summary>
         public static string LogIn {
@@ -223,11 +232,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Информация.
+        /// </summary>
+        public static string LogInfo {
+            get {
+                return ResourceManager.GetString("LogInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выход.
         /// </summary>
         public static string LogOut {
             get {
                 return ResourceManager.GetString("LogOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Логи.
+        /// </summary>
+        public static string Logs {
+            get {
+                return ResourceManager.GetString("Logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип лога.
+        /// </summary>
+        public static string LogType {
+            get {
+                return ResourceManager.GetString("LogType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предупреждение.
+        /// </summary>
+        public static string LogWarning {
+            get {
+                return ResourceManager.GetString("LogWarning", resourceCulture);
             }
         }
         
@@ -273,6 +318,15 @@ namespace Resources {
         public static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Игрок.
+        /// </summary>
+        public static string Player {
+            get {
+                return ResourceManager.GetString("Player", resourceCulture);
             }
         }
         
@@ -466,6 +520,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Результат игры.
+        /// </summary>
+        public static string TRNgameResult {
+            get {
+                return ResourceManager.GetString("TRNgameResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дополнительная Информация.
         /// </summary>
         public static string TRNinfo {
@@ -592,11 +655,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Завершен.
+        /// </summary>
+        public static string TRNtourComplatedDate {
+            get {
+                return ResourceManager.GetString("TRNtourComplatedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тур завершен.
+        /// </summary>
+        public static string TRNtourCompleted {
+            get {
+                return ResourceManager.GetString("TRNtourCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тур в процессе.
+        /// </summary>
+        public static string TRNtourInProcess {
+            get {
+                return ResourceManager.GetString("TRNtourInProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Туры.
         /// </summary>
         public static string TRNtours {
             get {
                 return ResourceManager.GetString("TRNtours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Статус.
+        /// </summary>
+        public static string TRNtourStatus {
+            get {
+                return ResourceManager.GetString("TRNtourStatus", resourceCulture);
             }
         }
         

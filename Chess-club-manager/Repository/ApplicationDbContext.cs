@@ -16,10 +16,17 @@ namespace Chess_club_manager.Repository
         //[dbo].[AspNetUsers]
 
         public DbSet<Tournament> Tournaments { get; set; }
+
+        public DbSet<TournamentTour> TournamentTours { get; set; }
+
+        public DbSet<TourGame> TourGames { get; set; }
+
         
         public DbSet<News> News { get; set; }
 
         public DbSet<MailSettings> MailSettings { get; set; }
+
+        public DbSet<Log> Logs { get; set; }
 
 
         public ApplicationDbContext()

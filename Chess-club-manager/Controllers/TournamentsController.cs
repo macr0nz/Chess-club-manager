@@ -16,10 +16,12 @@ namespace Chess_club_manager.Controllers
     public class TournamentsController : Controller
     {
         private readonly IRepository<Tournament> _tournamentsRepository;
+        private readonly IRepository<TournamentTour> _toursRepository;
 
         public TournamentsController()
         {
             this._tournamentsRepository = new ChessClubManagerRepository<Tournament>();
+            this._toursRepository = new ChessClubManagerRepository<TournamentTour>();
         }
 
         // GET: Tournaments
@@ -53,9 +55,10 @@ namespace Chess_club_manager.Controllers
         public ActionResult Details(int id)
         {
             var tournament = this._tournamentsRepository.All()
-                .Include("Creator")
-                .Include("Players")
-                .Include("Arbitrators")
+                .Include(x => x.Creator)
+                .Include(x => x.Players)
+                .Include(x => x.Arbitrators)
+                .Include(x => x.Tours)
                 .AsNoTracking().SingleOrDefault(x => x.Id == id);
 
             if (tournament == null)
@@ -116,10 +119,30 @@ namespace Chess_club_manager.Controllers
                 IsCompleted = tournament.IsCompleted,
                 CreatedDate = tournament.CreatedDate,
                 TimeControl = tournament.TimeControl,
-                AccessPassed = access
+                AccessPassed = access,
+
+                Tours = tournament.Tours
             };
 
             return View(tournamentView);
+        }
+
+        public ActionResult TourDetails(int id)
+        {
+            var tour = this._toursRepository
+                .All()
+                .Include(x => x.Tournament)
+                .Include(x => x.Games)
+                .Include(x => x.Games.Select(g => g.LeftPlayer))
+                .Include(x => x.Games.Select(g => g.RightPlayer))
+                .SingleOrDefault(x => x.Id == id);
+
+            if (tour == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(tour);
         }
     }
 }

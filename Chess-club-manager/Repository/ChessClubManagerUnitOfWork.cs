@@ -17,6 +17,7 @@ namespace Chess_club_manager.Repository
         public IRepository<ApplicationUser> UsersRepository { get; }
         public IRepository<News> NewsRepository { get; }
         public IRepository<MailSettings> MailSettingsRepository { get; }
+        public IRepository<Log> LogsRepository { get; }
 
         public ChessClubManagerUnitOfWork()
         {
@@ -26,6 +27,7 @@ namespace Chess_club_manager.Repository
             UsersRepository = new ChessClubManagerRepository<ApplicationUser>(_context);
             NewsRepository = new ChessClubManagerRepository<News>(_context);
             MailSettingsRepository = new ChessClubManagerRepository<MailSettings>(_context);
+            LogsRepository = new ChessClubManagerRepository<Log>(_context);
         }
 
         public void Dispose()
@@ -33,7 +35,8 @@ namespace Chess_club_manager.Repository
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        public virtual void Dispose(bool disposing)
+
+        protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
             {

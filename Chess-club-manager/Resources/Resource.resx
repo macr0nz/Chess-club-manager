@@ -312,4 +312,37 @@
   <data name="TRNmanagePlayers" xml:space="preserve">
     <value>Управление Игроками</value>
   </data>
+  <data name="LogError" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="LogInfo" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="Logs" xml:space="preserve">
+    <value>Логи</value>
+  </data>
+  <data name="LogType" xml:space="preserve">
+    <value>Тип лога</value>
+  </data>
+  <data name="LogWarning" xml:space="preserve">
+    <value>Предупреждение</value>
+  </data>
+  <data name="TRNtourComplatedDate" xml:space="preserve">
+    <value>Завершен</value>
+  </data>
+  <data name="TRNtourCompleted" xml:space="preserve">
+    <value>Тур завершен</value>
+  </data>
+  <data name="TRNtourInProcess" xml:space="preserve">
+    <value>Тур в процессе</value>
+  </data>
+  <data name="TRNtourStatus" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="Player" xml:space="preserve">
+    <value>Игрок</value>
+  </data>
+  <data name="TRNgameResult" xml:space="preserve">
+    <value>Результат игры</value>
+  </data>
 </root>

@@ -1,0 +1,57 @@
+﻿@using Chess_club_manager.DataModel.Enum
+@model IEnumerable<Chess_club_manager.DataModel.Entity.Log>
+
+@{
+    ViewBag.Title = @Resources.Resource.Logs;
+}
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Resources.Resource.LogType
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @switch (item.Type)
+            {
+                case LogType.Info:
+                {
+                        <label class="label label-info">@Resources.Resource.LogInfo</label>
+                }break;
+
+                case LogType.Warning:
+                {
+                    <label class="label label-warning">@Resources.Resource.LogWarning</label>
+                }break;
+
+                case LogType.Error:
+                {
+                    <label class="label label-danger">@Resources.Resource.LogError</label>
+                    }break;
+
+                default:
+                    break;
+            }
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+    </tr>
+}
+
+</table>

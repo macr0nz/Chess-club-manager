@@ -5,6 +5,11 @@
     ViewBag.Title = Model.Name;
 }
 
+@*<script>
+    setTimeout(function () {
+        location.reload();
+    }, @Model.PageReloadDelayTimeMs);
+</script>*@
 
 
 <div class="row well">
@@ -189,12 +194,13 @@
 <div class="row well">
     
     <div class="col-md-6">
-        <h3 style="text-align: center"><i class="fa fa-star-o"></i> @Resources.Resource.TRNtours</h3>
+        <h3 style="text-align: center"><i class="fa fa-hourglass"></i> @Resources.Resource.TRNtours</h3>
         <hr/>
         <ul class="nav nav-tabs">
-            <li><a href="#">1st @Resources.Resource.TRNtour</a></li>
-            <li><a href="#">2nd Tour</a></li>
-            <li><a href="#">3rd Tour</a></li>
+            @foreach (var tour in Model.Tours)
+            {
+                <li><a href="@Url.Action("TourDetails", "Tournaments", new {id = tour.Id})">@tour.Number.ToString() @Resources.Resource.TRNtour</a></li>
+            }
         </ul>
     </div>
 

@@ -34,5 +34,6 @@ namespace Chess_club_manager.Models
         //results
         //list tours
         //tour = list games
+        public ICollection<TournamentTour> Tours { get; set; }
     }
 }

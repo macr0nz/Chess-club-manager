@@ -198,6 +198,7 @@
     <Compile Include="BackgroundJobs\TournamentStartSheduler.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Controllers\MailSettingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageNewsController.cs" />
@@ -236,7 +237,9 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TourGame.cs" />
     <Compile Include="Models\Tournament.cs" />
+    <Compile Include="Models\TournamentTour.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ApplicationDbContext.cs" />
@@ -295,9 +298,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <None Include="job_scheduling_data_2_0.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\toFileDeploy.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
@@ -376,6 +376,8 @@
     <Content Include="Views\Home\TopTournaments.cshtml" />
     <Content Include="Views\ManageTournaments\ManageArbitrators.cshtml" />
     <Content Include="Views\ManageTournaments\ManagePlayers.cshtml" />
+    <Content Include="Views\Logs\Index.cshtml" />
+    <Content Include="Views\Tournaments\TourDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

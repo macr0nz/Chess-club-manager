@@ -37,12 +37,14 @@ namespace Chess_club_manager.DTO.Tournament
         //state
         public bool IsStarted { get; set; }
         public bool IsCompleted { get; set; }
+        //public int PageReloadDelayTimeMs { get; set; }
 
         //stage?
         public bool AccessPassed { get; set; }
 
-        //tours
 
+        //tours
+        public ICollection<TournamentTour> Tours { get; set; }
 
     }
 
