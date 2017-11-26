@@ -26,6 +26,12 @@ namespace Chess_club_manager.Controllers
             this._unitOfWork = new ChessClubManagerUnitOfWork();
         }
 
+        [Authorize(Roles = "admin")]
+        public void Restart()
+        {
+            System.Web.HttpRuntime.UnloadAppDomain();
+        }
+
         public ActionResult Index()
         {
             return View();

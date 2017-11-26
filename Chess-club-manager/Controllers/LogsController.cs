@@ -5,10 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Repository;
+using Chess_club_manager.Filters;
 using Chess_club_manager.Repository;
 
 namespace Chess_club_manager.Controllers
 {
+    [Culture]
     [Authorize(Roles = "admin, moderator")]
     public class LogsController : Controller
     {
