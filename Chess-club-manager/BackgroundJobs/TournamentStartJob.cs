@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Enum;
+using Chess_club_manager.Helpers;
 using Chess_club_manager.Models;
 using Chess_club_manager.Repository;
 using Quartz;
@@ -39,15 +40,17 @@ namespace Chess_club_manager.BackgroundJobs
                         case TournamentType.Round:
                         {
                             var tournamentsCount = 0;
-                            if (tournament.Players.Count % 2 == 0)
+                            if (tournament.Players.Count > 0)
                             {
-                                tournamentsCount = tournament.Players.Count - 1;
+                                if (tournament.Players.Count % 2 == 0)
+                                {
+                                    tournamentsCount = tournament.Players.Count - 1;
+                                }
+                                else
+                                {
+                                    tournamentsCount = tournament.Players.Count;
+                                }
                             }
-                            else
-                            {
-                                tournamentsCount = tournament.Players.Count;
-                            }
-
                             tournament.MaxToursCount = tournamentsCount;
 
                             //TEST ONLY
@@ -55,7 +58,7 @@ namespace Chess_club_manager.BackgroundJobs
                             var players = tournament.Players.ToList();
                             //TEST ONLY
 
-                                if (tournament.Tours == null)
+                            if (tournament.Tours == null)
                             {
                                 tournament.Tours = new List<TournamentTour>(tournamentsCount);
                             }
@@ -107,17 +110,12 @@ namespace Chess_club_manager.BackgroundJobs
                     }
                     
                     //log
-                    unitOfWork.LogsRepository.Add(new Log
-                    {
-                        Type = LogType.Info,
-                        Message = $"Tournament Auto Start: {tournament.Name}"
-                    });
-
+                    ApplicationLogger.Log($"Tournament Auto Start: {tournament.Name}", LogType.Info);
+                    
                 }
 
                 unitOfWork.TournamentsRepository.UpdateRange(tournamentsToStart);
-
-                //log all
+                
             }
         }
 
