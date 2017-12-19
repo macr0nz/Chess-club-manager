@@ -112,9 +112,10 @@ namespace Chess_club_manager.BackgroundJobs
                     //log
                     ApplicationLogger.Log($"Tournament Auto Start: {tournament.Name}", LogType.Info);
                     
+                    unitOfWork.TournamentsRepository.Update(tournament);
                 }
 
-                unitOfWork.TournamentsRepository.UpdateRange(tournamentsToStart);
+                //unitOfWork.TournamentsRepository.UpdateRange(tournamentsToStart);
                 
             }
         }

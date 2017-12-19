@@ -199,7 +199,15 @@
         <ul class="nav nav-tabs">
             @foreach (var tour in Model.Tours)
             {
-                <li><a href="@Url.Action("TourDetails", "Tournaments", new {id = tour.Id})">@tour.Number.ToString() @Resources.Resource.TRNtour</a></li>
+                if (tour.IsCompleted)
+                {
+                    <li><a href="@Url.Action("TourDetails", "Tournaments", new {id = tour.Id})"><i class="fa fa-check"></i> @tour.Number.ToString() @Resources.Resource.TRNtour</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("TourDetails", "Tournaments", new {id = tour.Id})"><i class="fa fa-spinner fa-spin fa-fw"></i> @tour.Number.ToString() @Resources.Resource.TRNtour</a></li>
+
+                }
             }
         </ul>
     </div>

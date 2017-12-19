@@ -1,17 +1,18 @@
 ﻿@using Chess_club_manager.Helpers
-@model Chess_club_manager.Models.TournamentTour
+@model Chess_club_manager.DTO.Tournament.Tour.TourDetailsDto
 
 @{
-    ViewBag.Title = $"{Model.Number} {Resources.Resource.TRNtour} - {Model.Tournament.Name}";
+    ViewBag.Title = $"{Model.Number} {Resources.Resource.TRNtour} - {Model.TournamentName}";
 }
 
 <div class="row well">
     <h2 style="text-align: center"><i class="fa fa-hourglass"></i> @Resources.Resource.TRNtour</h2>
     <h3 style="text-align: center">@ViewBag.Title</h3>
-    <hr/>
+
+    <hr />
 
     <div class="col-md-6">
-        <table class="table">
+        <table class="table table-bordered">
             <tr>
                 <th>
                     @Resources.Resource.TRNtourStatus
@@ -27,50 +28,63 @@
                     }
                 </td>
             </tr>
-            
+
+            @if (Model.IsCompleted)
+            {
+                <tr>
+                    <th>@Resources.Resource.TRNtourComplatedDate</th>
+                    <td>
+                        @if (Model.CompletedDateTime.HasValue)
+                        {
+                            @Model.CompletedDateTime.Value.ToUIformat()
+                        }
+                    </td>
+                </tr>
+            }
+
             <tr>
                 <th>
                     @Resources.Resource.Tournament
                 </th>
                 <td>
-                    <a href="@Url.Action("Details", "Tournaments", new {id = Model.TournamentId})" class="btn btn-primary btn-xs">@Model.Tournament.Name</a>
+                    <a href="@Url.Action("Details", "Tournaments", new {id = Model.TournamentId})" class="btn btn-primary btn-xs">@Model.TournamentName</a>
                 </td>
             </tr>
 
-            <tr>
-                <th>@Resources.Resource.TRNtourComplatedDate</th>
-                <td>
-                    @if (Model.CompletedDateTime.HasValue)
-                    {
-                        @Model.CompletedDateTime.Value.ToUIformat()
-                    }
-                </td>
-            </tr>
+
         </table>
     </div>
-    
+
     <div class="col-md-6">
         <table class="table table-bordered">
             <thead>
-            <tr>
-                <th>@Resources.Resource.Player</th>
-                <th>@Resources.Resource.TRNgameResult</th>
-                <th>@Resources.Resource.Player</th>
-            </tr>
+                <tr>
+                    <th>@Resources.Resource.Player</th>
+                    <th>@Resources.Resource.TRNgameResult</th>
+                    <th>@Resources.Resource.Player</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var game in Model.Games)
-            {
-                <tr>
-                    <td><a href="@Url.Action("Details", "Players", new {id = game.LeftPlayer.Id})"><b>@game.LeftPlayer.FirstName @game.LeftPlayer.LastName</b></a></td>
-                    <td>@game.Result.ToString()</td>
-                    <td><a href="@Url.Action("Details", "Players", new {id = game.RightPlayer.Id})"><b>@game.RightPlayer.FirstName @game.RightPlayer.LastName</b></a></td>
-                </tr>
-            }
+                @foreach (var game in Model.Games)
+                {
+                    <tr>
+                        <td><a href="@Url.Action("Details", "Players", new {id = game.LeftPlayer.Id})"><b>@game.LeftPlayer.FirstName @game.LeftPlayer.LastName</b></a></td>
+                        <td>@game.Result.ToString()</td>
+                        <td><a href="@Url.Action("Details", "Players", new {id = game.RightPlayer.Id})"><b>@game.RightPlayer.FirstName @game.RightPlayer.LastName</b></a></td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 
+    @if (!Model.IsCompleted && Request.IsAuthenticated)
+    {
+        <hr />
+        <div class="col-md-offset-6">
+            <a href="@Url.Action()" class="btn btn-success col-md-12"><i class="fa fa-pencil-square-o"></i> Edit results</a>
+        </div>
+    }
+
 </div>
 
-<a class="btn btn-warning" href="@Url.Action("Details", "Tournaments", new {id = Model.TournamentId})"><i class="fa fa-arrow-left"></i> @Model.Tournament.Name</a>
+<a class="btn btn-warning" href="@Url.Action("Details", "Tournaments", new {id = Model.TournamentId})"><i class="fa fa-arrow-left"></i> @Model.TournamentName</a>

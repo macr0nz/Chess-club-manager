@@ -228,6 +228,7 @@
     <Compile Include="DTO\Tournament\ManageTournamentPlayersViewDto.cs" />
     <Compile Include="DTO\Tournament\TournamentDto.cs" />
     <Compile Include="DTO\Tournament\TournamentViewDto.cs" />
+    <Compile Include="DTO\Tournament\Tour\TourDetailsDto.cs" />
     <Compile Include="Filters\CultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

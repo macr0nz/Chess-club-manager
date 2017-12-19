@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Tournament;
+using Chess_club_manager.DTO.Tournament.Tour;
 using Chess_club_manager.Filters;
 using Chess_club_manager.Models;
 using Chess_club_manager.Repository;
@@ -132,6 +133,7 @@ namespace Chess_club_manager.Controllers
             var tour = this._toursRepository
                 .All()
                 .Include(x => x.Tournament)
+                .Include(x => x.Tournament.Arbitrators)
                 .Include(x => x.Games)
                 .Include(x => x.Games.Select(g => g.LeftPlayer))
                 .Include(x => x.Games.Select(g => g.RightPlayer))
@@ -142,7 +144,20 @@ namespace Chess_club_manager.Controllers
                 return HttpNotFound();
             }
 
-            return View(tour);
+            var editAccess = tour.Tournament.Arbitrators.Select(x => x.UserName).Contains(User.Identity.Name);
+
+            var tourDetails = new TourDetailsDto
+            {
+                EditAccess = editAccess,
+                IsCompleted = tour.IsCompleted,
+                CompletedDateTime = tour.CompletedDateTime,
+                Games = tour.Games,
+                Number = tour.Number,
+                TournamentName = tour.Tournament.Name,
+                TournamentId = tour.Tournament.Id
+            };
+            
+            return View(tourDetails);
         }
     }
 }
