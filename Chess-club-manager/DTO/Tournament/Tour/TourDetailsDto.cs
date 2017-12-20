@@ -6,6 +6,7 @@ namespace Chess_club_manager.DTO.Tournament.Tour
 {
     public class TourDetailsDto
     {
+        public int Id { get; set; }
         public int TournamentId { get; set; }
         public string TournamentName { get; set; }
 

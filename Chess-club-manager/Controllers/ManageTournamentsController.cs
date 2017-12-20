@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Tournament;
+using Chess_club_manager.DTO.Tournament.Tour;
 using Chess_club_manager.Filters;
 using Chess_club_manager.Models;
 using Chess_club_manager.Repository;
@@ -399,6 +400,66 @@ namespace Chess_club_manager.Controllers
 
             return RedirectToAction("ManageArbitrators", new {id = tournament.Id});
         }
+
+
+        [HttpGet]
+        public ActionResult EditTour(int id)
+        {
+            var tour = _unitOfWork.ToursRepository.All()
+                .AsNoTracking()
+                .Include(x => x.Tournament.Arbitrators)
+                .SingleOrDefault(x => x.Id == id);
+
+            if (tour == null)
+            {
+                return HttpNotFound("Tour not found!");
+            }
+
+            var currentUserName = User.Identity.Name;
+            var access = tour.Tournament.Arbitrators.Select(x => x.UserName).Contains(currentUserName);
+
+            if (!access || tour.IsCompleted)
+            {
+                return RedirectToAction("TourDetails", "Tournaments", new {id = tour.Id});
+            }
+
+            var tourGames = _unitOfWork.TourGamesRepository.All()
+                .AsNoTracking()
+                .Include(x => x.LeftPlayer)
+                .Include(x => x.RightPlayer)
+                .Where(x => x.TourId == tour.Id)
+                .AsEnumerable()
+                .Select(x => new TourGameLightDto
+                {
+                    Id = x.Id,
+                    LeftPlayerId = x.LeftPlayerId,
+                    LeftPlayerName = $"{x.LeftPlayer.FirstName} {x.LeftPlayer.LastName}",
+                    RightPlayerId = x.RightPlayerId,
+                    RightPlayerName = $"{x.RightPlayer.FirstName} {x.RightPlayer.LastName}",
+                    Result = x.Result,
+                    TourId = x.TourId
+                })
+                .ToList();
+                
+
+            var editTour = new TourEditDto
+            {
+                Id = tour.Id,
+                Number = tour.Number,
+                TournamentName = tour.Tournament.Name,
+                TournamentId = tour.Tournament.Id,
+                Games = tourGames
+            };
+
+
+            return View(editTour);
+        }
+
+        //[HttpPost]
+        //public ActionResult EditTour(int id)
+        //{
+        //    return View();
+        //}
     }
 
 

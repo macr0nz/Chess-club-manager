@@ -345,4 +345,7 @@
   <data name="TRNgameResult" xml:space="preserve">
     <value>Результат игры</value>
   </data>
+  <data name="TourEditResults" xml:space="preserve">
+    <value>Редактировать результаты</value>
+  </data>
 </root>

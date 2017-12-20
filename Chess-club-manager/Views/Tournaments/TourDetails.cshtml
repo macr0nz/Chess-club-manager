@@ -81,7 +81,7 @@
     {
         <hr />
         <div class="col-md-offset-6">
-            <a href="@Url.Action()" class="btn btn-success col-md-12"><i class="fa fa-pencil-square-o"></i> Edit results</a>
+            <a href="@Url.Action("EditTour", "ManageTournaments", new {id = Model.Id})" class="btn btn-success col-md-12"><i class="fa fa-pencil-square-o"></i> @Resources.Resource.TourEditResults</a>
         </div>
     }
 

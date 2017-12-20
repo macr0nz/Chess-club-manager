@@ -5,11 +5,6 @@
     ViewBag.Title = Model.Name;
 }
 
-@*<script>
-    setTimeout(function () {
-        location.reload();
-    }, @Model.PageReloadDelayTimeMs);
-</script>*@
 
 
 <div class="row well">
@@ -176,7 +171,8 @@
             <td>
                 @if (Model.AccessPassed)
                 {
-                    <a href="@Url.Action("Edit", "ManageTournaments", new {id = Model.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
+                    //disabled until method will be created
+                    <a href="@Url.Action("Edit", "ManageTournaments", new {id = Model.Id})" class="btn btn-default btn-xs disabled"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
                     <a href="@Url.Action("ManageArbitrators", "ManageTournaments", new {id = Model.Id})" class="btn btn-default btn-xs"><i class="fa fa-user"></i> @Resources.Resource.TRNmanageArbitrators</a>
                 }
              </td>

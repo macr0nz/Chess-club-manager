@@ -1,0 +1,42 @@
+﻿@model Chess_club_manager.DTO.Tournament.Tour.TourEditDto
+
+@{
+    ViewBag.Title = $"{Model.Number} {Resources.Resource.TRNtour} - {Model.TournamentName}";
+}
+
+<div class="row well">
+
+    <h2 style="text-align: center"><i class="fa fa-hourglass"></i> @Resources.Resource.TRNtour</h2>
+    <h3 style="text-align: center">@ViewBag.Title</h3>
+
+    <hr />
+
+    <div class="col-md-8">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>@Resources.Resource.Player</th>
+                <th>@Resources.Resource.TRNgameResult</th>
+                <th>@Resources.Resource.Player</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var game in Model.Games)
+            {
+                <tr>
+                    <td><a href="@Url.Action("Details", "Players", new {id = game.LeftPlayerId})"><b>@game.LeftPlayerName</b></a></td>
+                    <td>@Html.EnumDropDownListFor(x => game.Result, new { @class = "form-control" })</td>
+                    <td><a href="@Url.Action("Details", "Players", new {id = game.RightPlayerId})"><b>@game.RightPlayerName</b></a></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="col-md-6">
+        <a class="btn btn-warning" href="@Url.Action("TourDetails", "Tournaments", new {id = Model.Id})"><i class="fa fa-arrow-left"></i> @Model.Number @Resources.Resource.TRNtour</a>
+        <a class="btn btn-warning" href="@Url.Action("Details", "Tournaments", new {id = Model.TournamentId})"><i class="fa fa-arrow-left"></i> @Model.TournamentName</a>
+        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @Resources.Resource.Save</button>
+    </div>
+</div>
+

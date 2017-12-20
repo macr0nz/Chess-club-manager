@@ -148,6 +148,7 @@ namespace Chess_club_manager.Controllers
 
             var tourDetails = new TourDetailsDto
             {
+                Id = tour.Id,
                 EditAccess = editAccess,
                 IsCompleted = tour.IsCompleted,
                 CompletedDateTime = tour.CompletedDateTime,
@@ -159,5 +160,7 @@ namespace Chess_club_manager.Controllers
             
             return View(tourDetails);
         }
+
+        
     }
 }
