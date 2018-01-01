@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Chess_club_manager.DTO.Players
 {
@@ -14,6 +15,7 @@ namespace Chess_club_manager.DTO.Players
         public DateTime? BirthDay { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public string Info { get; set; }
 
         [EmailAddress]

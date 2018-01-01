@@ -15,8 +15,9 @@ namespace Chess_club_manager.Models
         public string Location { get; set; }
         public bool IsPrivate { get; set; }
         public int MaxPlayersCount { get; set; }
-        public int MaxToursCount { get; set; }
         public string Info { get; set; }
+
+        public int MaxToursCount { get; set; }
 
         public TournamentType Format { get; set; }
 

@@ -220,6 +220,7 @@
     <Compile Include="DTO\Players\ViewManagePlayerDto.cs" />
     <Compile Include="DTO\Players\ViewPlayerDto.cs" />
     <Compile Include="DTO\Tournament\CreateTournamentDto.cs" />
+    <Compile Include="DTO\Tournament\EditTournamentDto.cs" />
     <Compile Include="DTO\Tournament\HomePageTournamentView.cs" />
     <Compile Include="DTO\Tournament\ManageTournamentArbitratorsViewDto.cs" />
     <Compile Include="DTO\Tournament\ManageTournamentDto.cs" />
@@ -381,6 +382,7 @@
     <Content Include="Views\Logs\Index.cshtml" />
     <Content Include="Views\Tournaments\TourDetails.cshtml" />
     <Content Include="Views\ManageTournaments\EditTour.cshtml" />
+    <Content Include="Views\ManageTournaments\EditTournament.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

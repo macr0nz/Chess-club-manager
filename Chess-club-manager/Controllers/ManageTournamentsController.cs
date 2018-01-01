@@ -455,6 +455,73 @@ namespace Chess_club_manager.Controllers
             return View(editTour);
         }
 
+        [HttpGet]
+        public ActionResult EditTournament(int id)
+        {
+            var tournament = this._unitOfWork.TournamentsRepository
+                .All().SingleOrDefault(x => x.Id == id);
+
+            if (tournament == null)
+            {
+                return HttpNotFound("Tournament not found!");
+            }
+
+            var model = new EditTournamentDto
+            {
+                Id = tournament.Id,
+                Name = tournament.Name,
+                Info = tournament.Info,
+                Location = tournament.Location,
+                StartDate = tournament.Start,
+                StartTime = tournament.Start,
+                FinishDate = tournament.Finish,
+                FinishTime = tournament.Finish,
+                IsOfficial = tournament.IsOfficial,
+                IsPrivate = tournament.IsPrivate,
+                TimeControl = tournament.TimeControl,
+                MaxPlayersCount = tournament.MaxPlayersCount,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditTournament(EditTournamentDto model)
+        {
+            var tournament = this._unitOfWork.TournamentsRepository
+                .All().SingleOrDefault(x => x.Id == model.Id);
+
+            if (tournament == null)
+            {
+                return HttpNotFound("Tournament not found!");
+            }
+
+            tournament.Name = model.Name;
+            tournament.Info = model.Info;
+            tournament.Location = model.Location;
+
+            if (model.StartDate != DateTime.MinValue)
+            {
+                tournament.Start = model.StartDate.Add(model.StartTime.TimeOfDay);
+                //add model state errors
+            }
+
+            if (model.FinishDate != null)
+            {
+                var finishTimeSpan = model.FinishTime?.TimeOfDay;
+                tournament.Finish = finishTimeSpan == null ? model.FinishDate : model.FinishDate?.Add(finishTimeSpan.Value);
+            }
+            
+            tournament.IsOfficial = model.IsOfficial;
+            tournament.IsPrivate = model.IsPrivate;
+            tournament.TimeControl = model.TimeControl;
+            tournament.MaxPlayersCount = model.MaxPlayersCount;
+
+            this._unitOfWork.TournamentsRepository.Update(tournament);
+
+            return RedirectToAction("Details", "Tournaments", new { id = tournament.Id });
+        }
+
         //[HttpPost]
         //public ActionResult EditTour(int id)
         //{

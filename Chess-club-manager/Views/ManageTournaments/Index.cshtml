@@ -112,7 +112,7 @@
             </td>
             <td>
                 <a href="@Url.Action("Details", "Tournaments", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> @Resources.Resource.Details</a>
-                <a href="@Url.Action("Edit", "ManageTournaments", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
+                <a href="@Url.Action("EditTournament", "ManageTournaments", new {id = item.Id})" class="btn btn-default btn-xs"><i class="fa fa-cog"></i> @Resources.Resource.Edit</a>
             </td>
         </tr>
     }

@@ -14,7 +14,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Пользователь</h4>
+        <h4>@Resources.Resource.User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -102,7 +102,6 @@
             <b class="control-label col-md-2"><label class="label label-info">User</label></b>
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.IsUser, new { @class = "form-control" })
-                @*@Html.EditorFor(model => model.IsUser, new { @class = "form-control" })*@
             </div>
         </div>
 
