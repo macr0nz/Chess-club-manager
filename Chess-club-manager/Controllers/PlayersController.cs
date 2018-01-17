@@ -38,7 +38,8 @@ namespace Chess_club_manager.Controllers
                     Title = x.Title,
                     CurrentRating = x.CurrentRating,
                     BirthDay = x.BirthDay,
-                    Info = x.Info
+                    Info = x.Info,
+                    ImagePath = x.ImagePath
                 }).ToList();
 
             return View(allPlayers);
@@ -64,7 +65,8 @@ namespace Chess_club_manager.Controllers
                 UserName = x.UserName,
                 PhoneNumber = x.PhoneNumber,
                 Email = x.Email,
-                Roles = x.Roles
+                Roles = x.Roles,
+                ImagePath = x.ImagePath
             }).SingleOrDefault();
 
             if (player == null)

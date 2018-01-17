@@ -13,7 +13,7 @@
 
         <div class="media">
             <div class="media-left">
-                <img src="~/Resources/Images/user.png" class="media-object" style="width:150px" alt="User Avatar">
+                <img src="@Model.ImagePath" class="media-object" style="width:150px" alt="User Avatar">
             </div>
             <div class="media-body">
                 <div class="media-heading">
@@ -88,7 +88,7 @@
             
             <a href="@Url.Action("Edit", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-cogs"></i> <b>Редактировать профиль</b></a>
             
-            <a href="@Url.Action("Index", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-address-card"></i> <b>Изображение Пользователя</b></a>
+            <a href="@Url.Action("EditUserImage", "Manage")" class="list-group-item btn btn-default btn-sm"><i class="fa fa-address-card"></i> <b>Изображение Пользователя</b></a>
 
         </div>
     </div>

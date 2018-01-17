@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Manage;
 using Chess_club_manager.DTO.Players;
 using Chess_club_manager.Filters;
+using Chess_club_manager.Helpers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -88,6 +90,7 @@ namespace Chess_club_manager.Controllers
             model.CurrentRating = user.CurrentRating;
             model.BirthDay = user.BirthDay;
             model.Info = user.Info;
+            model.ImagePath = user.ImagePath;
 
             model.Roles = user.Roles;
 
@@ -405,10 +408,70 @@ namespace Chess_club_manager.Controllers
 
                 return RedirectToAction("Index");
             }
+
             return View(model);
-
-
         }
+
+        public async Task<ActionResult> EditUserImage()
+        {
+            var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+            var model = new EditUserImageDto
+            {
+                ImagePath = user.ImagePath,
+                UserName = $"{user.FirstName} {user.LastName}",
+                UserId = user.Id
+            };
+
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditUserImage(HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+
+                var imageName = $"[{User.Identity.Name}]-[{DateTime.Now:yy.mm.dd.hh.mm.ss}]-{fileName}";
+
+                var serverPath = Path.Combine(Server.MapPath("~/Resources/Images/Users"), imageName);
+                
+                file.SaveAs(serverPath);
+
+                //using (MemoryStream ms = new MemoryStream())
+                //{
+                //    file.InputStream.CopyTo(ms);
+                //    byte[] array = ms.GetBuffer();
+                //}
+
+                var imageVirtualPath = $"/Resources/Images/Users/{imageName}";
+
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+
+                user.ImagePath = imageVirtualPath;
+
+                await UserManager.UpdateAsync(user);
+
+            }
+            
+            return RedirectToAction("EditUserImage");
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> DeleteUserAvatar()
+        {
+            var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+            user.ImagePath = "/Resources/Images/user.png";
+
+            await UserManager.UpdateAsync(user);
+
+            return RedirectToAction("EditUserImage");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -90,6 +90,7 @@ namespace Chess_club_manager.Controllers
                     //Info = x.Info,
                     Title = x.Title,
                     CurrentRating = x.CurrentRating,
+                    ImagePath = x.ImagePath
                 }).ToList();
             
             return PartialView(players);

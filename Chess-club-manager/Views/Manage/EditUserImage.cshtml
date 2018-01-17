@@ -1,0 +1,56 @@
+﻿@model Chess_club_manager.DTO.Manage.EditUserImageDto
+
+
+@{
+    ViewBag.Title = "Edit User Image";
+}
+
+<div class="row">
+    <div class="col-md-10 well">
+        <h3>@Resources.Resource.CurrentImage</h3>
+        <hr />
+
+        <div class="media">
+            <div class="media-left">
+                <img src="@Model.ImagePath" class="media-object" style="width:150px" alt="User Avatar">
+            </div>
+            <div class="media-body">
+                <div class="media-heading">
+                    <h3>
+                        <b>
+                            <a href="@Url.Action("Details", "Players", new {id = Model.UserId})"><b>@Model.UserName</b></a>
+                        </b>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <p></p>
+        <a href="@Url.Action("Index", "Manage")" class="btn btn-warning"><i class="fa fa-arrow-left"></i> @Resources.Resource.BackToProfile</a>
+    </div>
+    
+    <div class="col-md-10 well">
+        <h3 >@Resources.Resource.NewImage</h3>
+        <hr />
+
+        @using (Html.BeginForm("EditUserImage", "Manage", FormMethod.Post, new {enctype = "multipart/form-data"}))
+        {
+            @*<label for="file">@Resources.Resource.SelectFile</label>*@
+
+            <label class="btn btn-default" for="file">
+                <input id="file" type="file" style="display: none;" name="file">
+                <i class="fa fa-file"> @Resources.Resource.SelectFile</i>
+            </label>
+
+            <input type="submit" value="@Resources.Resource.Upload" class="btn btn-success"/>
+
+            
+        }
+    </div>
+    
+    <div class="col-md-10 well">
+        <h3 >@Resources.Resource.DeleteImage</h3>
+        <hr />
+        <a href="@Url.Action("DeleteUserAvatar", "Manage")" class="btn btn-danger"><i class="fa fa-trash"></i> @Resources.Resource.DeleteImage</a>
+    </div>
+</div>
+

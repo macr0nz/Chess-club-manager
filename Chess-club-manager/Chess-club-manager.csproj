@@ -209,6 +209,7 @@
     <Compile Include="DTO\Arbitrators\EditArbitratorDto.cs" />
     <Compile Include="DTO\Arbitrators\ViewArbitratorDto.cs" />
     <Compile Include="DTO\MailSettings\MailSettingsDto.cs" />
+    <Compile Include="DTO\Manage\EditUserImageDto.cs" />
     <Compile Include="DTO\Manage\EditUserSelfDto.cs" />
     <Compile Include="DTO\News\EditNewsDto.cs" />
     <Compile Include="DTO\News\CreateNewsDto.cs" />
@@ -262,7 +263,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ans.ico" />
     <Content Include="App_Data\ChessClubManagerTestDb.mdf" />
     <Content Include="App_Data\ChessClubManagerTestDb_log.ldf">
       <DependentUpon>ChessClubManagerTestDb.mdf</DependentUpon>
@@ -286,7 +286,6 @@
     <Content Include="Content\custombootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Resources\Images\ans.ico" />
     <Content Include="Resources\Images\chart.png" />
     <Content Include="Resources\Images\fullLogo.png" />
     <Content Include="Resources\Images\ico_png.ico" />
@@ -383,6 +382,7 @@
     <Content Include="Views\Tournaments\TourDetails.cshtml" />
     <Content Include="Views\ManageTournaments\EditTour.cshtml" />
     <Content Include="Views\ManageTournaments\EditTournament.cshtml" />
+    <Content Include="Views\Manage\EditUserImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -409,7 +409,9 @@
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\Images\Users\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

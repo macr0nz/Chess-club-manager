@@ -348,4 +348,22 @@
   <data name="TourEditResults" xml:space="preserve">
     <value>Редактировать результаты</value>
   </data>
+  <data name="BackToProfile" xml:space="preserve">
+    <value>Назад к профилю</value>
+  </data>
+  <data name="CurrentImage" xml:space="preserve">
+    <value>Текущее изображение</value>
+  </data>
+  <data name="DeleteImage" xml:space="preserve">
+    <value>Удалить изображение</value>
+  </data>
+  <data name="NewImage" xml:space="preserve">
+    <value>Загрузка нового изображения</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Выберите файл</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Загрузить</value>
+  </data>
 </root>

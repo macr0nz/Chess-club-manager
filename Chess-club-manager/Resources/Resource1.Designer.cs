@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Назад к профилю.
+        /// </summary>
+        public static string BackToProfile {
+            get {
+                return ResourceManager.GetString("BackToProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отмена.
         /// </summary>
         public static string Cancel {
@@ -147,6 +156,24 @@ namespace Resources {
         public static string CreatedDate {
             get {
                 return ResourceManager.GetString("CreatedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Текущее изображение.
+        /// </summary>
+        public static string CurrentImage {
+            get {
+                return ResourceManager.GetString("CurrentImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалить изображение.
+        /// </summary>
+        public static string DeleteImage {
+            get {
+                return ResourceManager.GetString("DeleteImage", resourceCulture);
             }
         }
         
@@ -295,6 +322,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Загрузка нового изображения.
+        /// </summary>
+        public static string NewImage {
+            get {
+                return ResourceManager.GetString("NewImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Новости.
         /// </summary>
         public static string News {
@@ -417,6 +453,15 @@ namespace Resources {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите файл.
+        /// </summary>
+        public static string SelectFile {
+            get {
+                return ResourceManager.GetString("SelectFile", resourceCulture);
             }
         }
         
@@ -723,6 +768,15 @@ namespace Resources {
         public static string UnOfficial {
             get {
                 return ResourceManager.GetString("UnOfficial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузить.
+        /// </summary>
+        public static string Upload {
+            get {
+                return ResourceManager.GetString("Upload", resourceCulture);
             }
         }
         

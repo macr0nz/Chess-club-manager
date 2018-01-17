@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace Chess_club_manager.Helpers
 {
     public static class DateTimeHelper
     {
+        
         public static string ToUIformat(this DateTime? dateTime)
         {
             if (dateTime == null)
@@ -35,5 +37,6 @@ namespace Chess_club_manager.Helpers
 
             return dateTimeNotNull.ToString("dd-MMM-yyyy");
         }
+        
     }
 }

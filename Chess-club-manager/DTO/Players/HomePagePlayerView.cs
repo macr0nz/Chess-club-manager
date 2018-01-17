@@ -13,6 +13,7 @@ namespace Chess_club_manager.DTO.Players
         public string Title { get; set; }
         public int CurrentRating { get; set; }
         public string Info { get; set; }
+        public string ImagePath { get; set; }
 
         //public ICollection<Tournament> Tournaments { get; set; }
 

@@ -13,7 +13,7 @@
     @foreach (var player in Model)
     {
         <tr>
-            <td><img src="~/Resources/Images/user.png" class="media-object" style="width: 40px"></td>
+            <td><img src="@player.ImagePath" class="media-object" style="width: 40px"></td>
             <td><a href="@Url.Action("Details", "Players", new {id = player.Id})"><b>@player.FirstName @player.LastName</b></a></td>
             <td>@player.CurrentRating</td>
             <td>@player.Title</td>

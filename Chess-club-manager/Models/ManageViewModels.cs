@@ -24,6 +24,7 @@ namespace Chess_club_manager.Models
         public string Title { get; set; }
         public int CurrentRating { get; set; }
         public string Info { get; set; }
+        public string ImagePath { get; set; }
 
         public ICollection<IdentityUserRole> Roles { get; set; }
 

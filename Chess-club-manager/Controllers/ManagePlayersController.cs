@@ -104,7 +104,10 @@ namespace Chess_club_manager.Controllers
                     Email = model.Email,
                     BirthDay = model.BirthDay,
                     Info = model.Info,
-                    PhoneNumber = model.PhoneNumber
+                    PhoneNumber = model.PhoneNumber,
+
+                    //set default user image
+                    ImagePath = "/Resources/Images/user.png"
                 };
 
                 //default password if no email

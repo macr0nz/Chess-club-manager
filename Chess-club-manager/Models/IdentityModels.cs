@@ -22,6 +22,7 @@ namespace Chess_club_manager.Models
 
         public int CurrentRating { get; set; }
         public string Info { get; set; }
+        public string ImagePath { get; set; }
 
         public ICollection<Tournament> CreatedTournaments { get; set; }
         public ICollection<Tournament> PlayedTournaments { get; set; }
