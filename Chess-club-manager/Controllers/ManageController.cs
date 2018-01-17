@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Chess_club_manager.DataModel.Enum;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Manage;
 using Chess_club_manager.DTO.Players;
@@ -432,28 +433,34 @@ namespace Chess_club_manager.Controllers
         {
             if (file != null)
             {
-                var fileName = Path.GetFileName(file.FileName);
+                try
+                {
+                    var fileName = Path.GetFileName(file.FileName);
 
-                var imageName = $"[{User.Identity.Name}]-[{DateTime.Now:yy.mm.dd.hh.mm.ss}]-{fileName}";
+                    var imageName = $"[{User.Identity.Name}]-[{DateTime.Now:yy.mm.dd.hh.mm.ss}]-{fileName}";
 
-                var serverPath = Path.Combine(Server.MapPath("~/Resources/Images/Users"), imageName);
-                
-                file.SaveAs(serverPath);
+                    var serverPath = Path.Combine(Server.MapPath("~/Resources/Images/Users"), imageName);
 
-                //using (MemoryStream ms = new MemoryStream())
-                //{
-                //    file.InputStream.CopyTo(ms);
-                //    byte[] array = ms.GetBuffer();
-                //}
+                    file.SaveAs(serverPath);
 
-                var imageVirtualPath = $"/Resources/Images/Users/{imageName}";
+                    //using (MemoryStream ms = new MemoryStream())
+                    //{
+                    //    file.InputStream.CopyTo(ms);
+                    //    byte[] array = ms.GetBuffer();
+                    //}
 
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    var imageVirtualPath = $"/Resources/Images/Users/{imageName}";
 
-                user.ImagePath = imageVirtualPath;
+                    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-                await UserManager.UpdateAsync(user);
+                    user.ImagePath = imageVirtualPath;
 
+                    await UserManager.UpdateAsync(user);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationLogger.Log($"Error updating {User.Identity.Name}'s image. Message: {ex.Message}", LogType.Error);
+                }
             }
             
             return RedirectToAction("EditUserImage");

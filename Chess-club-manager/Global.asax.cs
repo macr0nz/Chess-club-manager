@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Chess_club_manager.BackgroundJobs;
+using Chess_club_manager.DataModel.Entity;
+using Chess_club_manager.DataModel.Enum;
+using Chess_club_manager.Repository;
 
 namespace Chess_club_manager
 {
@@ -20,6 +23,15 @@ namespace Chess_club_manager
 
             //tournament start background job 
             TournamentStartSheduler.Start();
+
+            using (var unit = new ChessClubManagerUnitOfWork())
+            {
+                unit.LogsRepository.Add(new Log
+                {
+                    Type = LogType.Info,
+                    Message = $"Aplication Started at {DateTime.Now}"
+                });
+            }
         }
     }
 }
