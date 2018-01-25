@@ -22,7 +22,7 @@ namespace Chess_club_manager.BackgroundJobs
 
                 var tournamentsToStart = unitOfWork.TournamentsRepository
                     .All()
-                    .Where(x => !x.IsStarted && (x.Start <= currentDateTime || x.Start <= DbFunctions.AddSeconds(currentDateTime, 5)))
+                    .Where(x => !x.IsStarted && (x.Start <= currentDateTime || x.Start <= DbFunctions.AddSeconds(currentDateTime, 10)))
                     .Include(x => x.Players)
                     .ToList();
 
@@ -34,63 +34,12 @@ namespace Chess_club_manager.BackgroundJobs
                 {
                     tournament.IsStarted = true;
 
-                    //generate tours for current tour
+                    //generate tours for current tournament
                     switch (tournament.Format)
                     {
                         case TournamentType.Round:
                         {
-                            var tournamentsCount = 0;
-                            if (tournament.Players.Count > 0)
-                            {
-                                if (tournament.Players.Count % 2 == 0)
-                                {
-                                    tournamentsCount = tournament.Players.Count - 1;
-                                }
-                                else
-                                {
-                                    tournamentsCount = tournament.Players.Count;
-                                }
-                            }
-                            tournament.MaxToursCount = tournamentsCount;
-
-                            //TEST ONLY
-                            var rand = new Random();
-                            var players = tournament.Players.ToList();
-                            //TEST ONLY
-
-                            if (tournament.Tours == null)
-                            {
-                                tournament.Tours = new List<TournamentTour>(tournamentsCount);
-                            }
-
-                            var gamesInATour = players.Count / 2;
-
-
-                            for (var i = 0; i < tournamentsCount; i++)
-                            {
-                                var tour = new TournamentTour();
-
-                                var games = new List<TourGame>(gamesInATour);
-
-                                    
-                                for (var j = 0; j < gamesInATour; j++)
-                                {
-                                    games.Add(new TourGame
-                                    {
-                                        //TEST random players!
-                                        LeftPlayer = players[rand.Next(players.Count)],
-                                        RightPlayer = players[rand.Next(players.Count)],
-                                        Tour = tour
-                                    });
-                                }
-
-                                tour.Games = games;
-                                tour.Tournament = tournament;
-                                tour.IsCompleted = false;
-                                tour.Number = i+1;
-                                
-                                tournament.Tours.Add(tour);
-                            }
+                            GenerateRoundTypeTours(tournament);
 
                         } break;
 
@@ -120,5 +69,122 @@ namespace Chess_club_manager.BackgroundJobs
             }
         }
 
+        private void GenerateRoundTypeTours(Tournament tournament)
+        {
+            var playersCount = tournament.Players.Count;
+            var players = tournament.Players.ToList();
+            var toursCount = RoundHardcodeTable.GetToursCountByPlayers(playersCount);
+            
+            tournament.MaxToursCount = toursCount;
+
+            if(toursCount == 0) { return; }
+
+            if (tournament.Tours == null)
+            {
+                tournament.Tours = new List<TournamentTour>(toursCount);
+            }
+
+            //if players are 2 -> make 1 tour
+            if (toursCount == 1)
+            {
+                var tour1 = new TournamentTour
+                {
+                    Tournament = tournament,
+                    Number = 1,
+                };
+
+                var games1 = new List<TourGame>
+                {
+                    new TourGame
+                    {
+                        Tour = tour1,
+                        LeftPlayer = tournament.Players.FirstOrDefault(),
+                        RightPlayer = tournament.Players.LastOrDefault(),
+                    }
+                };
+
+                tour1.Games = games1;
+
+                tournament.Tours.Add(tour1);
+
+                return;
+            }
+
+            //if players are > 2
+
+
+            //for (var i = 1; i <= toursCount; i++)
+            //{
+            //    var tour = new TournamentTour
+            //    {
+            //        Tournament = tournament,
+            //        Number = i
+            //    };
+
+            //    var games = new List<TourGame>();
+
+            //    //var gamesIndexes = RoundHardcodeTable.GetGamesIndexesByTourNumber(tourNumber: tour.Number, toursCount: toursCount);
+
+            //    //foreach (var index in gamesIndexes)
+            //    //{
+            //    //    games.Add(new TourGame
+            //    //    {
+            //    //        Tour = tour,
+            //    //        LeftPlayer = players[index.First],
+            //    //        RightPlayer = players[index.Second]
+            //    //    });
+            //    //}
+
+            //    tour.Games = games;
+
+            //    tournament.Tours.Add(tour);
+            //}
+
+
+            /////////////////////////////////////////
+            //TEST ONLY
+            var rand = new Random();
+            //var players = tournament.Players.ToList();
+            //TEST ONLY
+
+            
+
+            var gamesInATour = players.Count / 2;
+
+
+            for (var i = 0; i < toursCount; i++)
+            {
+                var tour = new TournamentTour();
+
+                var games = new List<TourGame>(gamesInATour);
+
+
+                for (var j = 0; j < gamesInATour; j++)
+                {
+                    games.Add(new TourGame
+                    {
+                        //TEST random players!
+                        LeftPlayer = players[rand.Next(players.Count)],
+                        RightPlayer = players[rand.Next(players.Count)],
+                        Tour = tour
+                    });
+                }
+
+                tour.Games = games;
+                tour.Tournament = tournament;
+                tour.IsCompleted = false;
+                tour.Number = i + 1;
+
+                tournament.Tours.Add(tour);
+            }
+        }
+
+        private void GenerateSwissTypeTours(Tournament tournament)
+        {
+        }
+
+        private void GenerateOlympicTypeTours(Tournament tournament)
+        {
+        }
     }
 }

@@ -34,5 +34,7 @@ namespace Chess_club_manager.Models
 
         //results
         public ICollection<TournamentTour> Tours { get; set; }
+        
+        //prob result table link
     }
 }

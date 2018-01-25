@@ -18,8 +18,9 @@ namespace Chess_club_manager.Models
 
     public enum GameResult
     {
-        LeftWin = 1,
-        RightWin = 2,
-        Draw = 3
+        Default = 0,
+            LeftWin = 1,
+                RightWin = 2,
+                    Draw = 3
     }
 }
