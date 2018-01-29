@@ -71,9 +71,11 @@ namespace Chess_club_manager.BackgroundJobs
 
         private void GenerateRoundTypeTours(Tournament tournament)
         {
-            var playersCount = tournament.Players.Count;
             var players = tournament.Players.ToList();
-            var toursCount = RoundHardcodeTable.GetToursCountByPlayers(playersCount);
+            var playersCount = players.Count;
+
+            //tours count = N-1 (even players) || N (!even)
+            var toursCount = playersCount.IsEven() ? playersCount - 1 : playersCount;
             
             tournament.MaxToursCount = toursCount;
 
@@ -111,34 +113,47 @@ namespace Chess_club_manager.BackgroundJobs
             }
 
             //if players are > 2
+            
+            //randomize player's indexes?
+
+            for (var i = 1; i <= toursCount; i++)
+            {
+                var tour = new TournamentTour
+                {
+                    Number = i,
+                    Tournament = tournament,
+                    Games = new List<TourGame>()
+                };
+
+                //get games
+                var columnsCount = playersCount.IsEven() ? playersCount / 2 : (playersCount + 1) / 2;
+                var row1 = players.GetRange(0, columnsCount);
+                var row2 = players.GetRange(columnsCount, players.Count);
+                if (!playersCount.IsEven())
+                {
+                    row2.Add(null);
+                }
+                row2.Reverse();
+
+                for (var col = 0; col < columnsCount; col++)
+                {
+                    tour.Games.Add(new TourGame
+                    {
+                        Tour = tour,
+                        LeftPlayer = row1[col],
+                        RightPlayer = row2[col]
+                    });
+                }
+                
+                tournament.Tours.Add(tour);
+
+                //shift players index
+                //1 2 3  =>  1 6 2
+                //6 5 4      5 4 3
 
 
-            //for (var i = 1; i <= toursCount; i++)
-            //{
-            //    var tour = new TournamentTour
-            //    {
-            //        Tournament = tournament,
-            //        Number = i
-            //    };
-
-            //    var games = new List<TourGame>();
-
-            //    //var gamesIndexes = RoundHardcodeTable.GetGamesIndexesByTourNumber(tourNumber: tour.Number, toursCount: toursCount);
-
-            //    //foreach (var index in gamesIndexes)
-            //    //{
-            //    //    games.Add(new TourGame
-            //    //    {
-            //    //        Tour = tour,
-            //    //        LeftPlayer = players[index.First],
-            //    //        RightPlayer = players[index.Second]
-            //    //    });
-            //    //}
-
-            //    tour.Games = games;
-
-            //    tournament.Tours.Add(tour);
-            //}
+            }
+            
 
 
             /////////////////////////////////////////
