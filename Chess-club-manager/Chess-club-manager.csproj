@@ -237,7 +237,7 @@
     </Compile>
     <Compile Include="Helpers\ApplicationLogger.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
-    <Compile Include="Helpers\RoundHardcodeTable.cs" />
+    <Compile Include="Helpers\IntHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
