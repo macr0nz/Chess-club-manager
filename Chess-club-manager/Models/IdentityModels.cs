@@ -20,6 +20,8 @@ namespace Chess_club_manager.Models
         public DateTime? BirthDay { get; set; }
         public string Title { get; set; }
 
+        //public DateTime? LastLogin { get; set; }
+
         public int CurrentRating { get; set; }
         public string Info { get; set; }
         public string ImagePath { get; set; }
