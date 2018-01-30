@@ -127,8 +127,9 @@ namespace Chess_club_manager.BackgroundJobs
 
                 //get games
                 var columnsCount = playersCount.IsEven() ? playersCount / 2 : (playersCount + 1) / 2;
+
                 var row1 = players.GetRange(0, columnsCount);
-                var row2 = players.GetRange(columnsCount, players.Count);
+                var row2 = players.GetRange(columnsCount, players.Count - row1.Count);
                 if (!playersCount.IsEven())
                 {
                     row2.Add(null);
@@ -137,12 +138,15 @@ namespace Chess_club_manager.BackgroundJobs
 
                 for (var col = 0; col < columnsCount; col++)
                 {
-                    tour.Games.Add(new TourGame
+                    if (row1[col] != null && row2[col] != null)
                     {
-                        Tour = tour,
-                        LeftPlayer = row1[col],
-                        RightPlayer = row2[col]
-                    });
+                        tour.Games.Add(new TourGame
+                        {
+                            Tour = tour,
+                            LeftPlayer = row1[col],
+                            RightPlayer = row2[col]
+                        });
+                    }
                 }
                 
                 tournament.Tours.Add(tour);
@@ -150,48 +154,14 @@ namespace Chess_club_manager.BackgroundJobs
                 //shift players index
                 //1 2 3  =>  1 6 2
                 //6 5 4      5 4 3
-
+                var row2First = row2.First();
+                row1.Insert(1, row2First);
+                row2.Remove(row2First);
+                var row1Last = row1.Last();
+                row2.Add(row1Last);
 
             }
             
-
-
-            /////////////////////////////////////////
-            //TEST ONLY
-            var rand = new Random();
-            //var players = tournament.Players.ToList();
-            //TEST ONLY
-
-            
-
-            var gamesInATour = players.Count / 2;
-
-
-            for (var i = 0; i < toursCount; i++)
-            {
-                var tour = new TournamentTour();
-
-                var games = new List<TourGame>(gamesInATour);
-
-
-                for (var j = 0; j < gamesInATour; j++)
-                {
-                    games.Add(new TourGame
-                    {
-                        //TEST random players!
-                        LeftPlayer = players[rand.Next(players.Count)],
-                        RightPlayer = players[rand.Next(players.Count)],
-                        Tour = tour
-                    });
-                }
-
-                tour.Games = games;
-                tour.Tournament = tournament;
-                tour.IsCompleted = false;
-                tour.Number = i + 1;
-
-                tournament.Tours.Add(tour);
-            }
         }
 
         private void GenerateSwissTypeTours(Tournament tournament)
