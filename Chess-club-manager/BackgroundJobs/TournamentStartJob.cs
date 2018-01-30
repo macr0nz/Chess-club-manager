@@ -113,9 +113,22 @@ namespace Chess_club_manager.BackgroundJobs
             }
 
             //if players are > 2
-            
+
             //randomize player's indexes?
 
+            //get games
+            //prepare rows
+            var columnsCount = playersCount.IsEven() ? playersCount / 2 : (playersCount + 1) / 2;
+
+            var row1 = players.GetRange(0, columnsCount);
+            var row2 = players.GetRange(columnsCount, players.Count - row1.Count);
+            if (!playersCount.IsEven())
+            {
+                row2.Add(null);
+            }
+            row2.Reverse();
+
+            //making games
             for (var i = 1; i <= toursCount; i++)
             {
                 var tour = new TournamentTour
@@ -125,27 +138,18 @@ namespace Chess_club_manager.BackgroundJobs
                     Games = new List<TourGame>()
                 };
 
-                //get games
-                var columnsCount = playersCount.IsEven() ? playersCount / 2 : (playersCount + 1) / 2;
-
-                var row1 = players.GetRange(0, columnsCount);
-                var row2 = players.GetRange(columnsCount, players.Count - row1.Count);
-                if (!playersCount.IsEven())
-                {
-                    row2.Add(null);
-                }
-                row2.Reverse();
-
                 for (var col = 0; col < columnsCount; col++)
                 {
                     if (row1[col] != null && row2[col] != null)
                     {
-                        tour.Games.Add(new TourGame
+                        var game = new TourGame
                         {
                             Tour = tour,
                             LeftPlayer = row1[col],
                             RightPlayer = row2[col]
-                        });
+                        };
+
+                        tour.Games.Add(game);
                     }
                 }
                 
@@ -159,7 +163,8 @@ namespace Chess_club_manager.BackgroundJobs
                 row2.Remove(row2First);
                 var row1Last = row1.Last();
                 row2.Add(row1Last);
-
+                row1.Remove(row1Last);
+                
             }
             
         }
