@@ -114,6 +114,7 @@ namespace Chess_club_manager.Controllers
             topTournaments.CurrentTournaments = this._unitOfWork.TournamentsRepository
                 .All().AsNoTracking()
                 .Where(x => x.IsStarted && !x.IsCompleted)
+                .OrderByDescending(x => x.CreatedDate)
                 .Select(x => new HomePageTournament
                 {
                     Id = x.Id,
@@ -129,6 +130,7 @@ namespace Chess_club_manager.Controllers
             topTournaments.FutureTournaments = this._unitOfWork.TournamentsRepository
                 .All().AsNoTracking()
                 .Where(x => !x.IsStarted && x.Start > DateTime.Now)
+                .OrderByDescending(x => x.CreatedDate)
                 .Select(x => new HomePageTournament
                 {
                     Id = x.Id,
@@ -143,7 +145,8 @@ namespace Chess_club_manager.Controllers
 
             topTournaments.LastTournaments = this._unitOfWork.TournamentsRepository
                 .All().AsNoTracking()
-                .Where(x =>  x.IsCompleted && x.Finish <= DateTime.Now )
+                .Where(x =>  x.IsCompleted && x.Finish <= DateTime.Now)
+                .OrderByDescending(x => x.CreatedDate)
                 .Select(x => new HomePageTournament
                 {
                     Id = x.Id,

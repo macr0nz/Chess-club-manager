@@ -114,7 +114,8 @@ namespace Chess_club_manager.BackgroundJobs
 
             //if players are > 2
 
-            //randomize player's indexes?
+            //randomize player's indexes
+            players.RandomizeOrder();
 
             //get games
             //prepare rows
