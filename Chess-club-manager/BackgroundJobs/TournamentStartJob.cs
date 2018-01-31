@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
-using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Enum;
 using Chess_club_manager.Helpers;
 using Chess_club_manager.Models;

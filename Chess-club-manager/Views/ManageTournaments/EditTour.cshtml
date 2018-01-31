@@ -10,33 +10,43 @@
     <h3 style="text-align: center">@ViewBag.Title</h3>
 
     <hr />
+    @using (Html.BeginForm("EditTour", "ManageTournaments", FormMethod.Post))
+    {
+        <div class="col-md-8">
 
-    <div class="col-md-8">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>@Resources.Resource.Player</th>
-                <th>@Resources.Resource.TRNgameResult</th>
-                <th>@Resources.Resource.Player</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var game in Model.Games)
-            {
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Number)
+            @Html.HiddenFor(m => m.TournamentId)
+            @Html.HiddenFor(m => m.TournamentName)
+
+            <table class="table table-bordered">
+                <thead>
                 <tr>
-                    <td><a href="@Url.Action("Details", "Players", new {id = game.LeftPlayerId})"><b>@game.LeftPlayerName</b></a></td>
-                    <td>@Html.EnumDropDownListFor(x => game.Result, new { @class = "form-control" })</td>
-                    <td><a href="@Url.Action("Details", "Players", new {id = game.RightPlayerId})"><b>@game.RightPlayerName</b></a></td>
+                    <th>@Resources.Resource.Player</th>
+                    <th>@Resources.Resource.TRNgameResult</th>
+                    <th>@Resources.Resource.Player</th>
                 </tr>
-            }
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="col-md-6">
-        <a class="btn btn-warning" href="@Url.Action("TourDetails", "Tournaments", new {id = Model.Id})"><i class="fa fa-arrow-left"></i> @Model.Number @Resources.Resource.TRNtour</a>
-        <a class="btn btn-warning" href="@Url.Action("Details", "Tournaments", new {id = Model.TournamentId})"><i class="fa fa-arrow-left"></i> @Model.TournamentName</a>
-        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @Resources.Resource.Save</button>
-    </div>
+                </thead>
+                <tbody>
+
+                @for (var i = 0; i < Model.Games.Count; i++)
+                {
+                    <tr>
+                        <td><a href="@Url.Action("Details", "Players", new {id = Model.Games[i].LeftPlayerId})"><b>@Model.Games[i].LeftPlayerName</b></a></td>
+                        <td>@Html.EnumDropDownListFor(x => Model.Games[i].Result, new {@class = "form-control"})</td>
+                        <td><a href="@Url.Action("Details", "Players", new {id = Model.Games[i].RightPlayerId})"><b>@Model.Games[i].RightPlayerName</b></a></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="col-md-6">
+            <a class="btn btn-warning" href="@Url.Action("TourDetails", "Tournaments", new {id = Model.Id})"><i class="fa fa-arrow-left"></i> @Model.Number @Resources.Resource.TRNtour</a>
+            <a class="btn btn-warning" href="@Url.Action("Details", "Tournaments", new {id = Model.TournamentId})"><i class="fa fa-arrow-left"></i> @Model.TournamentName</a>
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @Resources.Resource.Save</button>
+        </div>
+    }
 </div>
 

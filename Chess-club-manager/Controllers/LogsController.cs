@@ -30,5 +30,6 @@ namespace Chess_club_manager.Controllers
 
             return View(allLogs);
         }
+        
     }
 }

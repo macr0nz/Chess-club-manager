@@ -455,6 +455,47 @@ namespace Chess_club_manager.Controllers
             return View(editTour);
         }
 
+        [HttpPost]
+        public ActionResult EditTour(TourEditDto model)
+        {
+            if (model == null)
+            {
+                return HttpNotFound("Null model value");
+            }
+
+            var tour = _unitOfWork.ToursRepository.All()
+                .AsNoTracking()
+                .Include(x => x.Games)
+                .SingleOrDefault(x => x.Id == model.Id);
+
+            if (tour == null)
+            {
+                return HttpNotFound("Tour not found");
+            }
+
+            //set games results
+            var gamesResults = model.Games;
+            var index = 0;
+            foreach (var game in tour.Games)
+            {
+                game.Result = gamesResults[index].Result;
+                index++;
+            }
+
+            //check if tour is completed
+            var anyIncompleted = tour.Games.Select(x => x.Result).Any(x => x == GameResult.Default);
+
+            if (!anyIncompleted)
+            {
+                //tour.IsCompleted = true;
+                tour.CompletedDateTime = DateTime.Now;
+            }
+
+            _unitOfWork.ToursRepository.Update(tour);
+
+            return RedirectToAction("TourDetails", "Tournaments", new {id = tour.Id});
+        }
+
         [HttpGet]
         public ActionResult EditTournament(int id)
         {
