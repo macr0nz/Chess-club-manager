@@ -464,7 +464,6 @@ namespace Chess_club_manager.Controllers
             }
 
             var tour = _unitOfWork.ToursRepository.All()
-                .AsNoTracking()
                 .Include(x => x.Games)
                 .SingleOrDefault(x => x.Id == model.Id);
 
@@ -473,13 +472,17 @@ namespace Chess_club_manager.Controllers
                 return HttpNotFound("Tour not found");
             }
 
+            
             //set games results
-            var gamesResults = model.Games;
+            var gamesResults = model.Games.Select(x => x.Result).ToList();
+
             var index = 0;
             foreach (var game in tour.Games)
             {
-                game.Result = gamesResults[index].Result;
+                game.Result = gamesResults[index];
                 index++;
+
+                if (index > tour.Games.Count) break;
             }
 
             //check if tour is completed
@@ -487,7 +490,7 @@ namespace Chess_club_manager.Controllers
 
             if (!anyIncompleted)
             {
-                //tour.IsCompleted = true;
+                tour.IsCompleted = true;
                 tour.CompletedDateTime = DateTime.Now;
             }
 
