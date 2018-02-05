@@ -81,7 +81,7 @@ namespace Chess_club_manager.BackgroundJobs
 
             if (tournament.Tours == null)
             {
-                tournament.Tours = new List<TournamentTour>(toursCount);
+                tournament.Tours = new List<TournamentTour>();
             }
 
             //if players are 2 -> make 1 tour
