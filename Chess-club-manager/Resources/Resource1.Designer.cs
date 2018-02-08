@@ -601,6 +601,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Турнир завершен.
+        /// </summary>
+        public static string TRNisCompletedYet {
+            get {
+                return ResourceManager.GetString("TRNisCompletedYet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Турнир в процессе.
+        /// </summary>
+        public static string TRNisInProcess {
+            get {
+                return ResourceManager.GetString("TRNisInProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Статус.
         /// </summary>
         public static string TRNisOfficial {

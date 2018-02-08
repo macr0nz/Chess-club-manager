@@ -227,6 +227,7 @@
     <Compile Include="DTO\Tournament\ManageTournamentDto.cs" />
     <Compile Include="DTO\Tournament\ManageTournamentPlayersViewDto.cs" />
     <Compile Include="DTO\Tournament\TournamentDto.cs" />
+    <Compile Include="DTO\Tournament\TournamentHistoryDto.cs" />
     <Compile Include="DTO\Tournament\TournamentViewDto.cs" />
     <Compile Include="DTO\Tournament\Tour\TourDetailsDto.cs" />
     <Compile Include="DTO\Tournament\Tour\TourEditDto.cs" />
@@ -387,6 +388,7 @@
     <Content Include="Views\ManageTournaments\EditTour.cshtml" />
     <Content Include="Views\ManageTournaments\EditTournament.cshtml" />
     <Content Include="Views\Manage\EditUserImage.cshtml" />
+    <Content Include="Views\Players\PlayersGameHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -405,6 +407,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.en.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>

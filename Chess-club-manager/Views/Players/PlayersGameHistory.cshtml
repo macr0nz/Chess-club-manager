@@ -1,0 +1,64 @@
+﻿@model List<Chess_club_manager.DTO.Tournament.TournamentHistoryDto>
+
+<h3 style="text-align: center;">Player game history</h3>
+
+@if (Model != null)
+{
+    <div>
+        @foreach (var trn in Model)
+        {
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <a href="@Url.Action("Details", "Tournaments", new {id = trn.Id})"><b>@trn.Name</b></a>
+
+                    @if (trn.IsOfficial)
+                    {
+                        <label class="label label-success"><i class="fa fa-star"></i> @Resources.Resource.Official</label>
+                    }
+                    else
+                    {
+                        <label class="label label-warning"><i class="fa fa-star-o"></i> @Resources.Resource.UnOfficial</label>
+                    }
+
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            @if (trn.IsPrivate)
+                            {
+                                <label class="label label-danger"><i class="fa fa-lock"></i> @Resources.Resource.Private</label>
+                            }
+                            else
+                            {
+                                <label class="label label-success"><i class="fa fa-unlock"></i> @Resources.Resource.Public</label>
+                            }
+                        </div>
+
+                        <div class="col-md-2"><i class="fa fa-map-marker"></i> @trn.Location</div>
+
+                        <div class="col-md-2">
+                            @if (trn.IsCompleted)
+                            {
+                                <label class="label label-success"><i class="fa fa-check"></i> @Resources.Resource.TRNisCompleted</label>
+                            }
+                            else
+                            {
+                                <label class="label label-warning"><i class="fa fa-spinner fa-spin fa-fw"></i> @Resources.Resource.TRNisInProcess</label>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+}
+
+@*<ul class="pagination">
+    <li class="active"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+</ul>*@

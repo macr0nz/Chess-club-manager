@@ -93,53 +93,7 @@
 
     <div id="tournamentHistory" class="col-md-10 well collapse">
 
-        <h3 style="text-align: center;">Player game history</h3>
+        @Html.Action("PlayersGameHistory", new {id = Model.Id})
 
-        @*@if (Model.Tournaments != null)
-            {
-                <div>
-                    @foreach (var tournament in Model.Tournaments)
-                    {
-                        <div class="panel">
-                            <p>
-                                @tournament.Name
-                            </p>
-                        </div>
-                    }
-                </div>
-            }*@
-
-        <div class="panel panel-success">
-            <div class="panel-heading">Tournament name [win]</div>
-            <div class="panel-body">Panel Content</div>
-        </div>
-
-        <div class="panel panel-danger">
-            <div class="panel-heading">Tournament name [lost]</div>
-            <div class="panel-body">Panel Content</div>
-        </div>
-
-        <div class="panel panel-success">
-            <div class="panel-heading">Tournament name [win]</div>
-            <div class="panel-body">Panel Content</div>
-        </div>
-
-        <div class="panel panel-danger">
-            <div class="panel-heading">Tournament name [lost]</div>
-            <div class="panel-body">Panel Content</div>
-        </div>
-
-        <div class="panel panel-warning">
-            <div class="panel-heading">Tournament name [any]</div>
-            <div class="panel-body">Panel Content</div>
-        </div>
-
-        <ul class="pagination">
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-        </ul>
     </div>
 </div>

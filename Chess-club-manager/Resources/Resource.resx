@@ -366,4 +366,10 @@
   <data name="Upload" xml:space="preserve">
     <value>Загрузить</value>
   </data>
+  <data name="TRNisCompletedYet" xml:space="preserve">
+    <value>Турнир завершен</value>
+  </data>
+  <data name="TRNisInProcess" xml:space="preserve">
+    <value>Турнир в процессе</value>
+  </data>
 </root>

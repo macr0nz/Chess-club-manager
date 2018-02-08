@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Players;
+using Chess_club_manager.DTO.Tournament;
 using Chess_club_manager.Filters;
 using Chess_club_manager.Models;
 using Chess_club_manager.Repository;
@@ -17,18 +18,18 @@ namespace Chess_club_manager.Controllers
     [Culture]
     public class PlayersController : Controller
     {
-        private readonly IRepository<ApplicationUser> _playersRepository;
+        private readonly ChessClubManagerUnitOfWork _unitOfWork;
 
         public PlayersController()
         {
-            _playersRepository = new ChessClubManagerRepository<ApplicationUser>();
+            this._unitOfWork = new ChessClubManagerUnitOfWork();
         }
 
         // GET: Players
         public ActionResult Index()
         {
             //except admin
-            var allPlayers = this._playersRepository.All()
+            var allPlayers = _unitOfWork.UsersRepository.All()
                 .AsNoTracking()
                 .Select(x => new ViewPlayerDto
                 {
@@ -52,7 +53,10 @@ namespace Chess_club_manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var player = this._playersRepository.All().Where(p => p.Id == id).Select(x => new PlayerDetailsDto
+            var player = this._unitOfWork.UsersRepository
+                .All()
+                .Where(p => p.Id == id)
+                .Select(x => new PlayerDetailsDto
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
@@ -78,17 +82,48 @@ namespace Chess_club_manager.Controllers
 
         public ActionResult PlayersChart(string id)
         {
-            var user = this._playersRepository.All().SingleOrDefault(p => p.Id == id);
+            var user = this._unitOfWork.UsersRepository.All().SingleOrDefault(p => p.Id == id);
 
-            if (user != null)
+            if (user == null)
             {
-                ViewBag.CharLabel = $"{user.FirstName} {user.LastName} - {Resources.Resource.PlayerChart}";
+                return HttpNotFound("Invalid request. User not found");
             }
+
+            ViewBag.CharLabel = $"{user.FirstName} {user.LastName} - {Resources.Resource.PlayerChart}";
+
             //get logic
             //form array logic
             //return array to js
 
             return PartialView();
+        }
+
+        public ActionResult PlayersGameHistory(string id)
+        {
+            var player = this._unitOfWork.UsersRepository.All().SingleOrDefault(p => p.Id == id);
+
+            if (player == null)
+            {
+                return HttpNotFound("Invalid request. User not found");
+            }
+
+            var tournaments = _unitOfWork.TournamentsRepository.All()
+                .AsNoTracking()
+                //.Include(t => t.Players)
+                .Where(p => p.Players.Select(pl => pl.Id).Contains(player.Id))
+                .AsEnumerable()
+                .Select(x => new TournamentHistoryDto
+                {
+                    Id = x.Id,
+                    IsCompleted = x.IsCompleted,
+                    Name = x.Name,
+                    Location = x.Location,
+                    IsPrivate = x.IsPrivate,
+                    IsOfficial = x.IsOfficial,
+                })
+                .ToList();
+
+            return PartialView(tournaments);
         }
     }
 }
