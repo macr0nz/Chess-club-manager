@@ -455,16 +455,18 @@ namespace Chess_club_manager.Controllers
             return View(editTour);
         }
 
+
         [HttpPost]
         public ActionResult EditTour(TourEditDto model)
         {
             if (model == null)
             {
-                return HttpNotFound("Null model value");
+                return HttpNotFound("Invalid request. Null model value");
             }
 
             var tour = _unitOfWork.ToursRepository.All()
                 .Include(x => x.Games)
+                .Include(x => x.Tournament.Tours)
                 .SingleOrDefault(x => x.Id == model.Id);
 
             if (tour == null)
@@ -486,18 +488,34 @@ namespace Chess_club_manager.Controllers
             }
 
             //check if tour is completed
-            var anyIncompleted = tour.Games.Select(x => x.Result).Any(x => x == GameResult.Default);
+            var anyIncompletedGames = tour.Games.Select(x => x.Result).Any(x => x == GameResult.Default);
 
-            if (!anyIncompleted)
+            if (!anyIncompletedGames)
             {
                 tour.IsCompleted = true;
                 tour.CompletedDateTime = DateTime.Now;
             }
 
+            //check if tournament is completed
+            var tournament = tour.Tournament;
+            var anyIncompleteTours = tournament.Tours.Select(x => x.IsCompleted).Any(x => x == false);
+
+            if (!anyIncompleteTours)
+            {
+                tournament.IsCompleted = true;
+                tournament.Finish = DateTime.Now;
+                
+                //generate result table?
+
+                //update user's rating?
+            }
+
+            //update results
             _unitOfWork.ToursRepository.Update(tour);
 
             return RedirectToAction("TourDetails", "Tournaments", new {id = tour.Id});
         }
+
 
         [HttpGet]
         public ActionResult EditTournament(int id)
