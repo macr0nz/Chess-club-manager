@@ -180,17 +180,56 @@
         </tbody>
     </table>
 </div>
-    
-    
-    
 
 </div>
 
+
+<div class="row well" id="TournamentState">
+    <h3 style="text-align: center"><i class="fa fa-line-chart"></i> @Resources.Resource.TRNstate</h3>
+
+    @if (!Model.IsStarted)
+    {
+        <div class="col-md-12">
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" role="progressbar" style="width:100%">
+                    <i class="fa fa-hourglass-o fa-lg"></i> @Resources.Resource.TRNstateNotStarted
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        if (Model.IsCompleted)
+        {
+            <div class="col-md-12">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%">
+                        <i class="fa fa-check fa-lg"></i> @Resources.Resource.TRNstateCompleted
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-12">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:100%">
+                        <i class="fa fa-refresh fa-spin fa-lg fa-fw"></i> @Resources.Resource.TRNstateProcess
+                    </div>
+                </div>
+                
+            </div>
+        }
+    }
+
+</div>
+
+
 <div class="row well">
-    
-    <div class="col-md-6">
+
+    <div class="col-md-6" id="ToursSection">
         <h3 style="text-align: center"><i class="fa fa-hourglass"></i> @Resources.Resource.TRNtours</h3>
-        <hr/>
+        <hr />
         <ul class="nav nav-tabs">
             @foreach (var tour in Model.Tours)
             {
@@ -207,23 +246,23 @@
         </ul>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6" id="TournamentInfo">
         <h3 style="text-align: center"><i class="fa fa-info"></i> @Resources.Resource.TRNinfo</h3>
-        <hr/>
+        <hr />
         @Html.Raw(Model.Info)
     </div>
 </div>
 
-<div class="row well">
+<div class="row well" id="PlayersSection">
     <h3 style="text-align: center"><i class="fa fa-user-o"></i> @Resources.Resource.Players</h3>
-    
-@if (Model.AccessPassed && !Model.IsStarted)
-{
-    <a href="@Url.Action("ManagePlayers", "ManageTournaments", new {id = Model.Id})" class="btn btn-success">
-        <i class="fa fa-plus-square"></i> @Resources.Resource.TRNmanagePlayers
-    </a>
-}
-    <hr/>
+
+    @if (Model.AccessPassed && !Model.IsStarted)
+    {
+        <a href="@Url.Action("ManagePlayers", "ManageTournaments", new {id = Model.Id})" class="btn btn-success">
+            <i class="fa fa-plus-square"></i> @Resources.Resource.TRNmanagePlayers
+        </a>
+    }
+    <hr />
 
     @if (Model.Players != null)
     {
@@ -243,7 +282,8 @@
                 </th>
                 <th></th>
             </tr>
-            @foreach (var item in Model.Players) {
+            @foreach (var item in Model.Players)
+            {
                 <tr>
                     <td>
                         <a href="@Url.Action("Details", "Players", new {id = item.Id})"><b>@item.FirstNameLastName</b></a>

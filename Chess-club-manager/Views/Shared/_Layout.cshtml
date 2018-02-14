@@ -71,16 +71,19 @@
 <div id="applicationFooter">
     <hr />
     <div class="col-md-12">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <p>&copy; @DateTime.Now.Year - @Resources.Resource.ApplicationName</p>
             <p>&reg; Chess Club Manager Project</p>
 
         </div>
-        <div class="col-md-4" style="text-align: center">
+        <div class="col-md-3" style="text-align: center">
             <p>Assembly Verson: @ViewContext.Controller.GetType().Assembly.GetName().Version</p>
             <p>Assembly Date: @File.GetCreationTime(ViewContext.Controller.GetType().Assembly.Location)</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3" style="text-align: center">
+            <p>Server time: @DateTime.Now</p>
+        </div>
+        <div class="col-md-3">
             <h5 style="text-align: right">USM High Graduate Work Project</h5>
             <div class="btn-group pull-right">
                 <a href="https://vk.com/macr0nz" class="btn btn-primary"><i class="fa fa-cogs"></i> Programmed</a>

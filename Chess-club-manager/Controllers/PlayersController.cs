@@ -109,8 +109,8 @@ namespace Chess_club_manager.Controllers
 
             var tournaments = _unitOfWork.TournamentsRepository.All()
                 .AsNoTracking()
-                //.Include(t => t.Players)
                 .Where(p => p.Players.Select(pl => pl.Id).Contains(player.Id))
+                .OrderByDescending(x => x.CreatedDate)
                 .AsEnumerable()
                 .Select(x => new TournamentHistoryDto
                 {

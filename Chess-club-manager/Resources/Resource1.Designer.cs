@@ -709,6 +709,42 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Состояние турнира.
+        /// </summary>
+        public static string TRNstate {
+            get {
+                return ResourceManager.GetString("TRNstate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Завершен.
+        /// </summary>
+        public static string TRNstateCompleted {
+            get {
+                return ResourceManager.GetString("TRNstateCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Еще не начат.
+        /// </summary>
+        public static string TRNstateNotStarted {
+            get {
+                return ResourceManager.GetString("TRNstateNotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to В процессе.
+        /// </summary>
+        public static string TRNstateProcess {
+            get {
+                return ResourceManager.GetString("TRNstateProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Контроль времени (мин.).
         /// </summary>
         public static string TRNtimeControl {

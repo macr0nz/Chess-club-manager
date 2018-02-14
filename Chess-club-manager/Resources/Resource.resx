@@ -372,4 +372,16 @@
   <data name="TRNisInProcess" xml:space="preserve">
     <value>Турнир в процессе</value>
   </data>
+  <data name="TRNstate" xml:space="preserve">
+    <value>Состояние турнира</value>
+  </data>
+  <data name="TRNstateCompleted" xml:space="preserve">
+    <value>Завершен</value>
+  </data>
+  <data name="TRNstateNotStarted" xml:space="preserve">
+    <value>Еще не начат</value>
+  </data>
+  <data name="TRNstateProcess" xml:space="preserve">
+    <value>В процессе</value>
+  </data>
 </root>
