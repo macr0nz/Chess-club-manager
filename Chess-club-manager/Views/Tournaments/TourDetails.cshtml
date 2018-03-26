@@ -69,7 +69,7 @@
                 {
                     <tr>
                         <td><a href="@Url.Action("Details", "Players", new {id = game.LeftPlayer.Id})"><b>@game.LeftPlayer.FirstName @game.LeftPlayer.LastName</b></a></td>
-                        <td>@game.Result.ToString()</td>
+                        <td style="text-align: center">@game.Result.GetDisplayName()</td>
                         <td><a href="@Url.Action("Details", "Players", new {id = game.RightPlayer.Id})"><b>@game.RightPlayer.FirstName @game.RightPlayer.LastName</b></a></td>
                     </tr>
                 }

@@ -384,4 +384,10 @@
   <data name="TRNstateProcess" xml:space="preserve">
     <value>В процессе</value>
   </data>
+  <data name="GameResultDefault" xml:space="preserve">
+    <value>Не установлено</value>
+  </data>
+  <data name="GameResultDraw" xml:space="preserve">
+    <value>Ничья (1/2)</value>
+  </data>
 </root>

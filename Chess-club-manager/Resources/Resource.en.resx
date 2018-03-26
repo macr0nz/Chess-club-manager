@@ -213,4 +213,10 @@
   <data name="Users" xml:space="preserve">
     <value>Users</value>
   </data>
+  <data name="GameResultDefault" xml:space="preserve">
+    <value>Not set</value>
+  </data>
+  <data name="GameResultDraw" xml:space="preserve">
+    <value>Draw (1/2)</value>
+  </data>
 </root>

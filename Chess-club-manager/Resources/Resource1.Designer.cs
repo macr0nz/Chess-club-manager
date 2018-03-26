@@ -196,6 +196,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не установлено.
+        /// </summary>
+        public static string GameResultDefault {
+            get {
+                return ResourceManager.GetString("GameResultDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ничья (1/2).
+        /// </summary>
+        public static string GameResultDraw {
+            get {
+                return ResourceManager.GetString("GameResultDraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Помощь.
         /// </summary>
         public static string Help {
