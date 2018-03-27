@@ -505,7 +505,7 @@ namespace Chess_club_manager.Controllers
                 tournament.IsCompleted = true;
                 tournament.Finish = DateTime.Now;
                 
-                //generate result table?
+                //generate result table
 
                 //update user's rating?
             }

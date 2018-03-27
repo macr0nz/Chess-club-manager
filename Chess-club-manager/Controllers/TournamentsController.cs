@@ -125,7 +125,22 @@ namespace Chess_club_manager.Controllers
                 Tours = tournament.Tours
             };
 
+            if (tournament.IsCompleted)
+            {
+                tournamentView.TournamentTable = GenerateResultTable(tournament);
+            }
+
             return View(tournamentView);
+        }
+
+        private TournamentTable GenerateResultTable(Tournament tournament)
+        {
+            var table = new TournamentTable {Rows = new List<TournamentTableRow>()};
+
+            //TODO: generate tournament table
+
+
+            return table;
         }
 
         public ActionResult TourDetails(int id)
@@ -157,10 +172,11 @@ namespace Chess_club_manager.Controllers
                 TournamentName = tour.Tournament.Name,
                 TournamentId = tour.Tournament.Id
             };
-            
+
             return View(tourDetails);
         }
 
         
+
     }
 }

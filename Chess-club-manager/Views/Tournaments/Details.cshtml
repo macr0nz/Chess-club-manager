@@ -224,6 +224,46 @@
 
 </div>
 
+@if (Model.IsCompleted)
+{
+    <div class="row well" id="TournamentTable">
+        <h3 style="text-align: center"><i class="fa fa-bar-chart"></i> @Resources.Resource.TRNtable</h3>
+        
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>@Resources.Resource.Player</th>
+                <th>Rating?</th>
+                @for (var i = 1; i <= Model.TournamentTable.Rows.Count; i++)
+                {
+                    <th>@i</th>
+                }
+                <th>Points</th>
+                <th>Place</th>
+            </tr>
+            </thead>
+            
+            <tbody>
+            @foreach (var row in Model.TournamentTable.Rows)
+            {
+                <tr>
+                    <td>@row.UserName</td>
+                    <td>@row.Rating</td>
+                    
+                    @foreach (var result in row.Results)
+                    {
+                        <td>@result.GetDisplayName()</td>
+                    }
+
+                    <td>@row.Points</td>
+                    <td>@row.Place</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+    </div>
+}
 
 <div class="row well">
 

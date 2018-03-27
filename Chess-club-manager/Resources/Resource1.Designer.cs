@@ -763,6 +763,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Турнирная таблица.
+        /// </summary>
+        public static string TRNtable {
+            get {
+                return ResourceManager.GetString("TRNtable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Контроль времени (мин.).
         /// </summary>
         public static string TRNtimeControl {

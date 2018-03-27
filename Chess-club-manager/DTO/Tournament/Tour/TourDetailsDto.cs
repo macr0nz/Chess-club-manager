@@ -18,5 +18,7 @@ namespace Chess_club_manager.DTO.Tournament.Tour
         public DateTime? CompletedDateTime { get; set; }
 
         public bool EditAccess { get; set; }
+
     }
+    
 }

@@ -247,6 +247,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\TourGame.cs" />
     <Compile Include="Models\Tournament.cs" />
+    <Compile Include="Models\TournamentTable.cs" />
     <Compile Include="Models\TournamentTour.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -390,4 +390,7 @@
   <data name="GameResultDraw" xml:space="preserve">
     <value>Ничья (1/2)</value>
   </data>
+  <data name="TRNtable" xml:space="preserve">
+    <value>Турнирная таблица</value>
+  </data>
 </root>
