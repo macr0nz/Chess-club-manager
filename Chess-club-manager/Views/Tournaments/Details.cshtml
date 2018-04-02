@@ -228,6 +228,36 @@
 {
     <div class="row well" id="TournamentTable">
         <h3 style="text-align: center"><i class="fa fa-bar-chart"></i> @Resources.Resource.TRNtable</h3>
+        <div class="col-md-8 col-md-offset-2">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>@Resources.Resource.Player</th>
+                    <th style="text-align: center">@Resources.Resource.TRNgameResult</th>
+                    <th>@Resources.Resource.Player</th>
+                </tr>
+                </thead>
+            
+                <tbody>
+                @foreach (var game in Model.TourGames)
+                {
+                    <tr>
+                        <td><a href="@Url.Action("Details", "Players", new {id = game.LeftPlayer.Id})"><b> @game.LeftPlayer.FirstName @game.LeftPlayer.LastName</b></a></td>
+                        <td style="text-align: center">@game.Result.GetDisplayName()</td>
+                        <td><a href="@Url.Action("Details", "Players", new {id = game.RightPlayer.Id})"><b> @game.RightPlayer.FirstName @game.RightPlayer.LastName</b></a></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+}
+
+@*@if (Model.IsCompleted)
+{
+    <div class="row well" id="TournamentTable">
+        <h3 style="text-align: center"><i class="fa fa-bar-chart"></i> @Resources.Resource.TRNtable</h3>
         
         <table class="table table-hover table-bordered">
             <thead>
@@ -263,7 +293,7 @@
         </table>
 
     </div>
-}
+}*@
 
 <div class="row well">
 

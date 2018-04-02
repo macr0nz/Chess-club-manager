@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.DTO.Tournament;
@@ -18,11 +16,13 @@ namespace Chess_club_manager.Controllers
     {
         private readonly IRepository<Tournament> _tournamentsRepository;
         private readonly IRepository<TournamentTour> _toursRepository;
+        private readonly IRepository<TourGame> _tourGamesRepository;
 
         public TournamentsController()
         {
             this._tournamentsRepository = new ChessClubManagerRepository<Tournament>();
             this._toursRepository = new ChessClubManagerRepository<TournamentTour>();
+            this._tourGamesRepository = new ChessClubManagerRepository<TourGame>();
         }
 
         // GET: Tournaments
@@ -60,6 +60,7 @@ namespace Chess_club_manager.Controllers
                 .Include(x => x.Players)
                 .Include(x => x.Arbitrators)
                 .Include(x => x.Tours)
+                .Include(x => x.Tours.Select(y => y.Games))
                 .AsNoTracking().SingleOrDefault(x => x.Id == id);
 
             if (tournament == null)
@@ -127,7 +128,22 @@ namespace Chess_club_manager.Controllers
 
             if (tournament.IsCompleted)
             {
-                tournamentView.TournamentTable = GenerateResultTable(tournament);
+                //tournamentView.TournamentTable = GenerateResultTable(tournament);
+
+                var allTours = tournament.Tours;
+                var allGamesId = new List<int>();
+                foreach (var tournamentTour in allTours)
+                {
+                    allGamesId.AddRange(tournamentTour.Games.Select(x => x.Id));
+                }
+
+                var tournamentGames = _tourGamesRepository.All()
+                    .Include(x => x.LeftPlayer)
+                    .Include(x => x.RightPlayer)
+                    .Where(x => allGamesId.Contains(x.Id))
+                    .ToList();
+
+                tournamentView.TourGames = tournamentGames;
             }
 
             return View(tournamentView);
