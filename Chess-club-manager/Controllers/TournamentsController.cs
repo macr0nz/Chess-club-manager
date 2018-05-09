@@ -17,12 +17,20 @@ namespace Chess_club_manager.Controllers
         private readonly IRepository<Tournament> _tournamentsRepository;
         private readonly IRepository<TournamentTour> _toursRepository;
         private readonly IRepository<TourGame> _tourGamesRepository;
-
+        
         public TournamentsController()
         {
             this._tournamentsRepository = new ChessClubManagerRepository<Tournament>();
             this._toursRepository = new ChessClubManagerRepository<TournamentTour>();
             this._tourGamesRepository = new ChessClubManagerRepository<TourGame>();
+        }
+
+        //mock constructor
+        public TournamentsController(IRepository<Tournament> mockTournamentRepository, IRepository<TourGame> mockTourGamesRepository, IRepository<TournamentTour> mockToursRepository)
+        {
+            this._tournamentsRepository = mockTournamentRepository;
+            this._tourGamesRepository = mockTourGamesRepository;
+            this._toursRepository = mockToursRepository;
         }
 
         // GET: Tournaments
@@ -175,7 +183,11 @@ namespace Chess_club_manager.Controllers
                 return HttpNotFound();
             }
 
-            var editAccess = tour.Tournament.Arbitrators.Select(x => x.UserName).Contains(User.Identity.Name);
+            var editAccess = false;
+            if (User != null)
+            {
+                editAccess = tour.Tournament.Arbitrators.Select(x => x.UserName).Contains(User.Identity.Name);
+            }
 
             var tourDetails = new TourDetailsDto
             {

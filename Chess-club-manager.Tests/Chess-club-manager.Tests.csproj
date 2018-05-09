@@ -82,6 +82,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\TournamentsControllerTest.cs" />
+    <Compile Include="Mock\TourGamesMockRepository.cs" />
+    <Compile Include="Mock\TournamentsMockRepository.cs" />
+    <Compile Include="Mock\ToursMockRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -92,6 +96,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Chess-club-manager.DataModel\Chess-club-manager.DataModel.csproj">
+      <Project>{622CCD42-A54E-4E44-B5A6-8DE4F5DD09C8}</Project>
+      <Name>Chess-club-manager.DataModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Chess-club-manager\Chess-club-manager.csproj">
       <Project>{B2A1E942-2837-4B70-84E7-9AE4C13043AE}</Project>
       <Name>Chess-club-manager</Name>

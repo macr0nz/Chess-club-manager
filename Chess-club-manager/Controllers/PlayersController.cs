@@ -82,7 +82,8 @@ namespace Chess_club_manager.Controllers
 
         public ActionResult PlayersChart(string id)
         {
-            var user = this._unitOfWork.UsersRepository.All().SingleOrDefault(p => p.Id == id);
+            var user = this._unitOfWork.UsersRepository.All()
+                .SingleOrDefault(p => p.Id == id);
 
             if (user == null)
             {
@@ -92,7 +93,27 @@ namespace Chess_club_manager.Controllers
             ViewBag.CharLabel = $"{user.FirstName} {user.LastName} - {Resources.Resource.PlayerChart}";
 
             //get logic
+            var games = _unitOfWork.TourGamesRepository.All()
+                .Include(x => x.Tour.Tournament)
+                .Where(x => x.LeftPlayerId == user.Id || x.RightPlayerId == user.Id)
+                .ToList();
+
             //form array logic
+            var tournaments = games.Select(x => x.Tour).Select(y => y.Tournament).Select(z => z.Name)
+                .Distinct().ToList();
+
+            ViewBag.Tournaments = tournaments;
+
+
+            //
+            var rand = new Random();
+            var values = new List<int>(tournaments.Count);
+            foreach (var trn in tournaments)
+            {
+                values.Add(rand.Next(3000));
+            }
+
+            ViewBag.Values = values;
             //return array to js
 
             return PartialView();

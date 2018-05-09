@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data.Entity;
+using System.Diagnostics;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -32,6 +33,8 @@ namespace Chess_club_manager.Repository
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            //debug write all SQL commands
+            Database.Log += str => { Debug.Write(str); };
         }
 
 
