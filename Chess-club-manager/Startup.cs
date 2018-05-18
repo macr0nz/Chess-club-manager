@@ -9,6 +9,7 @@ namespace Chess_club_manager
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            
         }
     }
 }

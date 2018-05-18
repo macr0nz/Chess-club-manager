@@ -497,7 +497,15 @@ namespace Chess_club_manager.Controllers
             }
 
             //check if tournament is completed
-            var tournament = tour.Tournament;
+            var tournament = _unitOfWork.TournamentsRepository.All()
+                .Include(x => x.Players)
+                .SingleOrDefault(x => x.Id == tour.TournamentId);
+
+            if (tournament == null)
+            {
+                return HttpNotFound("Error at get tournament!");
+            }
+
             var anyIncompleteTours = tournament.Tours.Select(x => x.IsCompleted).Any(x => x == false);
 
             if (!anyIncompleteTours)
@@ -508,12 +516,32 @@ namespace Chess_club_manager.Controllers
                 //generate result table
 
                 //update user's rating?
+                UpdateUsersRatingByTournament_OnCompleted(tournament);
             }
 
             //update results
             _unitOfWork.ToursRepository.Update(tour);
 
             return RedirectToAction("TourDetails", "Tournaments", new {id = tour.Id});
+        }
+
+        private void UpdateUsersRatingByTournament_OnCompleted(Tournament tournament)
+        {
+            //test: inc rating only if official T
+            if(!tournament.IsOfficial)
+                return;
+
+
+            var players = tournament.Players.ToList();
+
+            int ratingIncrementAmount = 150;
+            foreach (var player in players)
+            {
+                player.CurrentRating += ratingIncrementAmount;
+            }
+
+            //return
+            //without update any context!
         }
 
 
