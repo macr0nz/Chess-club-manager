@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Chess_club_manager.DataModel.Entity;
 using Chess_club_manager.DataModel.Repository;
 using Chess_club_manager.Models;

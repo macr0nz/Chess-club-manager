@@ -30,13 +30,13 @@ namespace Chess_club_manager.Repository
         public DbSet<Log> Logs { get; set; }
 
 
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        public ApplicationDbContext() : base("DefaultConnection")
         {
             //debug write all SQL commands
-            Database.Log += str => { Debug.Write(str); };
+            //Database.Log += str => { Debug.Write(str); };
         }
 
+        
 
         public static ApplicationDbContext Create()
         {
